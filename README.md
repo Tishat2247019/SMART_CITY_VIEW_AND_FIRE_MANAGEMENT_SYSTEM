@@ -10,7 +10,7 @@ This reposotary contains the source code of my computer graphics  project "FUTUR
 
 
 ## Group Members
- <table border="1" align="center">
+ <table align="center">
   <tr>
     <th>Name</th>
     <th>University</th>
