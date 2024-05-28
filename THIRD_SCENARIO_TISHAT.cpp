@@ -1,13 +1,12 @@
 #include <windows.h> // for MS Windows
-#include<iostream>
+#include <iostream>
 #include <GL/glut.h> // GLUT, include glu.h and gl.h
 #include <math.h>
 #include "glutil.h"
 #include "rain.h"
 #include <cmath>
 #include <ctime>
-#include<mmsystem.h>
-
+#include <mmsystem.h>
 
 string imagesFolderPath = "E:/SPRING 23-24/COMPUTER GRAPHICS/FINAL/PROJECT/SMART CITY VIEW AND FIRE MANAGEMENT SYSTEM/SMART CITY VIEW AND FIRE MANAGEMENT SYSTEM/Resources/images/";
 string soundsFolderPath = "E:/SPRING 23-24/COMPUTER GRAPHICS/FINAL/PROJECT/SMART CITY VIEW AND FIRE MANAGEMENT SYSTEM/SMART CITY VIEW AND FIRE MANAGEMENT SYSTEM/Resources/sounds/";
@@ -18,11 +17,9 @@ float _movetrain = 0;
 bool _ismovetrain = false;
 bool _isflybird = false;
 
-
-//FOR BIRD
+// FOR BIRD
 bool state = true;
 float move_bird = 0;
-
 
 int statefire = 1;
 int statefireedge = 1;
@@ -33,24 +30,20 @@ float zoom = 1;
 float fireleftmove = 0;
 float fireupmove = 0;
 
-
-//FIRE CONTROLLING VARIABLE
+// FIRE CONTROLLING VARIABLE
 
 bool showfire = false;
 int countfire = 1;
 
 int vanishfire = 20;
 
-
 float _angle1 = 0;
 float _angle2 = 0;
 float rotate_smoke = 0;
 
-
 float _movehelicopter = 0;
 
-
-//FLYING CAR CONTROLING VARIABLES'
+// FLYING CAR CONTROLING VARIABLES'
 float _move_fly_car_01 = 0.0;
 float _move_fly_car_02 = 0.0;
 float _move_fly_car_03 = 0.0;
@@ -58,13 +51,10 @@ float _move_fly_car_04 = 0.0;
 
 bool is_fly_car = true;
 
-
-//fire smoke move
+// fire smoke move
 float _move_fire_smoke = 0.0;
 
-
-
-//FLOWER AND JUNGLE LEAF MOVEMENT
+// FLOWER AND JUNGLE LEAF MOVEMENT
 
 float move_jungle_leaf_top6 = 0;
 float move_jungle_leaf_top5 = 0;
@@ -73,10 +63,9 @@ float move_jungle_leaf_top3 = 0;
 float move_jungle_leaf_top2 = 0;
 float move_jungle_leaf_top1 = 0;
 
-
 float zoom_flower = 1;
 
-//FLOWER AND LEAF STATES FOR MOVEMENT
+// FLOWER AND LEAF STATES FOR MOVEMENT
 int state_leaf6 = 1;
 int state_leaf5 = 1;
 int state_leaf4 = 1;
@@ -86,37 +75,29 @@ int state_leaf1 = 1;
 
 int state_flower_zoom = 1;
 
-//CARS
+// CARS
 
 float move_cybertruck_01 = 0;
 float move_ecocar_02 = 0;
 float move_auto_motorcycle_03 = 0;
 float move_ecocar_04 = 0;
 
-
-//ZOOM TO FIRE AND HELICOPTER
+// ZOOM TO FIRE AND HELICOPTER
 
 bool zoom_to_fire = false;
 float zoom_fire_value = 1;
 
-
-
-//ZOOM TO NORMAL
+// ZOOM TO NORMAL
 
 float zoom_to_normal_scenario_03_value = 6.05;
 
+// THIS FUNCTION IS USED TO DRAW TREE'S CIRCLE AND ANY KIND OF CIRCLE
 
-
-
-
-
-//THIS FUNCTION IS USED TO DRAW TREE'S CIRCLE AND ANY KIND OF CIRCLE 
-
-//ID - 
+// ID -
 void circle_tree(float radius, float xc, float yc, float r, float g, float b)
 {
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 200;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 200; i++)
     {
         glColor3f(r, g, b);
         float pi = 3.1416;
@@ -129,8 +110,8 @@ void circle_tree(float radius, float xc, float yc, float r, float g, float b)
     glEnd();
 }
 
-//THIS FUNCTION IS USED TO DRAW THE MORE DEEPER HALF CIRCLE CURVES IN THE FIRST TREEE IN LEFT
-//ID - 
+// THIS FUNCTION IS USED TO DRAW THE MORE DEEPER HALF CIRCLE CURVES IN THE FIRST TREEE IN LEFT
+// ID -
 void circle_tree_leaf(float radius, float xc, float yc, float r, float g, float b, int ii, int jj, int us)
 {
 
@@ -140,10 +121,12 @@ void circle_tree_leaf(float radius, float xc, float yc, float r, float g, float 
     {
         glColor3f(r, g, b);
         float A;
-        if (us == 1) {
+        if (us == 1)
+        {
             A = (i * pi) / jj;
         }
-        else {
+        else
+        {
             A = (i * 2 * pi) / jj;
         }
 
@@ -154,8 +137,8 @@ void circle_tree_leaf(float radius, float xc, float yc, float r, float g, float 
     glEnd();
 }
 
-
-void flower() {
+void flower()
+{
 
     glPushMatrix();
     // glTranslatef(move_jungle_leaf_top1, move_jungle_leaf_top1, 0);
@@ -166,7 +149,7 @@ void flower() {
 
     glColor3f(0.97, 0.87, 0.03);
 
-    //FIRST FLOWER YELLOW PORTION
+    // FIRST FLOWER YELLOW PORTION
     glBegin(GL_POLYGON);
 
     glVertex2f(125.1503551652435, 8.7391359639609);
@@ -180,9 +163,7 @@ void flower() {
 
     glEnd();
 
-
-
-    //NOW PRINTING REST OF THE FLOWER YELLOW PORTION
+    // NOW PRINTING REST OF THE FLOWER YELLOW PORTION
     glPushMatrix();
     glTranslatef(125.369791206714, 8.5433258942929, 0);
     glRotatef(1 * 40, 0, 0, 1);
@@ -200,7 +181,6 @@ void flower() {
 
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(125.369791206714, 8.5433258942929, 0);
@@ -328,8 +308,7 @@ void flower() {
     glEnd();
     glPopMatrix();
 
-
-    //SMALL MORE DEEPER AREA INSIDE EACH FLOWER PART
+    // SMALL MORE DEEPER AREA INSIDE EACH FLOWER PART
     glColor3f(0.93, 0.69, 0.04);
     glBegin(GL_POLYGON);
 
@@ -347,8 +326,7 @@ void flower() {
 
     glEnd();
 
-
-    //NOW PRINTING REST OF THE SMALL DEEPR AREA
+    // NOW PRINTING REST OF THE SMALL DEEPR AREA
 
     glPushMatrix();
     glTranslatef(125.369791206714, 8.5433258942929, 0);
@@ -534,20 +512,20 @@ void flower() {
 
     glPopMatrix();
 
-    //RED CIRLCE IN THE MIDDLE
+    // RED CIRLCE IN THE MIDDLE
     circle_tree(0.381264, 125.369791206714, 8.5433258942929, 0.94, 0.14, 0.04);
 
     glPopMatrix();
 }
 
+// ID - 01
+void left_pond()
+{
 
-//ID - 01
-void left_pond() {
-
-    //upper green portion
+    // upper green portion
     glBegin(GL_POLYGON);
     glColor3f(0.27, 0.5, 0.29);
-    //glColor3f(0.56, 0.46, 0.29);
+    // glColor3f(0.56, 0.46, 0.29);
 
     glVertex2f(0, 12);
     glVertex2f(35.5, 12);
@@ -556,24 +534,21 @@ void left_pond() {
 
     glEnd();
 
-    //right side deep green portion
+    // right side deep green portion
     glBegin(GL_POLYGON);
     glColor3f(0.19, 0.26, 0.19);
-    //glColor3f(0.19, 0.26, 0.19);
+    // glColor3f(0.19, 0.26, 0.19);
 
     glVertex2f(10, 0);
     glVertex2f(35.5, 12);
     glVertex2f(35.5, 9);
     glVertex2f(20, 0);
 
-
     glEnd();
-
 
     // water garden
 
     glBegin(GL_POLYGON);
-
 
     glColor3f(0.32, 0.59, 0.97);
 
@@ -589,19 +564,15 @@ void left_pond() {
     glVertex2f(4.2, 0);
     glVertex2f(0, 0);
 
-
     glEnd();
-
-
-
 }
 
 // ID - 53
-void left_pond_upper() {
+void left_pond_upper()
+{
     // water garden
 
     glBegin(GL_POLYGON);
-
 
     glColor3f(1, 1, 1);
 
@@ -612,8 +583,8 @@ void left_pond_upper() {
     glVertex2f(35.2, 0);
     glEnd();
 
-    //APPLYING TEXTURE IN THE LEFT POND UPPER AREA
-    //DIVIDED INTO SMALL PORTION TO APPLY THE TEXTURE PROPERLY
+    // APPLYING TEXTURE IN THE LEFT POND UPPER AREA
+    // DIVIDED INTO SMALL PORTION TO APPLY THE TEXTURE PROPERLY
 
     ApplyTexture(0, 12, 0, 15.25, 17, 15.25, 17, 12, textures[7].textureID);
 
@@ -647,9 +618,7 @@ void left_pond_upper() {
 
     glPopMatrix();
 
-
-
-    //1ST FLOWER DECORATION
+    // 1ST FLOWER DECORATION
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -660,10 +629,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //2ND FLOWER
+    // 2ND FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -674,10 +642,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //3RD FLOWER SMALL
+    // 3RD FLOWER SMALL
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -689,7 +656,7 @@ void left_pond_upper() {
     flower();
     glPopMatrix();
 
-    //4TH FLOWER
+    // 4TH FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -700,11 +667,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-
-    //5TH FLOWER
+    // 5TH FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -715,10 +680,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //6TH FLOWER
+    // 6TH FLOWER
 
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
@@ -730,16 +694,15 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //NOW TRANSLATING 1 - 6 TH FLOWER TO X AXIS
+    // NOW TRANSLATING 1 - 6 TH FLOWER TO X AXIS
 
     glPushMatrix();
 
     glTranslatef(1 * 13, 0, 0);
 
-    //1ST FLOWER DECORATION
+    // 1ST FLOWER DECORATION
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -750,10 +713,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //2ND FLOWER
+    // 2ND FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -764,10 +726,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //3RD FLOWER SMALL
+    // 3RD FLOWER SMALL
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -779,7 +740,7 @@ void left_pond_upper() {
     flower();
     glPopMatrix();
 
-    //4TH FLOWER
+    // 4TH FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -790,11 +751,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-
-    //5TH FLOWER
+    // 5TH FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -805,10 +764,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //6TH FLOWER
+    // 6TH FLOWER
 
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
@@ -820,19 +778,15 @@ void left_pond_upper() {
 
     flower();
 
+    glPopMatrix();
 
     glPopMatrix();
 
-
-
-    glPopMatrix();
-
-
-    //2ND TIME TRANSLATING THE FLOWERS
+    // 2ND TIME TRANSLATING THE FLOWERS
     glPushMatrix();
     glTranslatef(2 * 13, 0, 0);
 
-    //1ST FLOWER DECORATION
+    // 1ST FLOWER DECORATION
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -843,10 +797,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //2ND FLOWER
+    // 2ND FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -857,10 +810,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //3RD FLOWER SMALL
+    // 3RD FLOWER SMALL
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -872,7 +824,7 @@ void left_pond_upper() {
     flower();
     glPopMatrix();
 
-    //4TH FLOWER
+    // 4TH FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -883,11 +835,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-
-    //5TH FLOWER
+    // 5TH FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -898,10 +848,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //6TH FLOWER
+    // 6TH FLOWER
 
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
@@ -913,20 +862,16 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-
     glPopMatrix();
-
 
     glPushMatrix();
 
-
-    //3RD TIME TRANSLATING THE FLOWERS
+    // 3RD TIME TRANSLATING THE FLOWERS
     glTranslatef(3 * 13, 0, 0);
 
-    //1ST FLOWER DECORATION
+    // 1ST FLOWER DECORATION
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -937,10 +882,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //2ND FLOWER
+    // 2ND FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -951,10 +895,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //3RD FLOWER SMALL
+    // 3RD FLOWER SMALL
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -966,17 +909,14 @@ void left_pond_upper() {
     flower();
     glPopMatrix();
 
-
     glPopMatrix();
 
-
-
-    //2ND ROW
+    // 2ND ROW
     glPushMatrix();
 
     glTranslatef(3 * 12, -2.7, 0);
 
-    //1ST FLOWER DECORATION
+    // 1ST FLOWER DECORATION
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -987,10 +927,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //2ND FLOWER
+    // 2ND FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -1001,10 +940,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //3RD FLOWER SMALL
+    // 3RD FLOWER SMALL
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -1016,7 +954,7 @@ void left_pond_upper() {
     flower();
     glPopMatrix();
 
-    //4TH FLOWER
+    // 4TH FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -1031,14 +969,13 @@ void left_pond_upper() {
 
     glPopMatrix();
 
-
-    //3RD ROW
+    // 3RD ROW
 
     glPushMatrix();
 
     glTranslatef(3 * 12, 2 * -2.7, 0);
 
-    //1ST FLOWER DECORATION
+    // 1ST FLOWER DECORATION
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -1049,10 +986,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //2ND FLOWER
+    // 2ND FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -1063,10 +999,9 @@ void left_pond_upper() {
 
     flower();
 
-
     glPopMatrix();
 
-    //3RD FLOWER SMALL
+    // 3RD FLOWER SMALL
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -1078,7 +1013,7 @@ void left_pond_upper() {
     flower();
     glPopMatrix();
 
-    //4TH FLOWER
+    // 4TH FLOWER
     glPushMatrix();
     glTranslatef(-156, -5.4, 0);
     glScalef(2.2, 2.2, 1);
@@ -1091,21 +1026,14 @@ void left_pond_upper() {
 
     glPopMatrix();
 
-
-
-
     glPopMatrix();
-
-
-
-
-
 }
 
 // ID - 02
-void front_road() {
+void front_road()
+{
 
-    //left side light color
+    // left side light color
     glBegin(GL_POLYGON);
     glColor3f(0.8, 0.57, 0.6);
 
@@ -1116,7 +1044,7 @@ void front_road() {
 
     glEnd();
 
-    //main deep color area
+    // main deep color area
 
     glBegin(GL_POLYGON);
     // glColor3f(0.92, 0.6, 0.65);
@@ -1132,8 +1060,8 @@ void front_road() {
 
     glEnd();
 
-    //ApplyTexture(38, 0, 48.600006821, 15.25, 48.600006821 + 20, 15.25, 38 + 20, 0, textures[8].textureID);
-    //ApplyTexture(45.3721666389803, 10.5701912727206, 48.600006821, 15.25, 48.600006821 + 7, 15.25, 45.3721666389803 + 7, 10.5701912727206, textures[8].textureID);
+    // ApplyTexture(38, 0, 48.600006821, 15.25, 48.600006821 + 20, 15.25, 38 + 20, 0, textures[8].textureID);
+    // ApplyTexture(45.3721666389803, 10.5701912727206, 48.600006821, 15.25, 48.600006821 + 7, 15.25, 45.3721666389803 + 7, 10.5701912727206, textures[8].textureID);
     ApplyTexture(45.3721666389803, 10.5701912727206, 45.3721666389803 + 7, 10.5701912727206, 48.600006821 + 7, 15.25, 48.600006821, 15.25, textures[11].textureID);
 
     glPushMatrix();
@@ -1173,12 +1101,10 @@ void front_road() {
     ApplyTexture(45.3721666389803, 10.5701912727206, 45.3721666389803 + 7, 10.5701912727206, 48.600006821 + 7, 15.25, 48.600006821, 15.25, textures[11].textureID);
     glPopMatrix();
 
-
-    //USING THE CODE OF THE ABOVE ROW OF THE FRONT ROW TEXTURE
-    //JUST TRANSLATING TO -Y AXIS VALUE
+    // USING THE CODE OF THE ABOVE ROW OF THE FRONT ROW TEXTURE
+    // JUST TRANSLATING TO -Y AXIS VALUE
     glPushMatrix();
     glTranslatef(-3, -4, 0);
-
 
     ApplyTexture(45.3721666389803, 10.5701912727206, 45.3721666389803 + 7, 10.5701912727206, 48.600006821 + 7, 15.25, 48.600006821, 15.25, textures[11].textureID);
 
@@ -1225,16 +1151,12 @@ void front_road() {
     glPopMatrix();
 
     glPopMatrix();
-
-
-
 }
 
 // ID - 03
 
-void side_green_area() {
-
-
+void side_green_area()
+{
 
     glBegin(GL_POLYGON);
     // glColor3f(0.27, 0.5, 0.29);
@@ -1250,11 +1172,10 @@ void side_green_area() {
     ApplyTexture(130, 5.5, 130, 15.25, 103.47679385, 15.25, 90, 13.5, textures[7].textureID);
     // ApplyTexture(90, 13.5, 103.47679385, 15.25, 111.898 + 10, 12.438459, 107.8894 + 10, 9.9780, textures[0].textureID);
 
-     // left side deep area
+    // left side deep area
 
     glBegin(GL_POLYGON);
     glColor3f(0.19, 0.26, 0.19);
-
 
     glVertex2f(130, 2);
     glVertex2f(90.8, 10.2);
@@ -1262,19 +1183,16 @@ void side_green_area() {
     glVertex2f(130, 5.5);
 
     glEnd();
-
 }
 
-
 // ID - 04
-void poll_first() {
-
+void poll_first()
+{
 
     // first poll lower portion
     glBegin(GL_POLYGON);
 
     glColor3f(0.72, 0.42, 0.38);
-
 
     glVertex2f(37.7, 2.3);
     glVertex2f(37.7, 12);
@@ -1294,13 +1212,10 @@ void poll_first() {
 
     glEnd();
 
-
     // first poll upper lower portion  devided in 3 parts
     // glColor3f(0.67, 0.21, 0.11);
-    //glColor3f(0.91, 0.92, 0.9);
+    // glColor3f(0.91, 0.92, 0.9);
     glColor3f(0.55, 0.3, 0.26);
-
-
 
     glBegin(GL_POLYGON);
 
@@ -1310,7 +1225,6 @@ void poll_first() {
     glVertex2f(38.7, 12);
     glEnd();
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(38.7, 48.8);
@@ -1319,9 +1233,8 @@ void poll_first() {
     glVertex2f(48.35831, 49.6844234);
     glEnd();
 
-
-    //TOP MOST UPPER CYLINDER TYPE AREA
-    //glColor3f(0.72, 0.42, 0.38);
+    // TOP MOST UPPER CYLINDER TYPE AREA
+    // glColor3f(0.72, 0.42, 0.38);
     glBegin(GL_POLYGON);
     glVertex2f(48.4, 49.2);
     glVertex2f(48.3, 50.8);
@@ -1340,7 +1253,7 @@ void poll_first() {
 
     // cylinder in the first poll
 
-    //BACKGROUND MORE LIGHTER ARE
+    // BACKGROUND MORE LIGHTER ARE
     glColor3f(0.93, 0.85, 0.73);
     glBegin(GL_POLYGON);
     glVertex2f(39.2, 24.5);
@@ -1350,7 +1263,7 @@ void poll_first() {
 
     glEnd();
 
-    //MAIN MORE DEEPER AREA
+    // MAIN MORE DEEPER AREA
     glColor3f(0.99, 0.72, 0.4);
     glBegin(GL_POLYGON);
     glVertex2f(39.2, 26);
@@ -1373,23 +1286,21 @@ void poll_first() {
     glVertex2f(39.2, 32);
 
     glEnd();
-
 }
 
 // ID - 05
-void poll_second() {
+void poll_second()
+{
 
     // second poll lower portion
     glBegin(GL_POLYGON);
 
     glColor3f(0.72, 0.42, 0.38);
 
-
     glVertex2f(44.4, 11.4);
     glVertex2f(44.4, 19.75);
     glVertex2f(45.8, 19.75);
     glVertex2f(45.8, 11.4);
-
 
     glEnd();
 
@@ -1404,14 +1315,10 @@ void poll_second() {
 
     glEnd();
 
-
     // second poll upper lower portion  devided in 3 parts
-    //glColor3f(0.67, 0.21, 0.11);
-    //glColor3f(0.91, 0.92, 0.9);
+    // glColor3f(0.67, 0.21, 0.11);
+    // glColor3f(0.91, 0.92, 0.9);
     glColor3f(0.55, 0.3, 0.26);
-
-
-
 
     glBegin(GL_POLYGON);
 
@@ -1422,7 +1329,6 @@ void poll_second() {
 
     glEnd();
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(45.4, 41);
@@ -1430,7 +1336,6 @@ void poll_second() {
     glVertex2f(56.411733, 43.35007);
     glVertex2f(56.40078, 42.5985);
     glEnd();
-
 
     glBegin(GL_POLYGON);
     glVertex2f(56.4, 42.2);
@@ -1451,7 +1356,7 @@ void poll_second() {
 
     // cylinder in the first poll
 
-    //MAIN MORE LIGHTER AREA
+    // MAIN MORE LIGHTER AREA
     glColor3f(0.93, 0.85, 0.73);
     glBegin(GL_POLYGON);
     glVertex2f(46, 28.8);
@@ -1460,8 +1365,7 @@ void poll_second() {
     glVertex2f(47.8, 28.8);
     glEnd();
 
-
-    //MAIN MORE DEEPER AREA
+    // MAIN MORE DEEPER AREA
     glColor3f(0.99, 0.72, 0.4);
     glBegin(GL_POLYGON);
     glVertex2f(46, 29.5);
@@ -1470,7 +1374,6 @@ void poll_second() {
     glVertex2f(47.8, 29.5);
 
     glEnd();
-
 
     // two black vertical lines in the first poll cylinder
     glLineWidth(4.5);
@@ -1485,15 +1388,14 @@ void poll_second() {
     glVertex2f(46, 34.9);
 
     glEnd();
-
 }
 
-
 // ID - 06
-void road() {
+void road()
+{
 
-    //glColor3f(0.52, 0.55, 0.64);
-   // glColor3f(0.27, 0.27, 0.29);
+    // glColor3f(0.52, 0.55, 0.64);
+    // glColor3f(0.27, 0.27, 0.29);
     glColor3f(1, 1, 1);
     glBegin(GL_POLYGON);
 
@@ -1518,25 +1420,21 @@ void road() {
     ApplyTexture(110, 15.25, 110, 21.9, 120, 21.9, 120, 15.25, textures[8].textureID);
     ApplyTexture(120, 15.25, 120, 21.9, 130, 21.9, 130, 15.25, textures[8].textureID);
 
-
-
     // zebra crossing
 
     glPushMatrix();
     glTranslatef(10, 0, 0);
 
+    // COMMENTING OUT THE FIRST ZEBRA CROSSING TO SYNC THE DESIGN WITH THE ROAD TEXTURE
+    /*  glColor3f(0.85, 0.85, 0.85);
+     glBegin(GL_POLYGON);
 
-    //COMMENTING OUT THE FIRST ZEBRA CROSSING TO SYNC THE DESIGN WITH THE ROAD TEXTURE
-   /*  glColor3f(0.85, 0.85, 0.85);
-    glBegin(GL_POLYGON);
+     glVertex2f(51.5, 16);
+     glVertex2f(52, 16.5);
+     glVertex2f(60.6, 16.5);
+     glVertex2f(60.1, 16);
 
-    glVertex2f(51.5, 16);
-    glVertex2f(52, 16.5);
-    glVertex2f(60.6, 16.5);
-    glVertex2f(60.1, 16);
-
-    glEnd(); */
-
+     glEnd(); */
 
     glBegin(GL_POLYGON);
 
@@ -1545,10 +1443,7 @@ void road() {
     glVertex2f(61.6, 17.5);
     glVertex2f(61.1, 17);
 
-
     glEnd();
-
-
 
     glBegin(GL_POLYGON);
 
@@ -1557,9 +1452,7 @@ void road() {
     glVertex2f(62.6, 18.5);
     glVertex2f(62.1, 18);
 
-
     glEnd();
-
 
     glBegin(GL_POLYGON);
 
@@ -1568,9 +1461,7 @@ void road() {
     glVertex2f(63.6, 19.5);
     glVertex2f(63.1, 19);
 
-
     glEnd();
-
 
     glBegin(GL_POLYGON);
 
@@ -1579,12 +1470,9 @@ void road() {
     glVertex2f(64.6, 20.5);
     glVertex2f(64.1, 20);
 
-
     glEnd();
 
-
-
-    //COMMENTING OUT THE LAST ZEBRA CROSSING TO SYNC THE DESIGN WITH THE ROAD TEXTURE
+    // COMMENTING OUT THE LAST ZEBRA CROSSING TO SYNC THE DESIGN WITH THE ROAD TEXTURE
 
     /* glBegin(GL_POLYGON);
 
@@ -1596,16 +1484,12 @@ void road() {
 
     glEnd(); */
 
-
     glPopMatrix();
-
-
-
-
 }
 
 // ID - 08
-void ciecle() {
+void ciecle()
+{
 
     glPushMatrix();
     glTranslatef(-2, 0.5, 0);
@@ -1613,7 +1497,7 @@ void ciecle() {
     glPushMatrix();
     glTranslatef(0, -9, 0);
     glScalef(1, 1.8, 1);
-    glBegin(GL_POLYGON); // Draw a Red Half Circle centered at origin
+    glBegin(GL_POLYGON);         // Draw a Red Half Circle centered at origin
     for (int i = 0; i < 70; i++) // Iterate only halfway through the points
     {
         // glColor3f(0.59, 0.52, 0.38);
@@ -1629,14 +1513,13 @@ void ciecle() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(0, -10, 0);
     glScalef(1, 1.8, 1);
-    glBegin(GL_POLYGON); // Draw a Red Half Circle centered at origin
+    glBegin(GL_POLYGON);          // Draw a Red Half Circle centered at origin
     for (int i = 0; i < 100; i++) // Iterate only halfway through the points
     {
-        //glColor3f(0.21, 0.16, 0.18);
+        // glColor3f(0.21, 0.16, 0.18);
         glColor3f(0.19, 0.26, 0.19);
         float pi = 3.1416;
         float A = (i * pi) / 100; // Adjusted for half circle
@@ -1649,19 +1532,15 @@ void ciecle() {
     glEnd();
     glPopMatrix();
 
-
     glPopMatrix();
-
-
-
 
     glPushMatrix();
     glTranslatef(0, -9, 0);
     glScalef(1, 1.8, 1);
-    glBegin(GL_POLYGON); // Draw a Red Half Circle centered at origin
+    glBegin(GL_POLYGON);         // Draw a Red Half Circle centered at origin
     for (int i = 0; i < 70; i++) // Iterate only halfway through the points
     {
-        //glColor3f(0.59, 0.52, 0.38);
+        // glColor3f(0.59, 0.52, 0.38);
         glColor3f(0.27, 0.5, 0.29);
         float pi = 4.5009698999936;
         float A = (i * pi) / 100; // Adjusted for half circle
@@ -1674,14 +1553,13 @@ void ciecle() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(0, -10, 0);
     glScalef(1, 1.8, 1);
-    glBegin(GL_POLYGON); // Draw a Red Half Circle centered at origin
+    glBegin(GL_POLYGON);          // Draw a Red Half Circle centered at origin
     for (int i = 0; i < 100; i++) // Iterate only halfway through the points
     {
-        //glColor3f(0.21, 0.16, 0.18);
+        // glColor3f(0.21, 0.16, 0.18);
         glColor3f(0.19, 0.26, 0.19);
         float pi = 3.1416;
         float A = (i * pi) / 100; // Adjusted for half circle
@@ -1692,7 +1570,6 @@ void ciecle() {
     }
 
     glEnd();
-
 
     glLineWidth(7.5);
     glBegin(GL_LINES);
@@ -1713,15 +1590,13 @@ void ciecle() {
     glVertex2f(25, 7.5);
 
     glEnd();
-
 }
 
-
-
 // ID - 09
-void train_platform() {
+void train_platform()
+{
 
-    //ash color platform
+    // ash color platform
     glColor3f(0.62, 0.61, 0.61);
     glBegin(GL_POLYGON);
 
@@ -1730,10 +1605,9 @@ void train_platform() {
     glVertex2f(130, 36.6);
     glVertex2f(130, 33.4);
 
-
     glEnd();
 
-    //black corlor line between the ash color platform
+    // black corlor line between the ash color platform
 
     glLineWidth(5.5);
     glBegin(GL_LINES);
@@ -1742,16 +1616,13 @@ void train_platform() {
     glVertex2f(0, 35);
     glVertex2f(130, 35);
 
-
-
     glEnd();
-
 }
-
 
 // ID -  10
 
-void train_piller01() {
+void train_piller01()
+{
 
     // first piller lower portion
     glColor3f(0.5, 0.52, 0.5);
@@ -1770,7 +1641,6 @@ void train_piller01() {
     glColor3f(0.29, 0.29, 0.29);
     glBegin(GL_POLYGON);
 
-
     glVertex2f(19.0356644004177, 31);
     glVertex2f(14.9, 33.4);
     glVertex2f(32.1, 33.4);
@@ -1786,7 +1656,6 @@ void train_piller01() {
     glVertex2f(22.5, 33.4);
     glVertex2f(24.5, 33.4);
     glVertex2f(24.5, 21.9);
-
 
     glEnd();
 
@@ -1811,13 +1680,11 @@ void train_piller01() {
     glVertex2f(24.5, 32.4);
 
     glEnd();
-
-
 }
 
 // ID - 11
-void train_piller02() {
-
+void train_piller02()
+{
 
     glPushMatrix();
     glTranslatef(34.4, 0, 0);
@@ -1839,7 +1706,6 @@ void train_piller02() {
     glColor3f(0.29, 0.29, 0.29);
     glBegin(GL_POLYGON);
 
-
     glVertex2f(19.0356644004177, 31);
     glVertex2f(14.9, 33.4);
     glVertex2f(32.1, 33.4);
@@ -1855,7 +1721,6 @@ void train_piller02() {
     glVertex2f(22.5, 33.4);
     glVertex2f(24.5, 33.4);
     glVertex2f(24.5, 21.9);
-
 
     glEnd();
 
@@ -1884,12 +1749,9 @@ void train_piller02() {
     glPopMatrix();
 }
 
-
-
-
 // ID - 12
-void train_piller03() {
-
+void train_piller03()
+{
 
     glPushMatrix();
     glTranslatef(34.4 + 34.4, 0, 0);
@@ -1911,7 +1773,6 @@ void train_piller03() {
     glColor3f(0.29, 0.29, 0.29);
     glBegin(GL_POLYGON);
 
-
     glVertex2f(19.0356644004177, 31);
     glVertex2f(14.9, 33.4);
     glVertex2f(32.1, 33.4);
@@ -1927,7 +1788,6 @@ void train_piller03() {
     glVertex2f(22.5, 33.4);
     glVertex2f(24.5, 33.4);
     glVertex2f(24.5, 21.9);
-
 
     glEnd();
 
@@ -1957,8 +1817,8 @@ void train_piller03() {
 }
 
 // ID - 13
-void train_piller04() {
-
+void train_piller04()
+{
 
     glPushMatrix();
     glTranslatef(68.8 + 34.4, 0, 0);
@@ -1980,7 +1840,6 @@ void train_piller04() {
     glColor3f(0.29, 0.29, 0.29);
     glBegin(GL_POLYGON);
 
-
     glVertex2f(19.0356644004177, 31);
     glVertex2f(14.9, 33.4);
     glVertex2f(32.1, 33.4);
@@ -1996,7 +1855,6 @@ void train_piller04() {
     glVertex2f(22.5, 33.4);
     glVertex2f(24.5, 33.4);
     glVertex2f(24.5, 21.9);
-
 
     glEnd();
 
@@ -2024,7 +1882,6 @@ void train_piller04() {
 
     glPopMatrix();
 }
-
 
 /* // ID - 14
 void train01() {
@@ -2741,10 +2598,9 @@ void train03() {
     glPopMatrix();
 } */
 
-
 // ID - 14
-void train01() {
-
+void train01()
+{
 
     glPushMatrix();
 
@@ -2753,17 +2609,16 @@ void train01() {
         glRotatef(3 * _angle1, 0, 0, 1);
     glTranslatef(-53.4812580648495, -34.9597802060607, 0);
 
-    //LEFT TWO WHEELS
-    //FIRST ONE
+    // LEFT TWO WHEELS
+    // FIRST ONE
 
     circle_tree(1.131495, 53.4812580648495, 34.9597802060607, 0.06, 0.06, 0.06);
-    //SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
+    // SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
     circle_tree(0.2, 53.3034769315249, 34.401529793518, 1, 1, 1);
 
     glPopMatrix();
 
-
-    //SECOND ONE
+    // SECOND ONE
     glPushMatrix();
     glTranslatef(6, 0, 0);
 
@@ -2773,14 +2628,12 @@ void train01() {
     glTranslatef(-53.4812580648495, -34.9597802060607, 0);
 
     circle_tree(1.131495, 53.4812580648495, 34.9597802060607, 0.06, 0.06, 0.06);
-    //SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
+    // SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
     circle_tree(0.2, 53.3034769315249, 34.401529793518, 1, 1, 1);
-
 
     glPopMatrix();
 
-
-    //RIGHT TWO WHELLL.. JUST TRANSLATING FIRST ONE
+    // RIGHT TWO WHELLL.. JUST TRANSLATING FIRST ONE
 
     glPushMatrix();
 
@@ -2793,16 +2646,16 @@ void train01() {
         glRotatef(3 * _angle1, 0, 0, 1);
     glTranslatef(-53.4812580648495, -34.9597802060607, 0);
 
-    //LEFT TWO WHEELS
-    //FIRST ONE
+    // LEFT TWO WHEELS
+    // FIRST ONE
 
     circle_tree(1.131495, 53.4812580648495, 34.9597802060607, 0.06, 0.06, 0.06);
-    //SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
+    // SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
     circle_tree(0.2, 53.3034769315249, 34.401529793518, 1, 1, 1);
 
     glPopMatrix();
 
-    //SECOND ONE
+    // SECOND ONE
     glPushMatrix();
     glTranslatef(6, 0, 0);
 
@@ -2812,20 +2665,16 @@ void train01() {
     glTranslatef(-53.4812580648495, -34.9597802060607, 0);
 
     circle_tree(1.131495, 53.4812580648495, 34.9597802060607, 0.06, 0.06, 0.06);
-    //SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
+    // SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
     circle_tree(0.2, 53.3034769315249, 34.401529793518, 1, 1, 1);
 
     glPopMatrix();
 
-
     glPopMatrix();
 
-
-
-
-    //MAIN BODY OF TRAIN 01
-    //DIVIDED INTO PARTS
-    //FIRST PART FROM LEFT (HEAD PART)
+    // MAIN BODY OF TRAIN 01
+    // DIVIDED INTO PARTS
+    // FIRST PART FROM LEFT (HEAD PART)
     glColor3f(1, 1, 1);
     glBegin(GL_POLYGON);
 
@@ -2854,8 +2703,7 @@ void train01() {
 
     glEnd();
 
-
-    //SECOND PART
+    // SECOND PART
 
     glBegin(GL_POLYGON);
 
@@ -2867,11 +2715,9 @@ void train01() {
     glVertex2f(107.2043228824644, 34.7061356596523);
     glVertex2f(107.2043228824644, 42.5446867692894);
 
-
-
     glEnd();
 
-    //THIRD PART
+    // THIRD PART
 
     glBegin(GL_POLYGON);
 
@@ -2882,12 +2728,10 @@ void train01() {
     glVertex2f(107.2043228824644, 42.5446867692894);
     glEnd();
 
-
-    //NOW PRINTING BELOW BLAKISH AREA
+    // NOW PRINTING BELOW BLAKISH AREA
     glColor3f(0.54, 0.54, 0.54);
 
-
-    //FIRST PART
+    // FIRST PART
     glBegin(GL_POLYGON);
 
     glVertex2f(52.0347194400083, 35.9942390622938);
@@ -2903,7 +2747,7 @@ void train01() {
 
     glEnd();
 
-    //SECOND PART
+    // SECOND PART
     glBegin(GL_POLYGON);
     glVertex2f(64.7298715213756, 35.9942390622938);
     glVertex2f(52.0347194400083, 35.9942390622938);
@@ -2914,9 +2758,7 @@ void train01() {
 
     glEnd();
 
-
-
-    //THIRD PART
+    // THIRD PART
     glBegin(GL_POLYGON);
 
     glVertex2f(64.7298715213756, 35.9942390622938);
@@ -2928,9 +2770,7 @@ void train01() {
 
     glEnd();
 
-
-
-    //FOURTH PART
+    // FOURTH PART
     glBegin(GL_POLYGON);
 
     glVertex2f(107.2043228824644, 35.9942390622938);
@@ -2941,8 +2781,7 @@ void train01() {
 
     glEnd();
 
-
-    //TOP LEFT BLACK DRIVER WINDOW
+    // TOP LEFT BLACK DRIVER WINDOW
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
 
@@ -2954,9 +2793,8 @@ void train01() {
 
     glEnd();
 
-
-    //TWO HORIZONTAL BLUE COLORE STRIP 
-    //FIRST BIG ONE FROM UP
+    // TWO HORIZONTAL BLUE COLORE STRIP
+    // FIRST BIG ONE FROM UP
     glColor3f(0.16, 0.17, 0.53);
     glBegin(GL_POLYGON);
 
@@ -2967,7 +2805,7 @@ void train01() {
 
     glEnd();
 
-    //SECOND SMALL HORIZONTAL BLUE COLOR STRIP
+    // SECOND SMALL HORIZONTAL BLUE COLOR STRIP
     glBegin(GL_POLYGON);
 
     glVertex2f(65.3248371232006, 37.717347331249);
@@ -2977,12 +2815,9 @@ void train01() {
 
     glEnd();
 
+    // NOW DRAWING THE FIRST BIG DOOR (ACTUALLY THE OUTLINE WILL BE IN LINE)
 
-
-    //NOW DRAWING THE FIRST BIG DOOR (ACTUALLY THE OUTLINE WILL BE IN LINE)
-
-
-    //LEFT BIG DOOR
+    // LEFT BIG DOOR
 
     glLineWidth(1);
     glColor3f(0, 0, 0);
@@ -2994,7 +2829,6 @@ void train01() {
     glVertex2f(65.170763196853, 41.6069551546557);
     glVertex2f(64.9072768772416, 41.3487481128042);
 
-
     glVertex2f(64.9072768772416, 41.3487481128042);
     glVertex2f(64.9072768772416, 36.8497053960769);
 
@@ -3015,8 +2849,7 @@ void train01() {
 
     glEnd();
 
-
-    //NOW PRINTING THE BLACK WINDOW INSIDE THE LEFT BIG DOOR
+    // NOW PRINTING THE BLACK WINDOW INSIDE THE LEFT BIG DOOR
 
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
@@ -3032,8 +2865,7 @@ void train01() {
 
     glEnd();
 
-
-    //LEFT SMALL RECTANGLE TYPE BLACK AREA ABOVE THE FIRST SMALL WINDOW
+    // LEFT SMALL RECTANGLE TYPE BLACK AREA ABOVE THE FIRST SMALL WINDOW
 
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
@@ -3045,12 +2877,11 @@ void train01() {
 
     glEnd();
 
+    // NOW PRIINTING THE SMALL WINDOWS FROM LEFT TO RIGHT
+    // I WILL PRINT THE FIRST ONE FROM LEFT AND THEN
+    // WILL TRANSLATE IT TO X AXIS
 
-    //NOW PRIINTING THE SMALL WINDOWS FROM LEFT TO RIGHT
-    //I WILL PRINT THE FIRST ONE FROM LEFT AND THEN
-    //WILL TRANSLATE IT TO X AXIS
-
-    //FIRST WINDOW FROM LEFT
+    // FIRST WINDOW FROM LEFT
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
 
@@ -3065,10 +2896,9 @@ void train01() {
 
     glEnd();
 
+    // NOW FOR PRINTING REST OF THE WINDOWS, TRANSLATING IT TO X AXIS
 
-    //NOW FOR PRINTING REST OF THE WINDOWS, TRANSLATING IT TO X AXIS
-
-    //2ND WINDOW
+    // 2ND WINDOW
     glPushMatrix();
     glTranslatef(1 * 2.5, 0, 0);
 
@@ -3087,8 +2917,7 @@ void train01() {
 
     glPopMatrix();
 
-
-    //3RD WINDOW
+    // 3RD WINDOW
 
     glPushMatrix();
     glTranslatef(2 * 2.5, 0, 0);
@@ -3108,8 +2937,7 @@ void train01() {
 
     glPopMatrix();
 
-
-    //4TH WINDOW
+    // 4TH WINDOW
     glPushMatrix();
     glTranslatef(3 * 2.5, 0, 0);
 
@@ -3128,7 +2956,7 @@ void train01() {
 
     glPopMatrix();
 
-    //5TH  WINDOW
+    // 5TH  WINDOW
     glPushMatrix();
     glTranslatef(4 * 2.5, 0, 0);
 
@@ -3147,8 +2975,7 @@ void train01() {
 
     glPopMatrix();
 
-
-    //6TH WINDOW
+    // 6TH WINDOW
     glPushMatrix();
     glTranslatef(5 * 2.5, 0, 0);
 
@@ -3167,7 +2994,7 @@ void train01() {
 
     glPopMatrix();
 
-    //7TH WINDOW
+    // 7TH WINDOW
     glPushMatrix();
     glTranslatef(6 * 2.5, 0, 0);
 
@@ -3186,7 +3013,7 @@ void train01() {
 
     glPopMatrix();
 
-    //8TH WINDOW
+    // 8TH WINDOW
 
     glPushMatrix();
     glTranslatef(7 * 2.5, 0, 0);
@@ -3206,7 +3033,7 @@ void train01() {
 
     glPopMatrix();
 
-    //9TH WINDOW
+    // 9TH WINDOW
     glPushMatrix();
     glTranslatef(8 * 2.5, 0, 0);
 
@@ -3225,8 +3052,7 @@ void train01() {
 
     glPopMatrix();
 
-
-    //10TH WINDOW
+    // 10TH WINDOW
     glPushMatrix();
     glTranslatef(9 * 2.5, 0, 0);
 
@@ -3245,8 +3071,7 @@ void train01() {
 
     glPopMatrix();
 
-
-    //11TH WINDOW
+    // 11TH WINDOW
 
     glPushMatrix();
     glTranslatef(10 * 2.5, 0, 0);
@@ -3266,7 +3091,7 @@ void train01() {
 
     glPopMatrix();
 
-    //12TH WINDOW
+    // 12TH WINDOW
 
     glPushMatrix();
     glTranslatef(11 * 2.5, 0, 0);
@@ -3286,8 +3111,7 @@ void train01() {
 
     glPopMatrix();
 
-
-    //13TH WINDOW
+    // 13TH WINDOW
     glPushMatrix();
     glTranslatef(12 * 2.5, 0, 0);
 
@@ -3306,8 +3130,7 @@ void train01() {
 
     glPopMatrix();
 
-
-    //14TH WINDOW
+    // 14TH WINDOW
     glPushMatrix();
     glTranslatef(13 * 2.5, 0, 0);
 
@@ -3326,7 +3149,7 @@ void train01() {
 
     glPopMatrix();
 
-    //15TH WINDOW
+    // 15TH WINDOW
 
     glPushMatrix();
     glTranslatef(14 * 2.5, 0, 0);
@@ -3346,10 +3169,9 @@ void train01() {
 
     glPopMatrix();
 
-
-    //NOW PRINTING THE SMALL BLACK HORIZONTAL AREA ABOVE THE LAST SMALL WINDOW
-    //USING THE CODE OF THE FIRST ONE
-    //JUST TRANSLATING IT TO X AXIS
+    // NOW PRINTING THE SMALL BLACK HORIZONTAL AREA ABOVE THE LAST SMALL WINDOW
+    // USING THE CODE OF THE FIRST ONE
+    // JUST TRANSLATING IT TO X AXIS
     glPushMatrix();
     glTranslatef(35.2, 0, 0);
 
@@ -3365,10 +3187,9 @@ void train01() {
 
     glPopMatrix();
 
-
-    //NOW PRINTING THE LAST BIG DOOR
-    //USING THE CODE OF THE FIRST ONE
-    //JUST TRANSLATING IT TO X AXIS
+    // NOW PRINTING THE LAST BIG DOOR
+    // USING THE CODE OF THE FIRST ONE
+    // JUST TRANSLATING IT TO X AXIS
 
     glPushMatrix();
     glTranslatef(44, 0, 0);
@@ -3382,7 +3203,6 @@ void train01() {
 
     glVertex2f(65.170763196853, 41.6069551546557);
     glVertex2f(64.9072768772416, 41.3487481128042);
-
 
     glVertex2f(64.9072768772416, 41.3487481128042);
     glVertex2f(64.9072768772416, 36.8497053960769);
@@ -3404,8 +3224,7 @@ void train01() {
 
     glEnd();
 
-
-    //NOW PRINTING THE BLACK WINDOW INSIDE THE LEFT BIG DOOR
+    // NOW PRINTING THE BLACK WINDOW INSIDE THE LEFT BIG DOOR
 
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
@@ -3421,11 +3240,9 @@ void train01() {
 
     glEnd();
 
-
     glPopMatrix();
 
-
-    //SMALL YELLOWISH COLOR LIGHT IN THE HEAD(LEFT SIDE)
+    // SMALL YELLOWISH COLOR LIGHT IN THE HEAD(LEFT SIDE)
     glColor3f(0.76, 0.87, 0.18);
     glBegin(GL_POLYGON);
 
@@ -3441,9 +3258,7 @@ void train01() {
 
     glEnd();
 
-
-
-    //OUTLINE ABOVE THE LEFT TWO WHEELS
+    // OUTLINE ABOVE THE LEFT TWO WHEELS
 
     glLineWidth(1);
     glColor3f(0, 0, 0);
@@ -3463,10 +3278,9 @@ void train01() {
     glVertex2f(61.161765, 34.7061356596523);
     glVertex2f(52.5099163, 34.7061356596523);
 
-
     glEnd();
 
-    //OUTLINE ABOVE THE RIGHT TWO WHEELS
+    // OUTLINE ABOVE THE RIGHT TWO WHEELS
 
     glLineWidth(1);
     glColor3f(0, 0, 0);
@@ -3488,8 +3302,7 @@ void train01() {
 
     glEnd();
 
-
-    //NOW VERTICLE LINES IN THE DOWN SIDE
+    // NOW VERTICLE LINES IN THE DOWN SIDE
 
     glLineWidth(1);
     glColor3f(0.43, 0.43, 0.43);
@@ -3501,7 +3314,7 @@ void train01() {
 
     glEnd();
 
-    //VERTICLE LINES AT ABOVE OF THE LEFT TWO WHEELS OUTLNE
+    // VERTICLE LINES AT ABOVE OF THE LEFT TWO WHEELS OUTLNE
 
     glBegin(GL_LINES);
 
@@ -3517,20 +3330,18 @@ void train01() {
 
     glEnd();
 
-
-    //NOW PRINTING REST OF THE VERTICLE LINES AT THE
-    //SAME LEVEL
-    //JUST TRANSLATING TO X AXIS
+    // NOW PRINTING REST OF THE VERTICLE LINES AT THE
+    // SAME LEVEL
+    // JUST TRANSLATING TO X AXIS
 
     glPushMatrix();
     glTranslatef(1 * 11.5, 0, 0);
 
-    //NOW VERTICLE LINES IN THE DOWN SIDE
+    // NOW VERTICLE LINES IN THE DOWN SIDE
 
     glLineWidth(1);
     glColor3f(0.43, 0.43, 0.43);
 
-
     glBegin(GL_LINES);
 
     glVertex2f(51.2974872829811, 35.9942390622938);
@@ -3540,13 +3351,12 @@ void train01() {
 
     glPopMatrix();
 
-
-    //NOW PRIINTING REST OF THE VERTCLE LINES
+    // NOW PRIINTING REST OF THE VERTCLE LINES
 
     glPushMatrix();
     glTranslatef(14, 0, 0);
 
-    //NOW VERTICLE LINES IN THE DOWN SIDE
+    // NOW VERTICLE LINES IN THE DOWN SIDE
 
     glLineWidth(1);
 
@@ -3558,8 +3368,6 @@ void train01() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(16.5, 0, 0);
@@ -3575,10 +3383,8 @@ void train01() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(19, 0, 0);
-
 
     glLineWidth(1);
 
@@ -3590,12 +3396,10 @@ void train01() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(21.5, 0, 0);
 
-
     glLineWidth(1);
 
     glBegin(GL_LINES);
@@ -3606,12 +3410,10 @@ void train01() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(24, 0, 0);
 
-
     glLineWidth(1);
 
     glBegin(GL_LINES);
@@ -3622,12 +3424,10 @@ void train01() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(26.5, 0, 0);
 
-
     glLineWidth(1);
 
     glBegin(GL_LINES);
@@ -3639,10 +3439,8 @@ void train01() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(29, 0, 0);
-
 
     glLineWidth(1);
 
@@ -3658,7 +3456,6 @@ void train01() {
     glPushMatrix();
     glTranslatef(31.5, 0, 0);
 
-
     glLineWidth(1);
 
     glBegin(GL_LINES);
@@ -3670,10 +3467,8 @@ void train01() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(34, 0, 0);
-
 
     glLineWidth(1);
 
@@ -3689,7 +3484,6 @@ void train01() {
     glPushMatrix();
     glTranslatef(36.5, 0, 0);
 
-
     glLineWidth(1);
 
     glBegin(GL_LINES);
@@ -3700,12 +3494,10 @@ void train01() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(39, 0, 0);
 
-
     glLineWidth(1);
 
     glBegin(GL_LINES);
@@ -3717,10 +3509,8 @@ void train01() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(41.5, 0, 0);
-
 
     glLineWidth(1);
 
@@ -3736,7 +3526,6 @@ void train01() {
     glPushMatrix();
     glTranslatef(44, 0, 0);
 
-
     glLineWidth(1);
 
     glBegin(GL_LINES);
@@ -3747,12 +3536,10 @@ void train01() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(46, 0, 0);
 
-
     glLineWidth(1);
 
     glBegin(GL_LINES);
@@ -3764,14 +3551,13 @@ void train01() {
 
     glPopMatrix();
 
-    //LAST VERTICLE LINE
+    // LAST VERTICLE LINE
 
     glPushMatrix();
     glTranslatef(58, 0, 0);
 
     glLineWidth(1);
 
-
     glBegin(GL_LINES);
 
     glVertex2f(51.2974872829811, 35.9942390622938);
@@ -3781,11 +3567,9 @@ void train01() {
 
     glPopMatrix();
 
-
-    //NOW PRINTING THE TWO VERTICLE LINES ABOVE THE  TWO RIGHT WHEELS
-    //USING THE CODE OF THE FIRST TWO SMALL LINES
-    //JUST TRANSLATING IT
-
+    // NOW PRINTING THE TWO VERTICLE LINES ABOVE THE  TWO RIGHT WHEELS
+    // USING THE CODE OF THE FIRST TWO SMALL LINES
+    // JUST TRANSLATING IT
 
     glPushMatrix();
     glTranslatef(46, 0, 0);
@@ -3806,9 +3590,7 @@ void train01() {
 
     glPopMatrix();
 
-
-
-    //YELLOWISH CONNECTOR AT THE END
+    // YELLOWISH CONNECTOR AT THE END
 
     glColor3f(0.73, 0.66, 0.55);
     glBegin(GL_POLYGON);
@@ -3818,20 +3600,13 @@ void train01() {
     glVertex2f(111.6944945966745, 34.1264385750046);
     glVertex2f(112.2450416881816, 34.1264385750046);
     glEnd();
-
-
-
-
-
 }
 
 // ID - 15
-void train02() {
+void train02()
+{
 
-
-
-
-    //YELLOWISH CONNECTOR AT THE START.. USING THE CODE OF THE TRAIN001
+    // YELLOWISH CONNECTOR AT THE START.. USING THE CODE OF THE TRAIN001
 
     glPushMatrix();
     glTranslatef(0.583, 0, 0);
@@ -3846,9 +3621,8 @@ void train02() {
 
     glPopMatrix();
 
-
-    //NOW PRINTING THE LEFT WHEEL
-   //USING THE CODE OF THE FIRST ONE..JUST TRANSLATING
+    // NOW PRINTING THE LEFT WHEEL
+    // USING THE CODE OF THE FIRST ONE..JUST TRANSLATING
     glPushMatrix();
 
     glTranslatef(65.5, 0, 0);
@@ -3860,17 +3634,16 @@ void train02() {
         glRotatef(3 * _angle1, 0, 0, 1);
     glTranslatef(-53.4812580648495, -34.9597802060607, 0);
 
-    //LEFT TWO WHEELS
-    //FIRST ONE
+    // LEFT TWO WHEELS
+    // FIRST ONE
 
     circle_tree(1.131495, 53.4812580648495, 34.9597802060607, 0.06, 0.06, 0.06);
-    //SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
+    // SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
     circle_tree(0.2, 53.3034769315249, 34.401529793518, 1, 1, 1);
 
     glPopMatrix();
 
-
-    //SECOND ONE
+    // SECOND ONE
     glPushMatrix();
     glTranslatef(6, 0, 0);
 
@@ -3880,15 +3653,12 @@ void train02() {
     glTranslatef(-53.4812580648495, -34.9597802060607, 0);
 
     circle_tree(1.131495, 53.4812580648495, 34.9597802060607, 0.06, 0.06, 0.06);
-    //SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
+    // SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
     circle_tree(0.2, 53.3034769315249, 34.401529793518, 1, 1, 1);
 
-
     glPopMatrix();
 
-
     glPopMatrix();
-
 
     // RIGHT SIDE TWO WHEELS
 
@@ -3903,17 +3673,16 @@ void train02() {
         glRotatef(3 * _angle1, 0, 0, 1);
     glTranslatef(-53.4812580648495, -34.9597802060607, 0);
 
-    //LEFT TWO WHEELS
-    //FIRST ONE
+    // LEFT TWO WHEELS
+    // FIRST ONE
 
     circle_tree(1.131495, 53.4812580648495, 34.9597802060607, 0.06, 0.06, 0.06);
-    //SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
+    // SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
     circle_tree(0.2, 53.3034769315249, 34.401529793518, 1, 1, 1);
 
     glPopMatrix();
 
-
-    //SECOND ONE
+    // SECOND ONE
     glPushMatrix();
     glTranslatef(6, 0, 0);
 
@@ -3923,19 +3692,17 @@ void train02() {
     glTranslatef(-53.4812580648495, -34.9597802060607, 0);
 
     circle_tree(1.131495, 53.4812580648495, 34.9597802060607, 0.06, 0.06, 0.06);
-    //SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
+    // SMALL DOT CIRCLE FOR IDENTIFY WHEEL ROTATION
     circle_tree(0.2, 53.3034769315249, 34.401529793518, 1, 1, 1);
 
+    glPopMatrix();
 
     glPopMatrix();
 
+    // MAIN WHITISH BODY PART
+    // DIVIDED INTO SMALL PARTS
 
-    glPopMatrix();
-
-    //MAIN WHITISH BODY PART
-    //DIVIDED INTO SMALL PARTS
-
-    //FIRST PART
+    // FIRST PART
     glColor3f(1, 1, 1);
     glBegin(GL_POLYGON);
 
@@ -3946,9 +3713,7 @@ void train02() {
     glVertex2f(117.6520370354689, 34.7061356596523);
     glEnd();
 
-
-
-    //2ND PART
+    // 2ND PART
     glBegin(GL_POLYGON);
 
     glVertex2f(146.2784673708512, 42.5446867692894);
@@ -3960,7 +3725,7 @@ void train02() {
     glVertex2f(146.2784673708512, 34.7061356596523);
     glEnd();
 
-    //THIRD PART
+    // THIRD PART
     glBegin(GL_POLYGON);
     glVertex2f(159.8505546972679, 42.5446867692894);
     glVertex2f(146.2784673708512, 42.5446867692894);
@@ -3971,8 +3736,7 @@ void train02() {
 
     glEnd();
 
-
-    //FIRST BIG HORIZONTAL STRIP BLUE COLOR
+    // FIRST BIG HORIZONTAL STRIP BLUE COLOR
     glColor3f(0.16, 0.17, 0.53);
 
     glBegin(GL_POLYGON);
@@ -3983,7 +3747,7 @@ void train02() {
 
     glEnd();
 
-    //SECOND SMALL HORIZONTAL STRIP BLUE COLOR
+    // SECOND SMALL HORIZONTAL STRIP BLUE COLOR
     glBegin(GL_POLYGON);
     glVertex2f(159.8505546972679, 37.4);
     glVertex2f(159.8505546972679, 37.7064407144085);
@@ -3992,18 +3756,16 @@ void train02() {
 
     glEnd();
 
-
-    //NOW PRINTING THE DOORS AND SMALL BLACK WINDOWS
-    //USING THE CODE OF THE FIRST TRAIN
-    //JUST TRANSLATING TO -X AXIS
+    // NOW PRINTING THE DOORS AND SMALL BLACK WINDOWS
+    // USING THE CODE OF THE FIRST TRAIN
+    // JUST TRANSLATING TO -X AXIS
 
     glPushMatrix();
     glTranslatef(48.5, 0, 0);
 
-    //NOW DRAWING THE FIRST BIG DOOR (ACTUALLY THE OUTLINE WILL BE IN LINE)
+    // NOW DRAWING THE FIRST BIG DOOR (ACTUALLY THE OUTLINE WILL BE IN LINE)
 
-
-    //LEFT BIG DOOR
+    // LEFT BIG DOOR
 
     glLineWidth(1);
     glColor3f(0, 0, 0);
@@ -4015,7 +3777,6 @@ void train02() {
     glVertex2f(65.170763196853, 41.6069551546557);
     glVertex2f(64.9072768772416, 41.3487481128042);
 
-
     glVertex2f(64.9072768772416, 41.3487481128042);
     glVertex2f(64.9072768772416, 36.8497053960769);
 
@@ -4036,8 +3797,7 @@ void train02() {
 
     glEnd();
 
-
-    //NOW PRINTING THE BLACK WINDOW INSIDE THE LEFT BIG DOOR
+    // NOW PRINTING THE BLACK WINDOW INSIDE THE LEFT BIG DOOR
 
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
@@ -4053,8 +3813,7 @@ void train02() {
 
     glEnd();
 
-
-    //LEFT SMALL RECTANGLE TYPE BLACK AREA ABOVE THE FIRST SMALL WINDOW
+    // LEFT SMALL RECTANGLE TYPE BLACK AREA ABOVE THE FIRST SMALL WINDOW
 
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
@@ -4066,12 +3825,11 @@ void train02() {
 
     glEnd();
 
+    // NOW PRIINTING THE SMALL WINDOWS FROM LEFT TO RIGHT
+    // I WILL PRINT THE FIRST ONE FROM LEFT AND THEN
+    // WILL TRANSLATE IT TO X AXIS
 
-    //NOW PRIINTING THE SMALL WINDOWS FROM LEFT TO RIGHT
-    //I WILL PRINT THE FIRST ONE FROM LEFT AND THEN
-    //WILL TRANSLATE IT TO X AXIS
-
-    //FIRST WINDOW FROM LEFT
+    // FIRST WINDOW FROM LEFT
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
 
@@ -4086,10 +3844,9 @@ void train02() {
 
     glEnd();
 
+    // NOW FOR PRINTING REST OF THE WINDOWS, TRANSLATING IT TO X AXIS
 
-    //NOW FOR PRINTING REST OF THE WINDOWS, TRANSLATING IT TO X AXIS
-
-    //2ND WINDOW
+    // 2ND WINDOW
     glPushMatrix();
     glTranslatef(1 * 2.5, 0, 0);
 
@@ -4108,8 +3865,7 @@ void train02() {
 
     glPopMatrix();
 
-
-    //3RD WINDOW
+    // 3RD WINDOW
 
     glPushMatrix();
     glTranslatef(2 * 2.5, 0, 0);
@@ -4129,8 +3885,7 @@ void train02() {
 
     glPopMatrix();
 
-
-    //4TH WINDOW
+    // 4TH WINDOW
     glPushMatrix();
     glTranslatef(3 * 2.5, 0, 0);
 
@@ -4149,7 +3904,7 @@ void train02() {
 
     glPopMatrix();
 
-    //5TH  WINDOW
+    // 5TH  WINDOW
     glPushMatrix();
     glTranslatef(4 * 2.5, 0, 0);
 
@@ -4168,8 +3923,7 @@ void train02() {
 
     glPopMatrix();
 
-
-    //6TH WINDOW
+    // 6TH WINDOW
     glPushMatrix();
     glTranslatef(5 * 2.5, 0, 0);
 
@@ -4188,7 +3942,7 @@ void train02() {
 
     glPopMatrix();
 
-    //7TH WINDOW
+    // 7TH WINDOW
     glPushMatrix();
     glTranslatef(6 * 2.5, 0, 0);
 
@@ -4207,7 +3961,7 @@ void train02() {
 
     glPopMatrix();
 
-    //8TH WINDOW
+    // 8TH WINDOW
 
     glPushMatrix();
     glTranslatef(7 * 2.5, 0, 0);
@@ -4227,7 +3981,7 @@ void train02() {
 
     glPopMatrix();
 
-    //9TH WINDOW
+    // 9TH WINDOW
     glPushMatrix();
     glTranslatef(8 * 2.5, 0, 0);
 
@@ -4246,8 +4000,7 @@ void train02() {
 
     glPopMatrix();
 
-
-    //10TH WINDOW
+    // 10TH WINDOW
     glPushMatrix();
     glTranslatef(9 * 2.5, 0, 0);
 
@@ -4266,8 +4019,7 @@ void train02() {
 
     glPopMatrix();
 
-
-    //11TH WINDOW
+    // 11TH WINDOW
 
     glPushMatrix();
     glTranslatef(10 * 2.5, 0, 0);
@@ -4287,7 +4039,7 @@ void train02() {
 
     glPopMatrix();
 
-    //12TH WINDOW
+    // 12TH WINDOW
 
     glPushMatrix();
     glTranslatef(11 * 2.5, 0, 0);
@@ -4307,8 +4059,7 @@ void train02() {
 
     glPopMatrix();
 
-
-    //13TH WINDOW
+    // 13TH WINDOW
     glPushMatrix();
     glTranslatef(12 * 2.5, 0, 0);
 
@@ -4327,8 +4078,7 @@ void train02() {
 
     glPopMatrix();
 
-
-    //14TH WINDOW
+    // 14TH WINDOW
     glPushMatrix();
     glTranslatef(13 * 2.5, 0, 0);
 
@@ -4347,7 +4097,7 @@ void train02() {
 
     glPopMatrix();
 
-    //15TH WINDOW
+    // 15TH WINDOW
 
     glPushMatrix();
     glTranslatef(14 * 2.5, 0, 0);
@@ -4367,10 +4117,9 @@ void train02() {
 
     glPopMatrix();
 
-
-    //NOW PRINTING THE SMALL BLACK HORIZONTAL AREA ABOVE THE LAST SMALL WINDOW
-    //USING THE CODE OF THE FIRST ONE
-    //JUST TRANSLATING IT TO X AXIS
+    // NOW PRINTING THE SMALL BLACK HORIZONTAL AREA ABOVE THE LAST SMALL WINDOW
+    // USING THE CODE OF THE FIRST ONE
+    // JUST TRANSLATING IT TO X AXIS
     glPushMatrix();
     glTranslatef(35.2, 0, 0);
 
@@ -4386,10 +4135,9 @@ void train02() {
 
     glPopMatrix();
 
-
-    //NOW PRINTING THE LAST BIG DOOR
-    //USING THE CODE OF THE FIRST ONE
-    //JUST TRANSLATING IT TO X AXIS
+    // NOW PRINTING THE LAST BIG DOOR
+    // USING THE CODE OF THE FIRST ONE
+    // JUST TRANSLATING IT TO X AXIS
 
     glPushMatrix();
     glTranslatef(44, 0, 0);
@@ -4403,7 +4151,6 @@ void train02() {
 
     glVertex2f(65.170763196853, 41.6069551546557);
     glVertex2f(64.9072768772416, 41.3487481128042);
-
 
     glVertex2f(64.9072768772416, 41.3487481128042);
     glVertex2f(64.9072768772416, 36.8497053960769);
@@ -4425,8 +4172,7 @@ void train02() {
 
     glEnd();
 
-
-    //NOW PRINTING THE BLACK WINDOW INSIDE THE LEFT BIG DOOR
+    // NOW PRINTING THE BLACK WINDOW INSIDE THE LEFT BIG DOOR
 
     glColor3f(0.21, 0.2, 0.25);
     glBegin(GL_POLYGON);
@@ -4442,19 +4188,15 @@ void train02() {
 
     glEnd();
 
-
     glPopMatrix();
 
     glPopMatrix();
 
+    // BELOW BLAKISH AREA
 
-
-    //BELOW BLAKISH AREA
-
-    //FIRST PART
+    // FIRST PART
 
     glColor3f(0.54, 0.54, 0.54);
-
 
     glBegin(GL_POLYGON);
 
@@ -4465,9 +4207,7 @@ void train02() {
     glVertex2f(117.6520370354689, 34.7061356596523);
     glEnd();
 
-
-
-    //2ND PART
+    // 2ND PART
     glBegin(GL_POLYGON);
 
     glVertex2f(146.2784673708512, 35.9942390622938);
@@ -4478,10 +4218,9 @@ void train02() {
     glVertex2f(117.6520370354689, 34.7061356596523);
     glVertex2f(117.6520370354689, 35.9942390622938);
 
-
     glEnd();
 
-    //THIRD PART
+    // THIRD PART
     glBegin(GL_POLYGON);
     glVertex2f(159.8505546972679, 35.9942390622938);
     glVertex2f(159.8505546972679, 34.0381260913109);
@@ -4492,8 +4231,7 @@ void train02() {
 
     glEnd();
 
-
-    //VERTICAL LINE ABOVE LOWER BLAKISH AREA
+    // VERTICAL LINE ABOVE LOWER BLAKISH AREA
     glLineWidth(2);
     // glColor3f(0.16, 0.17, 0.53);
     glColor3f(0, 0, 0);
@@ -4503,28 +4241,25 @@ void train02() {
     glVertex2f(159.8505546972679, 35.9942390622938);
 
     glEnd();
-
-
 }
 
 // ID - 16
-void train03() {
+void train03()
+{
 
     glPushMatrix();
     glTranslatef(52 - 5, 0, 0);
 
     train02();
 
-
     glPopMatrix();
 }
 
-
 // ID - 17
-void building_01() {
+void building_01()
+{
 
-
-    //FIRST DOWN AREA OF BUILDING 01
+    // FIRST DOWN AREA OF BUILDING 01
     glBegin(GL_POLYGON);
     glColor3f(0.44, 0.49, 0.65);
 
@@ -4532,7 +4267,6 @@ void building_01() {
     glVertex2f(6.4, 29.1);
     glVertex2f(19, 29.1);
     glVertex2f(19, 21.9);
-
 
     glEnd();
 
@@ -4557,13 +4291,9 @@ void building_01() {
     glVertex2f(15.4, 21.9);
     glVertex2f(13, 21.9);
 
-
     glEnd();
 
     // YELLOW AREA ENDS HERE
-
-
-
 
     // DOOR OF BUILDING 01 START HERE
 
@@ -4574,7 +4304,6 @@ void building_01() {
     glVertex2f(10.7, 29.1);
     glVertex2f(14.7, 29.1);
     glVertex2f(14.7, 21.9);
-
 
     glEnd();
 
@@ -4590,9 +4319,7 @@ void building_01() {
     glVertex2f(10, 29.1);
     glVertex2f(10, 25.5);
 
-
     glEnd();
-
 
     // SECOND WINDOW OF BUILDING 01 START HERE
 
@@ -4603,7 +4330,6 @@ void building_01() {
     glVertex2f(17.9, 25.5);
     glVertex2f(17.9, 29.1);
     glVertex2f(15.4, 29.1);
-
 
     glEnd();
 
@@ -4617,10 +4343,9 @@ void building_01() {
     glVertex2f(19, 29.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
-    //SECOND UPPER EXTENTION OF BUILDING 01
+    // SECOND UPPER EXTENTION OF BUILDING 01
 
     glBegin(GL_POLYGON);
     glColor3f(0.44, 0.49, 0.65);
@@ -4629,11 +4354,10 @@ void building_01() {
     glVertex2f(19, 30);
     glVertex2f(19, 29.4);
 
-
     glEnd();
 
-    //FIRST ROUNDED AREA OF BUIDLING 01 FORM RIGHT
-    //EVERY ROUNDER AREA HAS A X AXIS VALUE OF .8
+    // FIRST ROUNDED AREA OF BUIDLING 01 FORM RIGHT
+    // EVERY ROUNDER AREA HAS A X AXIS VALUE OF .8
     glBegin(GL_POLYGON); // FIRST RED ROUNDD AREA
     glColor3f(0.93, 0.31, 0.33);
 
@@ -4644,9 +4368,7 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
-
 
     glPushMatrix();
 
@@ -4663,11 +4385,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4684,11 +4404,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4705,11 +4423,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4726,11 +4442,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4747,12 +4461,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
@@ -4769,11 +4480,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4790,14 +4499,11 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
 
-
-
-    //WHITE COLOR ROUNDED AREA START HERE
+    // WHITE COLOR ROUNDED AREA START HERE
 
     glPushMatrix();
 
@@ -4814,11 +4520,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4835,11 +4539,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4856,11 +4558,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4877,11 +4577,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4898,12 +4596,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
@@ -4920,11 +4615,9 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -4941,25 +4634,17 @@ void building_01() {
     glVertex2f(19, 27.4);
     glVertex2f(19, 29.1);
 
-
     glEnd();
 
     glPopMatrix();
-
-
-
-
-
 }
 
+// ID - 18
 
+void building_02()
+{
 
-// ID - 18 
-
-void building_02() {
-
-
-    //UPPER LOWER BODY
+    // UPPER LOWER BODY
     glColor3f(0.67, 0.67, 0.51);
     glBegin(GL_POLYGON);
 
@@ -4969,8 +4654,6 @@ void building_02() {
     glVertex2f(31.95, 21.9);
 
     glEnd();
-
-
 
     // 2ND UPPER LOWER BODY
 
@@ -4983,7 +4666,6 @@ void building_02() {
     glVertex2f(32.8, 58.8);
 
     glEnd();
-
 
     //  3RD UPPER PORTION OF BUILDING 02
 
@@ -5008,16 +4690,11 @@ void building_02() {
 
     glEnd();
 
-
     // TOP MOST TRIANGLE TYPE AREA OF BUILDING 02
-
-
-
 
     // FIVE SHADES OF TRIANGLE
 
     // FIRST SHADE
-
 
     glBegin(GL_POLYGON);
 
@@ -5038,7 +4715,6 @@ void building_02() {
 
     glEnd();
 
-
     // THIRD SHADE
     glBegin(GL_POLYGON);
 
@@ -5048,7 +4724,6 @@ void building_02() {
     glVertex2f(23.1, 61.5);
 
     glEnd();
-
 
     // FOURTH SHADE
     glBegin(GL_POLYGON);
@@ -5060,7 +4735,6 @@ void building_02() {
 
     glEnd();
 
-
     // FIVTH SHADE
     glBegin(GL_POLYGON);
     glColor3f(0.67, 0.67, 0.51);
@@ -5071,10 +4745,8 @@ void building_02() {
 
     glEnd();
 
-
     // WINDOWS OF BUILDING 02
     // I AM PRINTING THE WINDOWS IN ROW WISE
-
 
     glBegin(GL_POLYGON);
     glColor3f(0.85, 0.94, 0.96);
@@ -5085,7 +4757,6 @@ void building_02() {
     glVertex2f(18.1, 56);
 
     glEnd();
-
 
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
@@ -5108,7 +4779,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5116,7 +4786,6 @@ void building_02() {
     glVertex2f(16.5, 58);
     glVertex2f(16.5, 56);
     glEnd();
-
 
     glPushMatrix();
 
@@ -5132,7 +4801,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5153,7 +4821,6 @@ void building_02() {
     glEnd();
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
-
 
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
@@ -5179,7 +4846,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5201,7 +4867,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5211,7 +4876,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -5227,7 +4891,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5249,7 +4912,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5260,9 +4922,7 @@ void building_02() {
 
     glPopMatrix();
 
-
-
-    //2ND ROW START
+    // 2ND ROW START
     glPushMatrix();
 
     glTranslatef(1 * 0, 1 * -3, 0);
@@ -5277,7 +4937,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5299,7 +4958,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5309,8 +4967,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
@@ -5326,7 +4982,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5347,7 +5002,6 @@ void building_02() {
     glEnd();
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
-
 
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
@@ -5375,7 +5029,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5397,7 +5050,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5407,9 +5059,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
-
 
     glPushMatrix();
 
@@ -5425,7 +5074,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5447,7 +5095,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5458,9 +5105,7 @@ void building_02() {
 
     glPopMatrix();
 
-
     // 3rd row start
-
 
     glPushMatrix();
 
@@ -5476,7 +5121,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5498,7 +5142,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5508,7 +5151,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -5524,7 +5166,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5546,7 +5187,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5556,7 +5196,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -5572,7 +5211,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5594,7 +5232,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5604,8 +5241,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
@@ -5621,7 +5256,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5643,7 +5277,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5654,10 +5287,7 @@ void building_02() {
 
     glPopMatrix();
 
-
-
-    //4TH ROW START
-
+    // 4TH ROW START
 
     glPushMatrix();
 
@@ -5673,7 +5303,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5695,7 +5324,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5705,7 +5333,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -5721,7 +5348,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5743,7 +5369,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5753,7 +5378,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -5769,7 +5393,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5791,7 +5414,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5801,7 +5423,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -5817,7 +5438,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5839,7 +5459,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5849,17 +5468,13 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
     glTranslatef(0, -12, 0);
 
-
     // WINDOWS OF BUILDING 02
-   // I AM PRINTING THE WINDOWS IN ROW WISE
-
+    // I AM PRINTING THE WINDOWS IN ROW WISE
 
     glBegin(GL_POLYGON);
     glColor3f(0.85, 0.94, 0.96);
@@ -5870,7 +5485,6 @@ void building_02() {
     glVertex2f(18.1, 56);
 
     glEnd();
-
 
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
@@ -5893,7 +5507,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5901,7 +5514,6 @@ void building_02() {
     glVertex2f(16.5, 58);
     glVertex2f(16.5, 56);
     glEnd();
-
 
     glPushMatrix();
 
@@ -5917,7 +5529,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5938,7 +5549,6 @@ void building_02() {
     glEnd();
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
-
 
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
@@ -5964,7 +5574,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5986,7 +5595,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -5996,7 +5604,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -6012,7 +5619,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6034,7 +5640,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6045,9 +5650,7 @@ void building_02() {
 
     glPopMatrix();
 
-
-
-    //2ND ROW START
+    // 2ND ROW START
     glPushMatrix();
 
     glTranslatef(1 * 0, 1 * -3, 0);
@@ -6062,7 +5665,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6084,7 +5686,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6094,8 +5695,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
@@ -6111,7 +5710,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6132,7 +5730,6 @@ void building_02() {
     glEnd();
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
-
 
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
@@ -6160,7 +5757,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6182,7 +5778,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6192,9 +5787,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
-
 
     glPushMatrix();
 
@@ -6210,7 +5802,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6232,7 +5823,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6243,9 +5833,7 @@ void building_02() {
 
     glPopMatrix();
 
-
     // 3rd row start
-
 
     glPushMatrix();
 
@@ -6261,7 +5849,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6283,7 +5870,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6293,7 +5879,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -6309,7 +5894,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6331,7 +5915,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6341,7 +5924,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -6357,7 +5939,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6379,7 +5960,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6389,8 +5969,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
@@ -6406,7 +5984,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6428,7 +6005,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6439,10 +6015,7 @@ void building_02() {
 
     glPopMatrix();
 
-
-
-    //4TH ROW START
-
+    // 4TH ROW START
 
     glPushMatrix();
 
@@ -6458,7 +6031,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6480,7 +6052,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6490,7 +6061,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -6506,7 +6076,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6528,7 +6097,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6538,7 +6106,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -6554,7 +6121,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6576,7 +6142,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6586,7 +6151,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -6602,7 +6166,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6624,7 +6187,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6635,17 +6197,13 @@ void building_02() {
 
     glPopMatrix();
 
-
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(0, -24, 0);
 
     // WINDOWS OF BUILDING 02
-   // I AM PRINTING THE WINDOWS IN ROW WISE
-
+    // I AM PRINTING THE WINDOWS IN ROW WISE
 
     glBegin(GL_POLYGON);
     glColor3f(0.85, 0.94, 0.96);
@@ -6656,7 +6214,6 @@ void building_02() {
     glVertex2f(18.1, 56);
 
     glEnd();
-
 
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
@@ -6679,7 +6236,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6687,7 +6243,6 @@ void building_02() {
     glVertex2f(16.5, 58);
     glVertex2f(16.5, 56);
     glEnd();
-
 
     glPushMatrix();
 
@@ -6703,7 +6258,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6724,7 +6278,6 @@ void building_02() {
     glEnd();
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
-
 
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
@@ -6750,7 +6303,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6772,7 +6324,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6782,7 +6333,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -6798,7 +6348,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6820,7 +6369,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6831,9 +6379,7 @@ void building_02() {
 
     glPopMatrix();
 
-
-
-    //2ND ROW START
+    // 2ND ROW START
     glPushMatrix();
 
     glTranslatef(1 * 0, 1 * -3, 0);
@@ -6848,7 +6394,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6870,7 +6415,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6880,8 +6424,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
@@ -6897,7 +6439,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6918,7 +6459,6 @@ void building_02() {
     glEnd();
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
-
 
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
@@ -6946,7 +6486,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6968,7 +6507,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -6978,9 +6516,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
-
 
     glPushMatrix();
 
@@ -6996,7 +6531,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7018,7 +6552,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7029,9 +6562,7 @@ void building_02() {
 
     glPopMatrix();
 
-
     // 3rd row start
-
 
     glPushMatrix();
 
@@ -7047,7 +6578,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7069,7 +6599,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7079,7 +6608,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -7095,7 +6623,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7117,7 +6644,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7127,7 +6653,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -7143,7 +6668,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7165,7 +6689,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7175,8 +6698,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
 
@@ -7192,7 +6713,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7214,7 +6734,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7225,10 +6744,7 @@ void building_02() {
 
     glPopMatrix();
 
-
-
-    //4TH ROW START
-
+    // 4TH ROW START
 
     glPushMatrix();
 
@@ -7244,7 +6760,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7266,7 +6781,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7276,7 +6790,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -7292,7 +6805,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7314,7 +6826,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7324,7 +6835,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -7340,7 +6850,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7362,7 +6871,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7372,7 +6880,6 @@ void building_02() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -7388,7 +6895,6 @@ void building_02() {
 
     glEnd();
 
-
     glLineWidth(2);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7410,7 +6916,6 @@ void building_02() {
 
     // VERTICAL LINE IN THE MIDDLE OF EACH WINDOW
 
-
     glLineWidth(3.5);
     glColor3f(0.44, 0.44, 0.34);
 
@@ -7422,14 +6927,11 @@ void building_02() {
     glPopMatrix();
 
     glPopMatrix();
-
-
 }
 
-
 // ID - 19
-void building_03() {
-
+void building_03()
+{
 
     // BACK AREA OF BUILDING 03 START HERE
     glBegin(GL_POLYGON);
@@ -7454,7 +6956,6 @@ void building_03() {
     glVertex2f(53.3, 35.6);
 
     glEnd();
-
 
     // MIDDLE  AREA OF BUIDLING 03 START HERE
 
@@ -7490,7 +6991,6 @@ void building_03() {
 
     glEnd();
 
-
     // MIDDLE MAIN DOOR OF BUIDLING 03
 
     glBegin(GL_POLYGON);
@@ -7503,9 +7003,7 @@ void building_03() {
 
     glEnd();
 
-
     // MIDDLE VETICLE LINE OF THE MIDDLE OF THE MAIN DOOR
-
 
     glLineWidth(5.5);
     glBegin(GL_LINES);
@@ -7514,12 +7012,9 @@ void building_03() {
     glVertex2f(35.5, 30);
     glVertex2f(35.5, 21.9);
 
-
     glEnd();
 
-
     // WINDOWS OF BUILDING 03 START HERE
-
 
     // BACKGROUND MORE DEEPER COLOR OF EACH WINDOW
     glBegin(GL_POLYGON);
@@ -7532,9 +7027,6 @@ void building_03() {
 
     glEnd();
 
-
-
-
     // WINDOW MAIN AREA MIDDLE
     glBegin(GL_POLYGON);
 
@@ -7546,11 +7038,8 @@ void building_03() {
 
     glEnd();
 
-
-    // NOW PRINTING ALL THE WINDOWS OF THE LEFT SIDE BUILDING 
+    // NOW PRINTING ALL THE WINDOWS OF THE LEFT SIDE BUILDING
     // OF BUILDING 03
-
-
 
     glPushMatrix();
     glTranslatef(0, 1 * -3.1, 0);
@@ -7565,9 +7054,6 @@ void building_03() {
     glVertex2f(26.6, 32.3);
 
     glEnd();
-
-
-
 
     // WINDOW MAIN AREA MIDDLE
     glBegin(GL_POLYGON);
@@ -7596,9 +7082,6 @@ void building_03() {
 
     glEnd();
 
-
-
-
     // WINDOW MAIN AREA MIDDLE
     glBegin(GL_POLYGON);
 
@@ -7611,8 +7094,6 @@ void building_03() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(0, 3 * -3.1, 0);
@@ -7628,9 +7109,6 @@ void building_03() {
 
     glEnd();
 
-
-
-
     // WINDOW MAIN AREA MIDDLE
     glBegin(GL_POLYGON);
 
@@ -7643,18 +7121,13 @@ void building_03() {
     glEnd();
 
     glPopMatrix();
-
-
 
     // Using the windows of the first building of building 03
     // just translationg the x axis with value 15
     glPushMatrix();
     glTranslatef(25, 0, 0);
 
-
-
     // WINDOWS OF BUILDING 03 START HERE
-
 
     // BACKGROUND MORE DEEPER COLOR OF EACH WINDOW
     glBegin(GL_POLYGON);
@@ -7667,9 +7140,6 @@ void building_03() {
 
     glEnd();
 
-
-
-
     // WINDOW MAIN AREA MIDDLE
     glBegin(GL_POLYGON);
 
@@ -7681,11 +7151,8 @@ void building_03() {
 
     glEnd();
 
-
-    // NOW PRINTING ALL THE WINDOWS OF THE LEFT SIDE BUILDING 
+    // NOW PRINTING ALL THE WINDOWS OF THE LEFT SIDE BUILDING
     // OF BUILDING 03
-
-
 
     glPushMatrix();
     glTranslatef(0, 1 * -3.1, 0);
@@ -7700,9 +7167,6 @@ void building_03() {
     glVertex2f(26.6, 32.3);
 
     glEnd();
-
-
-
 
     // WINDOW MAIN AREA MIDDLE
     glBegin(GL_POLYGON);
@@ -7731,9 +7195,6 @@ void building_03() {
 
     glEnd();
 
-
-
-
     // WINDOW MAIN AREA MIDDLE
     glBegin(GL_POLYGON);
 
@@ -7746,8 +7207,6 @@ void building_03() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(0, 3 * -3.1, 0);
@@ -7763,9 +7222,6 @@ void building_03() {
 
     glEnd();
 
-
-
-
     // WINDOW MAIN AREA MIDDLE
     glBegin(GL_POLYGON);
 
@@ -7780,11 +7236,6 @@ void building_03() {
     glPopMatrix();
 
     glPopMatrix();
-
-
-
-
-
 
     // WINDOWS OF THE MIDDLE BUILDING START HERE
 
@@ -7799,13 +7250,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -7823,9 +7271,7 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
-
 
     // NOW PRINTING ALL THW WINDOW'S OF THE FIRST ROW
 
@@ -7843,13 +7289,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -7867,14 +7310,9 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
 
-
     glPopMatrix();
-
-
-
 
     glPushMatrix();
     glTranslatef(2 * 4, 0, 0);
@@ -7890,13 +7328,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -7914,13 +7349,9 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
 
-
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 4, 0, 0);
@@ -7936,13 +7367,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -7960,22 +7388,15 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
-
 
     glPopMatrix();
 
-
-
-    //2nd row
-
+    // 2nd row
 
     glPushMatrix();
     glTranslatef(0, -3.7, 0);
 
-
-
     glBegin(GL_POLYGON);
 
     glColor3f(0.35, 0.6, 0.58);
@@ -7987,13 +7408,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -8011,9 +7429,7 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
-
 
     // NOW PRINTING ALL THW WINDOW'S OF THE FIRST ROW
 
@@ -8031,13 +7447,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -8055,14 +7468,9 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
 
-
     glPopMatrix();
-
-
-
 
     glPushMatrix();
     glTranslatef(2 * 4, 0, 0);
@@ -8078,13 +7486,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -8102,13 +7507,9 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
 
-
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 4, 0, 0);
@@ -8124,13 +7525,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -8148,22 +7546,17 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
 
-
     glPopMatrix();
 
-
     glPopMatrix();
-
 
     // 3rd row.. just translating the first row by 3 y axis value
 
     glPushMatrix();
     glTranslatef(0, 2 * -3.7, 0);
 
-
     glBegin(GL_POLYGON);
 
     glColor3f(0.35, 0.6, 0.58);
@@ -8175,13 +7568,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -8199,9 +7589,7 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
-
 
     // NOW PRINTING ALL THW WINDOW'S OF THE FIRST ROW
 
@@ -8219,13 +7607,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -8243,14 +7628,9 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
 
-
     glPopMatrix();
-
-
-
 
     glPushMatrix();
     glTranslatef(2 * 4, 0, 0);
@@ -8266,13 +7646,10 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
-
 
     glVertex2f(29.3, 38.8);
     glVertex2f(29.3, 41.2);
@@ -8290,13 +7667,9 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
 
-
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 4, 0, 0);
@@ -8312,9 +7685,7 @@ void building_03() {
 
     glEnd();
 
-
-
-    // MIDDLE OF EACH WINDOW    
+    // MIDDLE OF EACH WINDOW
     glBegin(GL_POLYGON);
 
     glColor3f(0.87, 0.94, 0.88);
@@ -8335,20 +7706,16 @@ void building_03() {
     glVertex2f(29.3, 40);
     glVertex2f(31.2, 40);
 
-
     glEnd();
 
-
     glPopMatrix();
 
     glPopMatrix();
-
-
 }
 
-
 // ID - 20
-void building_04() {
+void building_04()
+{
 
     // LOWER PORTION OF BUILDING 04 START HERE
 
@@ -8361,7 +7728,6 @@ void building_04() {
     glVertex2f(50.9, 21.9);
 
     glEnd();
-
 
     // UPPER MORE DEEP COLOR PORTION OF BUILDING 04
 
@@ -8398,7 +7764,6 @@ void building_04() {
 
     glEnd();
 
-
     // 3RD UPPER PORTION FROM BELOW OF BUILDING 04
     glColor3f(0.62, 0.71, 0.76);
     glBegin(GL_POLYGON);
@@ -8409,7 +7774,6 @@ void building_04() {
     glVertex2f(46, 66);
 
     glEnd();
-
 
     // 3RD UPPER MORE DEEP COLOR PORTION OF BUILDING 04
 
@@ -8423,7 +7787,6 @@ void building_04() {
 
     glEnd();
 
-
     // 4TH UPPER PORTION FROM BELOW OF BUILDING 04
     glColor3f(0.62, 0.71, 0.76);
     glBegin(GL_POLYGON);
@@ -8434,7 +7797,6 @@ void building_04() {
     glVertex2f(45.2, 70);
 
     glEnd();
-
 
     // UPPER MORE DEEP VERTICLE ANTENA LIKE PORTION OF BUILDING 04
 
@@ -8448,7 +7810,7 @@ void building_04() {
 
     glEnd();
 
-    //FIVE VERTICALE LINE OF 3RD UPPER PORTION
+    // FIVE VERTICALE LINE OF 3RD UPPER PORTION
 
     glColor3f(0.51, 0.58, 0.62);
     glBegin(GL_POLYGON);
@@ -8472,7 +7834,6 @@ void building_04() {
 
     glEnd();
 
-
     glPopMatrix();
 
     glPushMatrix();
@@ -8486,9 +7847,7 @@ void building_04() {
 
     glEnd();
 
-
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 0.95, 0, 0);
@@ -8501,9 +7860,7 @@ void building_04() {
 
     glEnd();
 
-
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 0.95, 0, 0);
@@ -8515,7 +7872,6 @@ void building_04() {
     glVertex2f(40.8, 66.4);
 
     glEnd();
-
 
     glPopMatrix();
 
@@ -8530,12 +7886,9 @@ void building_04() {
 
     glEnd();
 
-
     glPopMatrix();
 
-
-    //VERTICAL AREARS IN THE 2ND UPPER PORTOIN
-
+    // VERTICAL AREARS IN THE 2ND UPPER PORTOIN
 
     glColor3f(0.79, 0.87, 0.9);
     glBegin(GL_POLYGON);
@@ -8563,8 +7916,6 @@ void building_04() {
 
     glPopMatrix();
 
-
-
     glPushMatrix();
     glTranslatef(2 * 1.90, 0, 0);
     glBegin(GL_POLYGON);
@@ -8577,7 +7928,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 1.90, 0, 0);
@@ -8592,7 +7942,6 @@ void building_04() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(4 * 1.90, 0, 0);
     glBegin(GL_POLYGON);
@@ -8605,7 +7954,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(5 * 1.90, 0, 0);
@@ -8620,9 +7968,7 @@ void building_04() {
 
     glPopMatrix();
 
-
     //  WINDOWS OF THE FIRST LOWER PORTION START HERE
-
 
     glColor3f(0.79, 0.87, 0.9);
     glBegin(GL_POLYGON);
@@ -8634,8 +7980,7 @@ void building_04() {
 
     glEnd();
 
-
-    //NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
+    // NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
@@ -8651,7 +7996,6 @@ void building_04() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
@@ -8665,7 +8009,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
@@ -8681,15 +8024,13 @@ void building_04() {
 
     glPopMatrix();
 
-
-    //2ND ROW  USING THE CODES OF THE FIRST ROW
-    // JUST TRANSLATING IN Y AXIS
+    // 2ND ROW  USING THE CODES OF THE FIRST ROW
+    //  JUST TRANSLATING IN Y AXIS
 
     glPushMatrix();
 
     glTranslatef(0, 1 * -3.5, 0);
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(36.5, 57.5);
@@ -8699,8 +8040,7 @@ void building_04() {
 
     glEnd();
 
-
-    //NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
+    // NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
@@ -8716,7 +8056,6 @@ void building_04() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
@@ -8730,7 +8069,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
@@ -8748,17 +8086,13 @@ void building_04() {
 
     glPopMatrix();
 
-
-
-    //3RD ROW USING THE CODE OF THE FIRST ROW
-    // JUST TRANSLATING THE CODES IN Y AXIS
-
+    // 3RD ROW USING THE CODE OF THE FIRST ROW
+    //  JUST TRANSLATING THE CODES IN Y AXIS
 
     glPushMatrix();
 
     glTranslatef(0, 2 * -3.5, 0);
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(36.5, 57.5);
@@ -8768,8 +8102,7 @@ void building_04() {
 
     glEnd();
 
-
-    //NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
+    // NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
@@ -8785,7 +8118,6 @@ void building_04() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
@@ -8799,7 +8131,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
@@ -8817,16 +8148,13 @@ void building_04() {
 
     glPopMatrix();
 
-
-    //RTH ROW, SAME USING THE CODSES OF THE FIRST ROW
-    //JUST TRANSLATING IN Y AXIS
-
+    // RTH ROW, SAME USING THE CODSES OF THE FIRST ROW
+    // JUST TRANSLATING IN Y AXIS
 
     glPushMatrix();
 
     glTranslatef(0, 3 * -3.5, 0);
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(36.5, 57.5);
@@ -8836,8 +8164,7 @@ void building_04() {
 
     glEnd();
 
-
-    //NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
+    // NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
@@ -8853,7 +8180,6 @@ void building_04() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
@@ -8867,7 +8193,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
@@ -8885,15 +8210,13 @@ void building_04() {
 
     glPopMatrix();
 
-
-    //5TH ROW SAME USING THE CODES OF THE FIRST ROW
-    //JUST TRANSLATING IN Y AXIS
+    // 5TH ROW SAME USING THE CODES OF THE FIRST ROW
+    // JUST TRANSLATING IN Y AXIS
 
     glPushMatrix();
 
     glTranslatef(0, 4 * -3.5, 0);
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(36.5, 57.5);
@@ -8903,8 +8226,7 @@ void building_04() {
 
     glEnd();
 
-
-    //NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
+    // NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
@@ -8920,7 +8242,6 @@ void building_04() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
@@ -8934,7 +8255,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
@@ -8952,14 +8272,11 @@ void building_04() {
 
     glPopMatrix();
 
-
-
-    //6TH ROW
+    // 6TH ROW
     glPushMatrix();
 
     glTranslatef(0, 5 * -3.5, 0);
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(36.5, 57.5);
@@ -8969,8 +8286,7 @@ void building_04() {
 
     glEnd();
 
-
-    //NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
+    // NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
@@ -8986,7 +8302,6 @@ void building_04() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
@@ -9000,7 +8315,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
@@ -9018,15 +8332,12 @@ void building_04() {
 
     glPopMatrix();
 
-
-    //7TH ROW
-
+    // 7TH ROW
 
     glPushMatrix();
 
     glTranslatef(0, 6 * -3.5, 0);
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(36.5, 57.5);
@@ -9036,8 +8347,7 @@ void building_04() {
 
     glEnd();
 
-
-    //NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
+    // NOW PRINTING ALL THE WINDOWS BY USING TRANSLATEF FUNCTION
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
@@ -9053,7 +8363,6 @@ void building_04() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
@@ -9067,7 +8376,6 @@ void building_04() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
@@ -9084,19 +8392,17 @@ void building_04() {
     glPopMatrix();
 
     glPopMatrix();
-
 }
-
 
 // ID - 21
 
-void building_05() {
+void building_05()
+{
 
-    //FIRST LOWER PORTION OF THE BUILDING 05
+    // FIRST LOWER PORTION OF THE BUILDING 05
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(51, 21.9);
     glVertex2f(51, 23.5);
@@ -9105,12 +8411,10 @@ void building_05() {
 
     glEnd();
 
-
-    //SECOND LOWER PORTION OF THE BUILDING 05
+    // SECOND LOWER PORTION OF THE BUILDING 05
 
     glColor3f(0.8, 0.7, 0.55);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(52.5, 23.5);
     glVertex2f(52.5, 24.7);
@@ -9119,14 +8423,10 @@ void building_05() {
 
     glEnd();
 
-
-
-    //THIRD LOWER PORTION OF THE BUILDING 06
-
+    // THIRD LOWER PORTION OF THE BUILDING 06
 
     glColor3f(0.78, 0.56, 0.4);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(53.3, 24.7);
     glVertex2f(53.3, 27.35);
@@ -9135,12 +8435,11 @@ void building_05() {
 
     glEnd();
 
-    //BOTH SIDE MORE LIGHTER BACKGROUND OF THE MIDDLE MORE DEEPER 
-    //PORTION
+    // BOTH SIDE MORE LIGHTER BACKGROUND OF THE MIDDLE MORE DEEPER
+    // PORTION
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(53.9, 27.35);
     glVertex2f(53.9, 32.7);
@@ -9149,13 +8448,11 @@ void building_05() {
 
     glEnd();
 
-
-    //UPPER SLIGHTHLY DEEPER PORTION OF THE MIDDLE 
-    // MORE DEEPER PORTION
+    // UPPER SLIGHTHLY DEEPER PORTION OF THE MIDDLE
+    //  MORE DEEPER PORTION
 
     glColor3f(0.8, 0.7, 0.55);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(53.9, 32.7);
     glVertex2f(53.9, 34);
@@ -9164,11 +8461,10 @@ void building_05() {
 
     glEnd();
 
-    //MIDDLE MORE DEEPER PORTION OF THE BUILDING 05
+    // MIDDLE MORE DEEPER PORTION OF THE BUILDING 05
 
     glColor3f(0.6, 0.39, 0.28);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(55.5, 27.35);
     glVertex2f(55.5, 32.7);
@@ -9177,12 +8473,10 @@ void building_05() {
 
     glEnd();
 
-
-    //5TH LOWER PORTION
+    // 5TH LOWER PORTION
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(55.6, 34);
     glVertex2f(55.6, 34.9);
@@ -9191,12 +8485,10 @@ void building_05() {
 
     glEnd();
 
-
-    //6TH ROUNDED LOWER PORTION
+    // 6TH ROUNDED LOWER PORTION
 
     glColor3f(0.8, 0.7, 0.55);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(55.6, 34.9);
     glVertex2f(55.2, 35.1);
@@ -9214,12 +8506,10 @@ void building_05() {
 
     glEnd();
 
-
-    //7TH TRIANGLE TYPE PORTION
+    // 7TH TRIANGLE TYPE PORTION
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(55.9, 35.8);
     glVertex2f(63.75, 38.7);
@@ -9227,17 +8517,14 @@ void building_05() {
 
     glEnd();
 
-
-    //TWO PILLER CODES START HERE
-
+    // TWO PILLER CODES START HERE
 
     // FIRST PILLER
 
-    //FIRST LOWER PORTION OF THE FIRST PILLER
+    // FIRST LOWER PORTION OF THE FIRST PILLER
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(56.8, 24.7);
     glVertex2f(56.8, 25.4);
@@ -9246,11 +8533,10 @@ void building_05() {
 
     glEnd();
 
-    //SECOND LOWER PORTION OF THE FIRST PILLER
+    // SECOND LOWER PORTION OF THE FIRST PILLER
 
     glColor3f(0.6, 0.39, 0.28);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(56.8, 25.4);
     glVertex2f(56.8, 25.8);
@@ -9259,11 +8545,10 @@ void building_05() {
 
     glEnd();
 
-    //MAIN AREA OF THE FIRST PILLER
+    // MAIN AREA OF THE FIRST PILLER
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(57.4, 25.8);
     glVertex2f(57.75, 32);
@@ -9272,10 +8557,9 @@ void building_05() {
 
     glEnd();
 
-    //UPPER PORTION OF THE MAIN AREA OF TEH FIRST PILLER
+    // UPPER PORTION OF THE MAIN AREA OF TEH FIRST PILLER
     glColor3f(0.81, 0.71, 0.56);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(57.75, 32);
     glVertex2f(57.6, 32.15);
@@ -9284,11 +8568,10 @@ void building_05() {
 
     glEnd();
 
-    //UPPER UPPER PORTION OF THE MAIN AREA OF THE FIRST PILLER
+    // UPPER UPPER PORTION OF THE MAIN AREA OF THE FIRST PILLER
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(57.1, 32.15);
     glVertex2f(57.1, 32.7);
@@ -9297,22 +8580,16 @@ void building_05() {
 
     glEnd();
 
-
-    //NOW TO DRAW THE SECOND PILLER, 
-    // I AM USING THE SAME CODE FROM THE 
-    //FIRST PILLER, JUST TRANSLATING
-    // X AXIS BY 11.1
-
-
+    // NOW TO DRAW THE SECOND PILLER,
+    //  I AM USING THE SAME CODE FROM THE
+    // FIRST PILLER, JUST TRANSLATING
+    //  X AXIS BY 11.1
 
     glPushMatrix();
     glTranslatef(11.1, 0, 0);
 
-
-
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(56.8, 24.7);
     glVertex2f(56.8, 25.4);
@@ -9321,11 +8598,10 @@ void building_05() {
 
     glEnd();
 
-    //SECOND LOWER PORTION OF THE FIRST PILLER
+    // SECOND LOWER PORTION OF THE FIRST PILLER
 
     glColor3f(0.6, 0.39, 0.28);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(56.8, 25.4);
     glVertex2f(56.8, 25.8);
@@ -9334,11 +8610,10 @@ void building_05() {
 
     glEnd();
 
-    //MAIN AREA OF THE FIRST PILLER
+    // MAIN AREA OF THE FIRST PILLER
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(57.4, 25.8);
     glVertex2f(57.75, 32);
@@ -9347,10 +8622,9 @@ void building_05() {
 
     glEnd();
 
-    //UPPER PORTION OF THE MAIN AREA OF TEH FIRST PILLER
+    // UPPER PORTION OF THE MAIN AREA OF TEH FIRST PILLER
     glColor3f(0.81, 0.71, 0.56);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(57.75, 32);
     glVertex2f(57.6, 32.15);
@@ -9359,11 +8633,10 @@ void building_05() {
 
     glEnd();
 
-    //UPPER UPPER PORTION OF THE MAIN AREA OF THE FIRST PILLER
+    // UPPER UPPER PORTION OF THE MAIN AREA OF THE FIRST PILLER
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(57.1, 32.15);
     glVertex2f(57.1, 32.7);
@@ -9374,21 +8647,14 @@ void building_05() {
 
     glPopMatrix();
 
-
-    //SECOND PILLER ENDS HERE
-
+    // SECOND PILLER ENDS HERE
 
     // NOW DRAWING THE MIDDLE DOOR ROUNDED
 
-
-
-    //BACKGROUND MORE LIGHER COLOR OF THE MIDDLE DOOR
-
-
+    // BACKGROUND MORE LIGHER COLOR OF THE MIDDLE DOOR
 
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(61, 24.7);
     glVertex2f(61, 27.35);
@@ -9402,11 +8668,10 @@ void building_05() {
 
     glEnd();
 
-    //MAIN AREA MIDDLE OF THE MIDDLE DOOR
+    // MAIN AREA MIDDLE OF THE MIDDLE DOOR
 
     glColor3f(0.78, 0.31, 0.27);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(61.2, 24.7);
     glVertex2f(61.2, 27.35);
@@ -9420,46 +8685,36 @@ void building_05() {
 
     glEnd();
 
-
-    //HORIZONTAL LINE IN THE MIDDLE OF THE MAIN MIDDLE DOOR
-
+    // HORIZONTAL LINE IN THE MIDDLE OF THE MAIN MIDDLE DOOR
 
     glLineWidth(2);
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_LINES);
-
 
     glVertex2f(61.2, 27.25);
     glVertex2f(66.1, 27.25);
 
     glEnd();
 
-    //VERTICAL LINE IN THE MIDDLE OF THE MAIN MIDDLE DOOR
+    // VERTICAL LINE IN THE MIDDLE OF THE MAIN MIDDLE DOOR
 
     glLineWidth(2);
     glColor3f(0.93, 0.82, 0.65);
     glBegin(GL_LINES);
-
 
     glVertex2f(63.75, 27.3);
     glVertex2f(63.75, 24.7);
 
     glEnd();
 
+    // SIDE MORE DEEPR HORIZONTAL DESIGNS
 
+    // PRINTING COLUMN WISE
 
-    //SIDE MORE DEEPR HORIZONTAL DESIGNS
-
-
-
-    //PRINTING COLUMN WISE
-
-
-    //FIRST COLUMN FROM LEFT
+    // FIRST COLUMN FROM LEFT
 
     glColor3f(0.81, 0.7, 0.55);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(53.9, 31.4);
     glVertex2f(53.9, 32);
@@ -9467,7 +8722,6 @@ void building_05() {
     glVertex2f(55.5, 31.4);
 
     glEnd();
-
 
     glPushMatrix();
 
@@ -9482,7 +8736,6 @@ void building_05() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -9512,18 +8765,14 @@ void building_05() {
 
     glPopMatrix();
 
-    //NOW PRINTING THE SECOND COLUMN OF THE 
-    // RIGHT SIDE
-
+    // NOW PRINTING THE SECOND COLUMN OF THE
+    //  RIGHT SIDE
 
     glPushMatrix();
     glTranslatef(18.1, 0, 0);
 
-
-
     glColor3f(0.81, 0.7, 0.55);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(53.9, 31.4);
     glVertex2f(53.9, 32);
@@ -9531,7 +8780,6 @@ void building_05() {
     glVertex2f(55.5, 31.4);
 
     glEnd();
-
 
     glPushMatrix();
 
@@ -9546,7 +8794,6 @@ void building_05() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -9578,13 +8825,12 @@ void building_05() {
 
     glPopMatrix();
 
+    // NOW PRINTING THE BD FLAG
 
-    //NOW PRINTING THE BD FLAG
+    // BACKGROUND MOFR DEEPER COLOR CIRCLE
 
-    //BACKGROUND MOFR DEEPER COLOR CIRCLE
-
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.7, 0.6, 0.49);
         float pi = 3.1416;
@@ -9597,10 +8843,10 @@ void building_05() {
 
     glEnd();
 
-    //GREEN CIRCLE OF BD FLAG
+    // GREEN CIRCLE OF BD FLAG
 
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.04, 0.31, 0.03);
         float pi = 3.1416;
@@ -9613,11 +8859,10 @@ void building_05() {
 
     glEnd();
 
+    // RED CIRCLE OF BD FLAG
 
-    //RED CIRCLE OF BD FLAG
-
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.72, 0.09, 0.09);
         float pi = 3.1416;
@@ -9629,19 +8874,14 @@ void building_05() {
     }
 
     glEnd();
-
-
-
-
-
-
 }
 
 // ID - 21
 
-void building_06() {
+void building_06()
+{
 
-    //FIRST LOWER PORTION OF THE BUILDING 06
+    // FIRST LOWER PORTION OF THE BUILDING 06
 
     glColor3f(0.57, 0.51, 0.47);
     glBegin(GL_POLYGON);
@@ -9653,9 +8893,7 @@ void building_06() {
 
     glEnd();
 
-
-    //SECOND MORE DEEPER PORTION OF THE BUILDING 06
-
+    // SECOND MORE DEEPER PORTION OF THE BUILDING 06
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9667,8 +8905,8 @@ void building_06() {
 
     glEnd();
 
-    //THIRD PORTION OF THE BUILDING 06
-    //TOP ONE
+    // THIRD PORTION OF THE BUILDING 06
+    // TOP ONE
 
     glColor3f(0.68, 0.56, 0.51);
     glBegin(GL_POLYGON);
@@ -9680,14 +8918,12 @@ void building_06() {
 
     glEnd();
 
+    // NOW PRINTING THE WINDOWS OF THE BUILDING SIX
+    // PRINTING ROW WISE
 
+    // FIRST ROW
 
-    //NOW PRINTING THE WINDOWS OF THE BUILDING SIX
-    //PRINTING ROW WISE
-
-    //FIRST ROW
-
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9699,7 +8935,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -9711,7 +8947,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -9721,14 +8957,13 @@ void building_06() {
     glVertex2f(50.8, 50.95);
 
     glEnd();
-
 
     // NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9740,7 +8975,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -9752,7 +8987,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -9764,12 +8999,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9781,7 +9015,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -9793,7 +9027,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -9805,13 +9039,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9823,7 +9055,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -9835,7 +9067,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -9847,12 +9079,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9864,7 +9095,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -9876,7 +9107,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -9889,16 +9120,15 @@ void building_06() {
 
     glPopMatrix();
 
+    // NOW PRINTING ALL THE WINDOWS OF THE SECOND ROW
+    // JUST TRANSLATING ALL THE WINDOWS OF THA FIRST ROW
+    //  IN Y AXIS
 
-    //NOW PRINTING ALL THE WINDOWS OF THE SECOND ROW
-    //JUST TRANSLATING ALL THE WINDOWS OF THA FIRST ROW
-    // IN Y AXIS
-
-    //2ND ROW
+    // 2ND ROW
     glPushMatrix();
     glTranslatef(0, 1 * -4.5, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9910,7 +9140,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -9922,7 +9152,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -9932,14 +9162,13 @@ void building_06() {
     glVertex2f(50.8, 50.95);
 
     glEnd();
-
 
     // NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9951,7 +9180,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -9963,7 +9192,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -9975,12 +9204,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -9992,7 +9220,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10004,7 +9232,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10016,13 +9244,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10034,7 +9260,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10046,7 +9272,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10058,12 +9284,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10075,7 +9300,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10087,7 +9312,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10101,14 +9326,11 @@ void building_06() {
     glPopMatrix();
     glPopMatrix();
 
-
-
-
-    //3RD ROW
+    // 3RD ROW
     glPushMatrix();
     glTranslatef(0, 2 * -4.5, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10120,7 +9342,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10132,7 +9354,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10142,14 +9364,13 @@ void building_06() {
     glVertex2f(50.8, 50.95);
 
     glEnd();
-
 
     // NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10161,7 +9382,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10173,7 +9394,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10185,12 +9406,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10202,7 +9422,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10214,7 +9434,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10226,13 +9446,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10244,7 +9462,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10256,7 +9474,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10268,12 +9486,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10285,7 +9502,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10297,7 +9514,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10311,13 +9528,11 @@ void building_06() {
     glPopMatrix();
     glPopMatrix();
 
-
-
-    //4TH ROW
+    // 4TH ROW
     glPushMatrix();
     glTranslatef(0, 3 * -4.5, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10329,7 +9544,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10341,7 +9556,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10351,14 +9566,13 @@ void building_06() {
     glVertex2f(50.8, 50.95);
 
     glEnd();
-
 
     // NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10370,7 +9584,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10382,7 +9596,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10394,12 +9608,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10411,7 +9624,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10423,7 +9636,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10435,13 +9648,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10453,7 +9664,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10465,7 +9676,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10477,12 +9688,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10494,7 +9704,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10506,7 +9716,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10520,13 +9730,11 @@ void building_06() {
     glPopMatrix();
     glPopMatrix();
 
-
-
-    //5TH ROW
+    // 5TH ROW
     glPushMatrix();
     glTranslatef(0, 4 * -4.5, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10538,7 +9746,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10550,7 +9758,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10560,14 +9768,13 @@ void building_06() {
     glVertex2f(50.8, 50.95);
 
     glEnd();
-
 
     // NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10579,7 +9786,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10591,7 +9798,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10603,12 +9810,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10620,7 +9826,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10632,7 +9838,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10644,13 +9850,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10662,7 +9866,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10674,7 +9878,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10686,12 +9890,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10703,7 +9906,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10715,7 +9918,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10729,13 +9932,12 @@ void building_06() {
     glPopMatrix();
     glPopMatrix();
 
-
-    //SIXTH ROW
+    // SIXTH ROW
 
     glPushMatrix();
     glTranslatef(0, 5 * -4.5, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10747,7 +9949,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10759,7 +9961,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10769,14 +9971,13 @@ void building_06() {
     glVertex2f(50.8, 50.95);
 
     glEnd();
-
 
     // NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(1 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10788,7 +9989,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10800,7 +10001,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10812,12 +10013,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(2 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10829,7 +10029,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10841,7 +10041,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10853,13 +10053,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
-
 
     glPushMatrix();
     glTranslatef(3 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10871,7 +10069,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10883,7 +10081,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10895,12 +10093,11 @@ void building_06() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3.5, 0, 0);
 
-    //BACKGROUND MORE DEEPER
+    // BACKGROUND MORE DEEPER
 
     glColor3f(0.45, 0.4, 0.38);
     glBegin(GL_POLYGON);
@@ -10912,7 +10109,7 @@ void building_06() {
 
     glEnd();
 
-    //MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
+    // MAIN WHITE COLOR LIKE MIDELE AREA OF EACH WINDOW
 
     glColor3f(1, 0.96, 0.92);
     glBegin(GL_POLYGON);
@@ -10924,7 +10121,7 @@ void building_06() {
 
     glEnd();
 
-    //HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
+    // HORIZONTAL LINE IN THE MIDDLE OF EACH WINDOW
 
     glColor3f(0.45, 0.4, 0.38);
     glLineWidth(3);
@@ -10937,17 +10134,14 @@ void building_06() {
 
     glPopMatrix();
     glPopMatrix();
-
-
 }
 
+// ID - 23
 
-//ID - 23
+void building_07()
+{
 
-void building_07() {
-
-
-    //FIRST LOWER PORTION REDISH AREA OF THE BUILDING 07
+    // FIRST LOWER PORTION REDISH AREA OF THE BUILDING 07
     glColor3f(0.95, 0.4, 0.39);
     glBegin(GL_POLYGON);
     glVertex2f(74.6, 21.9);
@@ -10955,11 +10149,9 @@ void building_07() {
     glVertex2f(92.4, 28.2);
     glVertex2f(92.4, 21.9);
 
-
     glEnd();
 
-
-    //MORE DEEPER COLOR IN THE MIDDLE OF THE FIRST PORTION
+    // MORE DEEPER COLOR IN THE MIDDLE OF THE FIRST PORTION
 
     glColor3f(0.16, 0.28, 0.35);
     glBegin(GL_POLYGON);
@@ -10970,8 +10162,7 @@ void building_07() {
 
     glEnd();
 
-
-    //2ND LOWER PORTION
+    // 2ND LOWER PORTION
 
     glColor3f(0.83, 0.33, 0.32);
     glBegin(GL_POLYGON);
@@ -10982,8 +10173,7 @@ void building_07() {
 
     glEnd();
 
-
-    //3RD LOWER PORTOIN
+    // 3RD LOWER PORTOIN
     glColor3f(0.95, 0.4, 0.39);
     glBegin(GL_POLYGON);
     glVertex2f(74.5, 30);
@@ -10993,9 +10183,8 @@ void building_07() {
 
     glEnd();
 
-
-    //HORIZONTAL WHITE LINE IN THE MIDDLE OF THE 
-    // 2ND AND 3RD LOWER PORTION
+    // HORIZONTAL WHITE LINE IN THE MIDDLE OF THE
+    //  2ND AND 3RD LOWER PORTION
 
     glColor3f(0.95, 0.53, 0.51);
     glLineWidth(3);
@@ -11005,9 +10194,7 @@ void building_07() {
 
     glEnd();
 
-
-
-    //4th LOWER PORTION YELLOW
+    // 4th LOWER PORTION YELLOW
 
     glColor3f(0.98, 0.91, 0.44);
     glBegin(GL_POLYGON);
@@ -11018,12 +10205,10 @@ void building_07() {
 
     glEnd();
 
+    // TWO (ONE MORE DEEP YELLOW AND ONE WHITE) AREA IN THE MIDDLE OF THE
+    //  4TH AREA
 
-    //TWO (ONE MORE DEEP YELLOW AND ONE WHITE) AREA IN THE MIDDLE OF THE 
-    // 4TH AREA
-
-
-    //MORE DEEPER YELLOW COLOR HORIZONTAL AREA
+    // MORE DEEPER YELLOW COLOR HORIZONTAL AREA
     glColor3f(0.83, 0.76, 0.39);
     glBegin(GL_POLYGON);
     glVertex2f(76, 36.6);
@@ -11033,8 +10218,7 @@ void building_07() {
 
     glEnd();
 
-
-    //WHITISH HORIZONATAL AREA 
+    // WHITISH HORIZONATAL AREA
 
     glColor3f(1, 0.97, 0.85);
     glBegin(GL_POLYGON);
@@ -11045,8 +10229,7 @@ void building_07() {
 
     glEnd();
 
-
-    //5TH TOP PORTION
+    // 5TH TOP PORTION
 
     glColor3f(0.84, 0.36, 0.33);
     glBegin(GL_POLYGON);
@@ -11057,14 +10240,9 @@ void building_07() {
 
     glEnd();
 
+    // NOW PRINTING THE MAIN DOOR AREA OF BUILDING 07
 
-    //NOW PRINTING THE MAIN DOOR AREA OF BUILDING 07
-
-
-
-    //HORIZONTAL LINE IN THE ABOVE OF THE MAIN DOOR
-
-
+    // HORIZONTAL LINE IN THE ABOVE OF THE MAIN DOOR
 
     glColor3f(0.27, 0.44, 0.53);
     glBegin(GL_POLYGON);
@@ -11075,9 +10253,7 @@ void building_07() {
 
     glEnd();
 
-
-
-    //LEFT VERTICLE LINE IN THE MAIN DOOR AREA
+    // LEFT VERTICLE LINE IN THE MAIN DOOR AREA
 
     glLineWidth(4);
     glColor3f(0.27, 0.44, 0.53);
@@ -11085,21 +10261,18 @@ void building_07() {
     glVertex2f(79, 26.5);
     glVertex2f(79, 21.9);
 
-
     glEnd();
 
-    //RIGHT VERTICLE LINE IN TEH MAIN DOOR AREA
+    // RIGHT VERTICLE LINE IN TEH MAIN DOOR AREA
     glLineWidth(4);
     glColor3f(0.27, 0.44, 0.53);
     glBegin(GL_LINES);
     glVertex2f(88, 26.5);
     glVertex2f(88, 21.9);
 
-
     glEnd();
 
-
-    //BACKGROUND MORE LIGHTER COLOR OF THE MAIN  DOOR
+    // BACKGROUND MORE LIGHTER COLOR OF THE MAIN  DOOR
 
     glColor3f(0.27, 0.44, 0.53);
     glBegin(GL_POLYGON);
@@ -11110,8 +10283,7 @@ void building_07() {
 
     glEnd();
 
-
-    //BACKGROUND YELLOW AREA OF THE MAIN DOOR
+    // BACKGROUND YELLOW AREA OF THE MAIN DOOR
 
     glColor3f(0.98, 0.91, 0.44);
     glBegin(GL_POLYGON);
@@ -11122,8 +10294,7 @@ void building_07() {
 
     glEnd();
 
-
-    //HORIZONTAL LINE IN THE MIDDLE OF THE MAIN DOOR
+    // HORIZONTAL LINE IN THE MIDDLE OF THE MAIN DOOR
 
     glLineWidth(4);
     glColor3f(0.27, 0.44, 0.53);
@@ -11131,17 +10302,13 @@ void building_07() {
     glVertex2f(83.5, 21.9);
     glVertex2f(83.5, 26.5);
 
-
     glEnd();
 
-
-
-    //WINDOWS START HERE OF THE BUILDING 07
+    // WINDOWS START HERE OF THE BUILDING 07
 
     // I AM PRINTING IN ROW WISE
 
-
-    //TOP MOST LAYER IN EACH WINDOW
+    // TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.6, 42);
@@ -11151,7 +10318,7 @@ void building_07() {
 
     glEnd();
 
-    //2ND TOP MOST LAYER IN EACH WINDOW
+    // 2ND TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.8, 41.8);
@@ -11160,7 +10327,6 @@ void building_07() {
     glVertex2f(80, 41.8);
 
     glEnd();
-
 
     // MAIN DEEPER COLOR OF EACH WINDOW
 
@@ -11173,9 +10339,7 @@ void building_07() {
 
     glEnd();
 
-
-    //MOST LOWER WHITISH LAYER OF EACH WINDOW
-
+    // MOST LOWER WHITISH LAYER OF EACH WINDOW
 
     glColor3f(1, 0.98, 0.86);
     glBegin(GL_POLYGON);
@@ -11186,9 +10350,7 @@ void building_07() {
 
     glEnd();
 
-
-    //HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
-
+    // HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
 
     glLineWidth(2.8);
     glColor3f(1, 0.98, 0.86);
@@ -11197,14 +10359,12 @@ void building_07() {
     glVertex2f(78.9, 39);
     glEnd();
 
-
-
-    //NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
+    // NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(1 * 4.5, 0, 0);
 
-    //TOP MOST LAYER IN EACH WINDOW
+    // TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.6, 42);
@@ -11214,7 +10374,7 @@ void building_07() {
 
     glEnd();
 
-    //2ND TOP MOST LAYER IN EACH WINDOW
+    // 2ND TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.8, 41.8);
@@ -11223,7 +10383,6 @@ void building_07() {
     glVertex2f(80, 41.8);
 
     glEnd();
-
 
     // MAIN DEEPER COLOR OF EACH WINDOW
 
@@ -11236,9 +10395,7 @@ void building_07() {
 
     glEnd();
 
-
-    //MOST LOWER WHITISH LAYER OF EACH WINDOW
-
+    // MOST LOWER WHITISH LAYER OF EACH WINDOW
 
     glColor3f(1, 0.98, 0.86);
     glBegin(GL_POLYGON);
@@ -11249,9 +10406,7 @@ void building_07() {
 
     glEnd();
 
-
-    //HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
-
+    // HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
 
     glLineWidth(2.8);
     glColor3f(1, 0.98, 0.86);
@@ -11260,16 +10415,12 @@ void building_07() {
     glVertex2f(78.9, 39);
     glEnd();
 
-
     glPopMatrix();
-
-
-
 
     glPushMatrix();
     glTranslatef(2 * 4.5, 0, 0);
 
-    //TOP MOST LAYER IN EACH WINDOW
+    // TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.6, 42);
@@ -11279,7 +10430,7 @@ void building_07() {
 
     glEnd();
 
-    //2ND TOP MOST LAYER IN EACH WINDOW
+    // 2ND TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.8, 41.8);
@@ -11288,7 +10439,6 @@ void building_07() {
     glVertex2f(80, 41.8);
 
     glEnd();
-
 
     // MAIN DEEPER COLOR OF EACH WINDOW
 
@@ -11301,9 +10451,7 @@ void building_07() {
 
     glEnd();
 
-
-    //MOST LOWER WHITISH LAYER OF EACH WINDOW
-
+    // MOST LOWER WHITISH LAYER OF EACH WINDOW
 
     glColor3f(1, 0.98, 0.86);
     glBegin(GL_POLYGON);
@@ -11314,9 +10462,7 @@ void building_07() {
 
     glEnd();
 
-
-    //HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
-
+    // HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
 
     glLineWidth(2.8);
     glColor3f(1, 0.98, 0.86);
@@ -11325,18 +10471,14 @@ void building_07() {
     glVertex2f(78.9, 39);
     glEnd();
 
-
     glPopMatrix();
 
-
-
     // NOW PRINTING ALL THE WINDOWS OF THE BELOW LAYER
-
 
     glPushMatrix();
     glTranslatef(0, -6.5, 0);
 
-    //TOP MOST LAYER IN EACH WINDOW
+    // TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.6, 42);
@@ -11346,7 +10488,7 @@ void building_07() {
 
     glEnd();
 
-    //2ND TOP MOST LAYER IN EACH WINDOW
+    // 2ND TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.8, 41.8);
@@ -11355,7 +10497,6 @@ void building_07() {
     glVertex2f(80, 41.8);
 
     glEnd();
-
 
     // MAIN DEEPER COLOR OF EACH WINDOW
 
@@ -11368,9 +10509,7 @@ void building_07() {
 
     glEnd();
 
-
-    //MOST LOWER WHITISH LAYER OF EACH WINDOW
-
+    // MOST LOWER WHITISH LAYER OF EACH WINDOW
 
     glColor3f(1, 0.98, 0.86);
     glBegin(GL_POLYGON);
@@ -11381,9 +10520,7 @@ void building_07() {
 
     glEnd();
 
-
-    //HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
-
+    // HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
 
     glLineWidth(2.8);
     glColor3f(1, 0.98, 0.86);
@@ -11392,14 +10529,12 @@ void building_07() {
     glVertex2f(78.9, 39);
     glEnd();
 
-
-
-    //NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
+    // NOW PRINTING ALL THE WINDOWS OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(1 * 4.5, 0, 0);
 
-    //TOP MOST LAYER IN EACH WINDOW
+    // TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.6, 42);
@@ -11409,7 +10544,7 @@ void building_07() {
 
     glEnd();
 
-    //2ND TOP MOST LAYER IN EACH WINDOW
+    // 2ND TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.8, 41.8);
@@ -11418,7 +10553,6 @@ void building_07() {
     glVertex2f(80, 41.8);
 
     glEnd();
-
 
     // MAIN DEEPER COLOR OF EACH WINDOW
 
@@ -11431,9 +10565,7 @@ void building_07() {
 
     glEnd();
 
-
-    //MOST LOWER WHITISH LAYER OF EACH WINDOW
-
+    // MOST LOWER WHITISH LAYER OF EACH WINDOW
 
     glColor3f(1, 0.98, 0.86);
     glBegin(GL_POLYGON);
@@ -11444,9 +10576,7 @@ void building_07() {
 
     glEnd();
 
-
-    //HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
-
+    // HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
 
     glLineWidth(2.8);
     glColor3f(1, 0.98, 0.86);
@@ -11455,16 +10585,12 @@ void building_07() {
     glVertex2f(78.9, 39);
     glEnd();
 
-
     glPopMatrix();
-
-
-
 
     glPushMatrix();
     glTranslatef(2 * 4.5, 0, 0);
 
-    //TOP MOST LAYER IN EACH WINDOW
+    // TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.6, 42);
@@ -11474,7 +10600,7 @@ void building_07() {
 
     glEnd();
 
-    //2ND TOP MOST LAYER IN EACH WINDOW
+    // 2ND TOP MOST LAYER IN EACH WINDOW
     glColor3f(0.88, 0.38, 0.37);
     glBegin(GL_POLYGON);
     glVertex2f(77.8, 41.8);
@@ -11483,7 +10609,6 @@ void building_07() {
     glVertex2f(80, 41.8);
 
     glEnd();
-
 
     // MAIN DEEPER COLOR OF EACH WINDOW
 
@@ -11496,9 +10621,7 @@ void building_07() {
 
     glEnd();
 
-
-    //MOST LOWER WHITISH LAYER OF EACH WINDOW
-
+    // MOST LOWER WHITISH LAYER OF EACH WINDOW
 
     glColor3f(1, 0.98, 0.86);
     glBegin(GL_POLYGON);
@@ -11509,9 +10632,7 @@ void building_07() {
 
     glEnd();
 
-
-    //HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
-
+    // HORIZONTAL WHITISH LINE IN THE MIDDLE OF THE EACH WINDOW
 
     glLineWidth(2.8);
     glColor3f(1, 0.98, 0.86);
@@ -11520,20 +10641,16 @@ void building_07() {
     glVertex2f(78.9, 39);
     glEnd();
 
-
     glPopMatrix();
 
     glPopMatrix();
-
-
-
 }
 
 //  ID - 24
-void building_08() {
+void building_08()
+{
 
-
-    //ANTENA LIKE AREA OF BUILDING 08
+    // ANTENA LIKE AREA OF BUILDING 08
     glColor3f(0.32, 0.34, 0.4);
     glBegin(GL_POLYGON);
     glVertex2f(75.5, 62);
@@ -11542,7 +10659,7 @@ void building_08() {
     glVertex2f(80, 62);
     glEnd();
 
-    //UPPER PORTION OF THE ANTENA LIKE AREA
+    // UPPER PORTION OF THE ANTENA LIKE AREA
     glColor3f(0.51, 0.53, 0.64);
     glBegin(GL_POLYGON);
     glVertex2f(74.5, 67.5);
@@ -11552,7 +10669,7 @@ void building_08() {
 
     glEnd();
 
-    //TOP MOST AREA OF THE ANTER LIKE AREA
+    // TOP MOST AREA OF THE ANTER LIKE AREA
 
     glColor3f(0.32, 0.34, 0.4);
     glBegin(GL_POLYGON);
@@ -11562,10 +10679,7 @@ void building_08() {
     glVertex2f(78.3, 69);
     glEnd();
 
-
-
-
-    //MAIN AREA OF BUILDING 08
+    // MAIN AREA OF BUILDING 08
     glColor3f(.51, 0.53, 0.64);
     glBegin(GL_POLYGON);
     glVertex2f(68.5, 21.9);
@@ -11575,8 +10689,7 @@ void building_08() {
 
     glEnd();
 
-
-    //GLASS LIKE AREA OF THE BUILDING 08
+    // GLASS LIKE AREA OF THE BUILDING 08
 
     glColor3f(0.7, 0.73, 0.81);
     glBegin(GL_POLYGON);
@@ -11587,10 +10700,8 @@ void building_08() {
 
     glEnd();
 
-
-    //NOW PRINTING THE WINDOWS OF BUILDIN 08
-    // I AM PRINTING IN ROW WISE
-
+    // NOW PRINTING THE WINDOWS OF BUILDIN 08
+    //  I AM PRINTING IN ROW WISE
 
     glColor3f(0.7, 0.73, 0.81);
     glBegin(GL_POLYGON);
@@ -11600,7 +10711,6 @@ void building_08() {
     glVertex2f(72, 48);
 
     glEnd();
-
 
     // NOW PRINTING ALL THE WINDOWS OF THE 1ST ROW
 
@@ -11616,7 +10726,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
@@ -11628,7 +10737,6 @@ void building_08() {
 
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
@@ -11642,7 +10750,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
@@ -11655,8 +10762,8 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-    //NOW PRINTING THE WINDOWS OF THE 2ND WINDOW
-    // USING TRANSLATEF
+    // NOW PRINTING THE WINDOWS OF THE 2ND WINDOW
+    //  USING TRANSLATEF
 
     glPushMatrix();
     glTranslatef(0, 1 * -3, 0);
@@ -11669,7 +10776,6 @@ void building_08() {
 
     glEnd();
 
-
     // NOW PRINTING ALL THE WINDOWS OF THE 1ST ROW
 
     glPushMatrix();
@@ -11684,7 +10790,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
@@ -11697,7 +10802,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
@@ -11709,7 +10813,6 @@ void building_08() {
 
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
@@ -11725,8 +10828,7 @@ void building_08() {
 
     glPopMatrix();
 
-
-    //3RD ROW
+    // 3RD ROW
 
     glPushMatrix();
     glTranslatef(0, 2 * -3, 0);
@@ -11739,7 +10841,6 @@ void building_08() {
 
     glEnd();
 
-
     // NOW PRINTING ALL THE WINDOWS OF THE 1ST ROW
 
     glPushMatrix();
@@ -11754,7 +10855,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
@@ -11767,7 +10867,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
@@ -11779,7 +10878,6 @@ void building_08() {
 
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
@@ -11795,8 +10893,7 @@ void building_08() {
 
     glPopMatrix();
 
-
-    //4TH ROW
+    // 4TH ROW
 
     glPushMatrix();
     glTranslatef(0, 3 * -3, 0);
@@ -11809,7 +10906,6 @@ void building_08() {
 
     glEnd();
 
-
     // NOW PRINTING ALL THE WINDOWS OF THE 1ST ROW
 
     glPushMatrix();
@@ -11824,7 +10920,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
@@ -11837,7 +10932,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
@@ -11849,7 +10943,6 @@ void building_08() {
 
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
@@ -11865,9 +10958,7 @@ void building_08() {
 
     glPopMatrix();
 
-
-    //5TH ROW
-
+    // 5TH ROW
 
     glPushMatrix();
     glTranslatef(0, 4 * -3, 0);
@@ -11880,7 +10971,6 @@ void building_08() {
 
     glEnd();
 
-
     // NOW PRINTING ALL THE WINDOWS OF THE 1ST ROW
 
     glPushMatrix();
@@ -11895,7 +10985,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
@@ -11908,7 +10997,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
@@ -11920,7 +11008,6 @@ void building_08() {
 
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
@@ -11936,8 +11023,7 @@ void building_08() {
 
     glPopMatrix();
 
-
-    //6TH ROW
+    // 6TH ROW
 
     glPushMatrix();
     glTranslatef(0, 5 * -3, 0);
@@ -11950,7 +11036,6 @@ void building_08() {
 
     glEnd();
 
-
     // NOW PRINTING ALL THE WINDOWS OF THE 1ST ROW
 
     glPushMatrix();
@@ -11965,7 +11050,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
@@ -11978,7 +11062,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
@@ -11990,7 +11073,6 @@ void building_08() {
 
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
@@ -12006,7 +11088,6 @@ void building_08() {
 
     glEnd();
 
-
     // NOW PRINTING ALL THE WINDOWS OF THE 1ST ROW
 
     glPushMatrix();
@@ -12021,7 +11102,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
@@ -12034,7 +11114,6 @@ void building_08() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
@@ -12046,7 +11125,6 @@ void building_08() {
 
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
@@ -12066,12 +11144,11 @@ void building_08() {
     glPopMatrix();
 }
 
-//ID - 25
-void building_09() {
+// ID - 25
+void building_09()
+{
 
-
-
-    //LOWER AREA OF BUILDING 09
+    // LOWER AREA OF BUILDING 09
     glColor3f(0.72, 0.76, 0.76);
     glBegin(GL_POLYGON);
     glVertex2f(85, 21.9);
@@ -12081,8 +11158,7 @@ void building_09() {
 
     glEnd();
 
-
-    //FIRST LOWER HORIZONTAL AREA
+    // FIRST LOWER HORIZONTAL AREA
     glColor3f(0.53, 0.56, 0.56);
     glBegin(GL_POLYGON);
     glVertex2f(90, 32);
@@ -12092,8 +11168,7 @@ void building_09() {
 
     glEnd();
 
-
-    //SECOND LOWER HORIZONTAL AREA
+    // SECOND LOWER HORIZONTAL AREA
     glColor3f(0.53, 0.56, 0.56);
     glBegin(GL_POLYGON);
     glVertex2f(90.2, 41);
@@ -12103,8 +11178,7 @@ void building_09() {
 
     glEnd();
 
-
-    //THIRD LOWER HORIZONTAL AREA
+    // THIRD LOWER HORIZONTAL AREA
     glColor3f(0.53, 0.56, 0.56);
     glBegin(GL_POLYGON);
     glVertex2f(84, 51);
@@ -12114,8 +11188,7 @@ void building_09() {
 
     glEnd();
 
-
-    //FOURTH LOWER HORIZONTAL AREA
+    // FOURTH LOWER HORIZONTAL AREA
     glColor3f(0.53, 0.56, 0.56);
     glBegin(GL_POLYGON);
     glVertex2f(84, 59);
@@ -12125,8 +11198,7 @@ void building_09() {
 
     glEnd();
 
-
-    //UPPER MORE LIGHTER PORTION OF BUILDING 09
+    // UPPER MORE LIGHTER PORTION OF BUILDING 09
 
     glColor3f(0.72, 0.76, 0.76);
     glBegin(GL_POLYGON);
@@ -12137,7 +11209,7 @@ void building_09() {
 
     glEnd();
 
-    //FIVTH HORIZONTAL AREA OF BUIDLING 09
+    // FIVTH HORIZONTAL AREA OF BUIDLING 09
 
     glColor3f(0.53, 0.56, 0.56);
     glBegin(GL_POLYGON);
@@ -12148,8 +11220,7 @@ void building_09() {
 
     glEnd();
 
-
-    //UPPER PORTION BELOW THE TWO ANTEN'S
+    // UPPER PORTION BELOW THE TWO ANTEN'S
     glColor3f(0.42, 0.44, 0.44);
     glBegin(GL_POLYGON);
     glVertex2f(87, 64.5);
@@ -12159,9 +11230,8 @@ void building_09() {
 
     glEnd();
 
-
-    //TWO ANTENA'S
-    //FIRST ANTENA
+    // TWO ANTENA'S
+    // FIRST ANTENA
 
     glColor3f(0.57, 0.6, 0.6);
     glBegin(GL_POLYGON);
@@ -12172,8 +11242,7 @@ void building_09() {
 
     glEnd();
 
-
-    //SECOND ANTENA
+    // SECOND ANTENA
     glColor3f(0.57, 0.6, 0.6);
     glBegin(GL_POLYGON);
     glVertex2f(90, 65.5);
@@ -12183,12 +11252,11 @@ void building_09() {
 
     glEnd();
 
-    //NOW PRINTING THE WINDOWS OF THE BUILDING 09
-    //FROM TOP
-    //BIG WINDOWS 
+    // NOW PRINTING THE WINDOWS OF THE BUILDING 09
+    // FROM TOP
+    // BIG WINDOWS
 
-
-    //BACKGROUND MORE DEEPER COLOR
+    // BACKGROUND MORE DEEPER COLOR
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(86.3, 60.3);
@@ -12198,7 +11266,7 @@ void building_09() {
 
     glEnd();
 
-    //MAIN AREA OF EACH BID WINDOW
+    // MAIN AREA OF EACH BID WINDOW
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86.5, 60.5);
@@ -12208,12 +11276,11 @@ void building_09() {
 
     glEnd();
 
-    //NOW PRINTING ALL THE BIG WINDOWS
+    // NOW PRINTING ALL THE BIG WINDOWS
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-
-    //BACKGROUND MORE DEEPER COLOR
+    // BACKGROUND MORE DEEPER COLOR
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(86.3, 60.3);
@@ -12223,7 +11290,7 @@ void building_09() {
 
     glEnd();
 
-    //MAIN AREA OF EACH BID WINDOW
+    // MAIN AREA OF EACH BID WINDOW
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86.5, 60.5);
@@ -12235,12 +11302,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-
-    //BACKGROUND MORE DEEPER COLOR
+    // BACKGROUND MORE DEEPER COLOR
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(86.3, 60.3);
@@ -12250,7 +11315,7 @@ void building_09() {
 
     glEnd();
 
-    //MAIN AREA OF EACH BID WINDOW
+    // MAIN AREA OF EACH BID WINDOW
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86.5, 60.5);
@@ -12265,8 +11330,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-
-    //BACKGROUND MORE DEEPER COLOR
+    // BACKGROUND MORE DEEPER COLOR
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(86.3, 60.3);
@@ -12276,7 +11340,7 @@ void building_09() {
 
     glEnd();
 
-    //MAIN AREA OF EACH BID WINDOW
+    // MAIN AREA OF EACH BID WINDOW
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86.5, 60.5);
@@ -12287,13 +11351,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-
-    //BACKGROUND MORE DEEPER COLOR
+    // BACKGROUND MORE DEEPER COLOR
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(86.3, 60.3);
@@ -12303,7 +11365,7 @@ void building_09() {
 
     glEnd();
 
-    //MAIN AREA OF EACH BID WINDOW
+    // MAIN AREA OF EACH BID WINDOW
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86.5, 60.5);
@@ -12315,10 +11377,9 @@ void building_09() {
 
     glPopMatrix();
 
+    // SMALL WINDOWS
 
-    //SMALL WINDOWS
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12328,7 +11389,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12337,13 +11398,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12353,7 +11413,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12364,11 +11424,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12378,7 +11437,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12392,7 +11451,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12402,7 +11461,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12412,12 +11471,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12427,7 +11485,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12438,15 +11496,12 @@ void building_09() {
 
     glPopMatrix();
 
-
-    //2ND ROW
-
+    // 2ND ROW
 
     glPushMatrix();
     glTranslatef(0, 1 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12456,7 +11511,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12465,13 +11520,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12481,7 +11535,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12492,11 +11546,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12506,7 +11559,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12520,7 +11573,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12530,7 +11583,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12540,12 +11593,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12555,7 +11607,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12568,18 +11620,15 @@ void building_09() {
 
     glPopMatrix();
 
+    // NOW PRINTING THE FIRST ROW WINDOWS OF THE BELOW AREA WINDOWS
+    // WE CAN SAY IT THIRD LOWER PORTION
 
-
-    //NOW PRINTING THE FIRST ROW WINDOWS OF THE BELOW AREA WINDOWS
-    //WE CAN SAY IT THIRD LOWER PORTION
-
-    //FIRST ROW
+    // FIRST ROW
 
     glPushMatrix();
     glTranslatef(0, 2.6 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12589,7 +11638,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12598,13 +11647,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12614,7 +11662,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12625,11 +11673,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12639,7 +11686,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12653,7 +11700,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12663,7 +11710,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12673,12 +11720,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12688,7 +11734,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12701,16 +11747,12 @@ void building_09() {
 
     glPopMatrix();
 
-
-
-    //2ND ROW
-
+    // 2ND ROW
 
     glPushMatrix();
     glTranslatef(0, 3.6 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12720,7 +11762,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12729,13 +11771,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12745,7 +11786,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12756,11 +11797,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12770,7 +11810,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12784,7 +11824,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12794,7 +11834,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12804,12 +11844,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12819,7 +11858,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12832,14 +11871,12 @@ void building_09() {
 
     glPopMatrix();
 
-
-    //3RD ROW
+    // 3RD ROW
 
     glPushMatrix();
     glTranslatef(0, 4.6 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12849,7 +11886,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12858,13 +11895,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12874,7 +11910,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12885,11 +11921,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12899,7 +11934,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12913,7 +11948,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12923,7 +11958,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12933,12 +11968,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12948,7 +11982,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12961,15 +11995,12 @@ void building_09() {
 
     glPopMatrix();
 
-
-
-    //FIRST ROW OF THE SECOND LOWER PORTION
+    // FIRST ROW OF THE SECOND LOWER PORTION
 
     glPushMatrix();
     glTranslatef(0, 5.9 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -12979,7 +12010,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -12988,13 +12019,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13004,7 +12034,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13015,11 +12045,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13029,7 +12058,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13043,7 +12072,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13053,7 +12082,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13063,12 +12092,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13078,7 +12106,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13091,15 +12119,12 @@ void building_09() {
 
     glPopMatrix();
 
-
-    //SEOND ROW
-
+    // SEOND ROW
 
     glPushMatrix();
     glTranslatef(0, 6.7 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13109,7 +12134,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13118,13 +12143,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13134,7 +12158,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13145,11 +12169,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13159,7 +12182,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13173,7 +12196,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13183,7 +12206,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13193,12 +12216,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13208,7 +12230,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13221,13 +12243,11 @@ void building_09() {
 
     glPopMatrix();
 
-
-    //THIRD ROW
+    // THIRD ROW
     glPushMatrix();
     glTranslatef(0, 7.6 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13237,7 +12257,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13246,13 +12266,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13262,7 +12281,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13273,11 +12292,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13287,7 +12305,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13301,7 +12319,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13311,7 +12329,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13321,12 +12339,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13336,7 +12353,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13349,16 +12366,12 @@ void building_09() {
 
     glPopMatrix();
 
-
-
-    //FIRST ROW OF THE FIRST LAYER
-
+    // FIRST ROW OF THE FIRST LAYER
 
     glPushMatrix();
     glTranslatef(0, 9 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13368,7 +12381,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13377,13 +12390,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13393,7 +12405,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13404,11 +12416,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13418,7 +12429,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13432,7 +12443,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13442,7 +12453,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13452,12 +12463,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13467,7 +12477,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13480,14 +12490,12 @@ void building_09() {
 
     glPopMatrix();
 
-
-    //SECOND ROW 
+    // SECOND ROW
 
     glPushMatrix();
     glTranslatef(0, 9.9 * -3, 0);
 
-
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13497,7 +12505,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13506,13 +12514,12 @@ void building_09() {
     glVertex2f(87.5, 56.6);
     glEnd();
 
-
-    //NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
-    //UPPER PORTOIN
+    // NOW  PRINTING ALL THE SMALL WINDOWS OF THE BUILDING 09
+    // UPPER PORTOIN
     glPushMatrix();
     glTranslatef(1 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13522,7 +12529,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13533,11 +12540,10 @@ void building_09() {
 
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13547,7 +12553,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13561,7 +12567,7 @@ void building_09() {
     glPushMatrix();
     glTranslatef(3 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13571,7 +12577,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13581,12 +12587,11 @@ void building_09() {
     glEnd();
 
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 3, 0, 0);
 
-    //BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
+    // BACKGROUND LIGHTER COLOR AREA OF EACH WINDOW
     glColor3f(0.56, 0.59, 0.59);
     glBegin(GL_POLYGON);
     glVertex2f(85.8, 56.4);
@@ -13596,7 +12601,7 @@ void building_09() {
 
     glEnd();
 
-    //BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
+    // BACKGOURND MAIN AREA OF EACH SMALL WINDOWS
     glColor3f(0.89, 0.96, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(86, 56.6);
@@ -13608,21 +12613,14 @@ void building_09() {
     glPopMatrix();
 
     glPopMatrix();
-
-
-
-
-
-
-
 }
 
+// ID - 26
 
-//ID - 26
+void building_10()
+{
 
-void building_10() {
-
-    //LOWER PORTION OF BUILDING 10
+    // LOWER PORTION OF BUILDING 10
 
     glColor3f(0.91, 0.71, 0.58);
     glBegin(GL_POLYGON);
@@ -13632,8 +12630,7 @@ void building_10() {
     glVertex2f(125, 21.9);
     glEnd();
 
-
-    //WHITISH AREA ABOVE THE LOWER PORTION
+    // WHITISH AREA ABOVE THE LOWER PORTION
 
     glColor3f(0.98, 0.85, 0.76);
     glBegin(GL_POLYGON);
@@ -13643,7 +12640,7 @@ void building_10() {
     glVertex2f(126, 29.8);
     glEnd();
 
-    //UPPER ANGLED PORTION OF BUILDING 10
+    // UPPER ANGLED PORTION OF BUILDING 10
 
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
@@ -13653,8 +12650,7 @@ void building_10() {
     glVertex2f(126, 30.5);
     glEnd();
 
-
-    //MOST UPPER TRIANGLED SHAPE AREA
+    // MOST UPPER TRIANGLED SHAPE AREA
 
     glColor3f(0.98, 0.85, 0.76);
     glBegin(GL_POLYGON);
@@ -13664,8 +12660,7 @@ void building_10() {
     glVertex2f(110.4, 32.4);
     glEnd();
 
-
-    //HORIZONTAL ROUNDED SHAPE AREA IN THE TRIANGLED AREA
+    // HORIZONTAL ROUNDED SHAPE AREA IN THE TRIANGLED AREA
 
     glColor3f(0.96, 0.49, 0.46);
     glBegin(GL_POLYGON);
@@ -13679,8 +12674,7 @@ void building_10() {
     glVertex2f(110.4, 36);
     glEnd();
 
-
-    //TRIANGLE SHAPE AT THE TOP
+    // TRIANGLE SHAPE AT THE TOP
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(106.6, 36.35);
@@ -13688,11 +12682,9 @@ void building_10() {
     glVertex2f(110.4, 36.35);
     glEnd();
 
+    // MAIN DOOR AREA TRIANGLED SHAPE
 
-
-    //MAIN DOOR AREA TRIANGLED SHAPE
-
-    //BACK MORE LIGHTER AREA
+    // BACK MORE LIGHTER AREA
 
     glColor3f(0.98, 0.85, 0.76);
     glBegin(GL_POLYGON);
@@ -13703,7 +12695,7 @@ void building_10() {
     glVertex2f(113.5, 21.9);
     glEnd();
 
-    //REDISGH TRIANGLE ARE
+    // REDISGH TRIANGLE ARE
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(103.5, 29);
@@ -13719,10 +12711,9 @@ void building_10() {
     glVertex2f(108.5, 32.5);
     glEnd();
 
+    // MAIN DOOR
 
-    //MAIN DOOR
-
-    //BACKGROUND  REDISH COLOR OF MAIN DOOR
+    // BACKGROUND  REDISH COLOR OF MAIN DOOR
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(105.5, 21.9);
@@ -13736,7 +12727,7 @@ void building_10() {
 
     glEnd();
 
-    //MAIN BACK BROWN COLOR OF MAIN DOOR
+    // MAIN BACK BROWN COLOR OF MAIN DOOR
 
     glColor3f(0.6, 0.39, 0.28);
     glBegin(GL_POLYGON);
@@ -13751,8 +12742,7 @@ void building_10() {
 
     glEnd();
 
-
-    //HORIZONTAL LINE IN THE MIDDLE OF THE MAIN DOOR
+    // HORIZONTAL LINE IN THE MIDDLE OF THE MAIN DOOR
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -13760,7 +12750,7 @@ void building_10() {
     glVertex2f(111, 26);
     glEnd();
 
-    //VERTICAL LINE IN THE MIDDLE OF THE MAIN DOOR
+    // VERTICAL LINE IN THE MIDDLE OF THE MAIN DOOR
 
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
@@ -13769,12 +12759,11 @@ void building_10() {
     glVertex2f(108.5, 21.9);
     glEnd();
 
+    // WINDOWS OF THE BUILDING 10
 
-    //WINDOWS OF THE BUILDING 10
+    // FROM LEFT SIDE
 
-    //FROM LEFT SIDE
-
-    //BACKGROUND REDISH AREA OF EACH WINDOW
+    // BACKGROUND REDISH AREA OF EACH WINDOW
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(93, 26);
@@ -13783,7 +12772,7 @@ void building_10() {
     glVertex2f(97, 26);
     glEnd();
 
-    //MAIN LIGHT BLUE COLOR OF EACH WINDOW
+    // MAIN LIGHT BLUE COLOR OF EACH WINDOW
 
     glColor3f(0.73, 0.89, 0.94);
     glBegin(GL_POLYGON);
@@ -13793,7 +12782,7 @@ void building_10() {
     glVertex2f(96.5, 26.5);
     glEnd();
 
-    //VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
+    // VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -13801,12 +12790,12 @@ void building_10() {
     glVertex2f(95, 26.5);
     glEnd();
 
-    //NOW PRINTING THE SECOND WINDOWS OF FIRST ROW IN LEFT SIDE
+    // NOW PRINTING THE SECOND WINDOWS OF FIRST ROW IN LEFT SIDE
 
     glPushMatrix();
     glTranslatef(1 * 5, 0, 0);
 
-    //BACKGROUND REDISH AREA OF EACH WINDOW
+    // BACKGROUND REDISH AREA OF EACH WINDOW
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(93, 26);
@@ -13815,7 +12804,7 @@ void building_10() {
     glVertex2f(97, 26);
     glEnd();
 
-    //MAIN LIGHT BLUE COLOR OF EACH WINDOW
+    // MAIN LIGHT BLUE COLOR OF EACH WINDOW
 
     glColor3f(0.73, 0.89, 0.94);
     glBegin(GL_POLYGON);
@@ -13825,7 +12814,7 @@ void building_10() {
     glVertex2f(96.5, 26.5);
     glEnd();
 
-    //VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
+    // VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -13835,14 +12824,12 @@ void building_10() {
 
     glPopMatrix();
 
-
-
-    //SECOND ROW
+    // SECOND ROW
 
     glPushMatrix();
     glTranslatef(0, 1 * -3.5, 0);
 
-    //BACKGROUND REDISH AREA OF EACH WINDOW
+    // BACKGROUND REDISH AREA OF EACH WINDOW
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(93, 26);
@@ -13851,7 +12838,7 @@ void building_10() {
     glVertex2f(97, 26);
     glEnd();
 
-    //MAIN LIGHT BLUE COLOR OF EACH WINDOW
+    // MAIN LIGHT BLUE COLOR OF EACH WINDOW
 
     glColor3f(0.73, 0.89, 0.94);
     glBegin(GL_POLYGON);
@@ -13861,7 +12848,7 @@ void building_10() {
     glVertex2f(96.5, 26.5);
     glEnd();
 
-    //VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
+    // VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -13869,12 +12856,12 @@ void building_10() {
     glVertex2f(95, 26.5);
     glEnd();
 
-    //NOW PRINTING THE SECOND WINDOWS OF FIRST ROW IN LEFT SIDE
+    // NOW PRINTING THE SECOND WINDOWS OF FIRST ROW IN LEFT SIDE
 
     glPushMatrix();
     glTranslatef(1 * 5, 0, 0);
 
-    //BACKGROUND REDISH AREA OF EACH WINDOW
+    // BACKGROUND REDISH AREA OF EACH WINDOW
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(93, 26);
@@ -13883,7 +12870,7 @@ void building_10() {
     glVertex2f(97, 26);
     glEnd();
 
-    //MAIN LIGHT BLUE COLOR OF EACH WINDOW
+    // MAIN LIGHT BLUE COLOR OF EACH WINDOW
 
     glColor3f(0.73, 0.89, 0.94);
     glBegin(GL_POLYGON);
@@ -13893,7 +12880,7 @@ void building_10() {
     glVertex2f(96.5, 26.5);
     glEnd();
 
-    //VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
+    // VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -13905,16 +12892,14 @@ void building_10() {
 
     glPopMatrix();
 
-
-
-    //NOW PRINTING THE SECOND ROW OF THE RIGHT SIDE
-    //JUST USING THE CODES OF THE LEFT SIDE TWO ROWS WINDOWS
-    //TRANSLATING IN X AXIS
+    // NOW PRINTING THE SECOND ROW OF THE RIGHT SIDE
+    // JUST USING THE CODES OF THE LEFT SIDE TWO ROWS WINDOWS
+    // TRANSLATING IN X AXIS
 
     glPushMatrix();
     glTranslatef(1 * 22, 0, 0);
 
-    //BACKGROUND REDISH AREA OF EACH WINDOW
+    // BACKGROUND REDISH AREA OF EACH WINDOW
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(93, 26);
@@ -13923,7 +12908,7 @@ void building_10() {
     glVertex2f(97, 26);
     glEnd();
 
-    //MAIN LIGHT BLUE COLOR OF EACH WINDOW
+    // MAIN LIGHT BLUE COLOR OF EACH WINDOW
 
     glColor3f(0.73, 0.89, 0.94);
     glBegin(GL_POLYGON);
@@ -13933,7 +12918,7 @@ void building_10() {
     glVertex2f(96.5, 26.5);
     glEnd();
 
-    //VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
+    // VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -13941,12 +12926,12 @@ void building_10() {
     glVertex2f(95, 26.5);
     glEnd();
 
-    //NOW PRINTING THE SECOND WINDOWS OF FIRST ROW IN LEFT SIDE
+    // NOW PRINTING THE SECOND WINDOWS OF FIRST ROW IN LEFT SIDE
 
     glPushMatrix();
     glTranslatef(1 * 5, 0, 0);
 
-    //BACKGROUND REDISH AREA OF EACH WINDOW
+    // BACKGROUND REDISH AREA OF EACH WINDOW
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(93, 26);
@@ -13955,7 +12940,7 @@ void building_10() {
     glVertex2f(97, 26);
     glEnd();
 
-    //MAIN LIGHT BLUE COLOR OF EACH WINDOW
+    // MAIN LIGHT BLUE COLOR OF EACH WINDOW
 
     glColor3f(0.73, 0.89, 0.94);
     glBegin(GL_POLYGON);
@@ -13965,7 +12950,7 @@ void building_10() {
     glVertex2f(96.5, 26.5);
     glEnd();
 
-    //VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
+    // VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -13975,14 +12960,12 @@ void building_10() {
 
     glPopMatrix();
 
-
-
-    //SECOND ROW
+    // SECOND ROW
 
     glPushMatrix();
     glTranslatef(0, 1 * -3.5, 0);
 
-    //BACKGROUND REDISH AREA OF EACH WINDOW
+    // BACKGROUND REDISH AREA OF EACH WINDOW
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(93, 26);
@@ -13991,7 +12974,7 @@ void building_10() {
     glVertex2f(97, 26);
     glEnd();
 
-    //MAIN LIGHT BLUE COLOR OF EACH WINDOW
+    // MAIN LIGHT BLUE COLOR OF EACH WINDOW
 
     glColor3f(0.73, 0.89, 0.94);
     glBegin(GL_POLYGON);
@@ -14001,7 +12984,7 @@ void building_10() {
     glVertex2f(96.5, 26.5);
     glEnd();
 
-    //VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
+    // VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -14009,12 +12992,12 @@ void building_10() {
     glVertex2f(95, 26.5);
     glEnd();
 
-    //NOW PRINTING THE SECOND WINDOWS OF FIRST ROW IN LEFT SIDE
+    // NOW PRINTING THE SECOND WINDOWS OF FIRST ROW IN LEFT SIDE
 
     glPushMatrix();
     glTranslatef(1 * 5, 0, 0);
 
-    //BACKGROUND REDISH AREA OF EACH WINDOW
+    // BACKGROUND REDISH AREA OF EACH WINDOW
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_POLYGON);
     glVertex2f(93, 26);
@@ -14023,7 +13006,7 @@ void building_10() {
     glVertex2f(97, 26);
     glEnd();
 
-    //MAIN LIGHT BLUE COLOR OF EACH WINDOW
+    // MAIN LIGHT BLUE COLOR OF EACH WINDOW
 
     glColor3f(0.73, 0.89, 0.94);
     glBegin(GL_POLYGON);
@@ -14033,7 +13016,7 @@ void building_10() {
     glVertex2f(96.5, 26.5);
     glEnd();
 
-    //VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
+    // VERTICAL REDISH LINE IN THE MIDDLE OF EACH WINDOW
     glLineWidth(4.5);
     glColor3f(0.95, 0.44, 0.42);
     glBegin(GL_LINES);
@@ -14046,27 +13029,22 @@ void building_10() {
     glPopMatrix();
 
     glPopMatrix();
-
-
-
-
-
 }
-
 
 // ID - 27
 
-void building_11() {
+void building_11()
+{
 
-    //MAIN AREA OF BUILDING 11
-    glColor3f(0.57, 0.65, 0.69); //INITIAL COLOR
+    // MAIN AREA OF BUILDING 11
+    glColor3f(0.57, 0.65, 0.69); // INITIAL COLOR
     if (countfire > 19)
         // glColor3f(0.95, 0.73, 0.06);
         glColor3f(0.95, 0, 0);
 
     if (vanishfire < 5)
         glColor3f(0.34, 0.35, 0.35);
-    //glColor3f(0, 0, 0);
+    // glColor3f(0, 0, 0);
 
     glBegin(GL_POLYGON);
     glVertex2f(104, 35);
@@ -14075,9 +13053,9 @@ void building_11() {
     glVertex2f(120, 35);
     glEnd();
 
-
-    //2ND MORE DEEPER PORTION
-    if (vanishfire > 5) {
+    // 2ND MORE DEEPER PORTION
+    if (vanishfire > 5)
+    {
         glColor3f(0.5, 0.56, 0.59);
         glBegin(GL_POLYGON);
         glVertex2f(103, 60);
@@ -14087,9 +13065,9 @@ void building_11() {
         glEnd();
     }
 
-
-    //3RD PORTION FROM BOTTOM
-    if (countfire <= 20) {
+    // 3RD PORTION FROM BOTTOM
+    if (countfire <= 20)
+    {
         glColor3f(0.57, 0.65, 0.69);
         glBegin(GL_POLYGON);
         glVertex2f(108, 61);
@@ -14098,11 +13076,11 @@ void building_11() {
         glVertex2f(116, 61);
         glEnd();
     }
-    if (countfire > 20 && vanishfire > 5) //for building texture
-        //if (countfire > 20)
-       // if (vanishfire < 5)
+    if (countfire > 20 && vanishfire > 5) // for building texture
+                                          // if (countfire > 20)
+    // if (vanishfire < 5)
     {
-        //glColor3f(0.95, 0.73, 0.06);
+        // glColor3f(0.95, 0.73, 0.06);
         glColor3f(0.95, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(108, 61);
@@ -14112,9 +13090,9 @@ void building_11() {
         glEnd();
     }
 
-
-    //TOP MOST PORTION MORE DEEPER
-    if (vanishfire > 5) { // ONLY PRINT WHEN VANISHFIRE IS GREATER THAN 5
+    // TOP MOST PORTION MORE DEEPER
+    if (vanishfire > 5)
+    { // ONLY PRINT WHEN VANISHFIRE IS GREATER THAN 5
         glColor3f(0.5, 0.56, 0.59);
         // if (vanishfire < 5)
         //     glColor3f(0, 0, 0);
@@ -14126,8 +13104,7 @@ void building_11() {
         glVertex2f(117, 63.5);
         glEnd();
 
-
-        //VERTICAL WHITISH LINE IN THE 3RD PORTION
+        // VERTICAL WHITISH LINE IN THE 3RD PORTION
 
         glLineWidth(3);
         glColor3f(0.69, 0.76, 0.8);
@@ -14140,8 +13117,7 @@ void building_11() {
         glVertex2f(109.5, 61);
         glEnd();
 
-
-        //PRINTING REST OF THE VERTCAL WHITISH LINE
+        // PRINTING REST OF THE VERTCAL WHITISH LINE
         glPushMatrix();
         glTranslatef(1 * 1.8, 0, 0);
 
@@ -14171,13 +13147,11 @@ void building_11() {
         glEnd();
 
         glPopMatrix();
-
     }
 
+    // NOW PRINTING THE HORIZONTAL WINDOWS OF BUILDING 11
 
-    //NOW PRINTING THE HORIZONTAL WINDOWS OF BUILDING 11
-
-    //BACKGROUND AREA OF HORIZONTAL WINDOWS
+    // BACKGROUND AREA OF HORIZONTAL WINDOWS
 
     glColor3f(0.5, 0.56, 0.59);
     // if (vanishfire < 5)
@@ -14190,14 +13164,14 @@ void building_11() {
     glVertex2f(119, 56.5);
     glEnd();
 
-    //MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
+    // MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
 
     glColor3f(0.91, 0.93, 0.94);
     if (countfire > 9)
         glColor3f(0.95, 0.73, 0.06);
     if (vanishfire < 5)
         glColor3f(0.34, 0.35, 0.35);
-    //glColor3f(0, 0, 0);
+    // glColor3f(0, 0, 0);
 
     glBegin(GL_POLYGON);
     glVertex2f(105.5, 57);
@@ -14206,7 +13180,7 @@ void building_11() {
     glVertex2f(118.5, 57);
     glEnd();
 
-    //VERTICAL LINES IN EACH HORIZONTAL WINDOWS
+    // VERTICAL LINES IN EACH HORIZONTAL WINDOWS
 
     glLineWidth(3);
     glColor3f(0.69, 0.76, 0.8);
@@ -14218,7 +13192,7 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
 
-    //NOW PRINTING REST OF THE VERTICAL LINES IN ECH WINDOWS
+    // NOW PRINTING REST OF THE VERTICAL LINES IN ECH WINDOWS
 
     glPushMatrix();
     glTranslatef(1 * 1.9, 0, 0);
@@ -14229,7 +13203,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 1.9, 0, 0);
 
@@ -14239,7 +13212,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 1.9, 0, 0);
 
@@ -14248,7 +13220,6 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 1.9, 0, 0);
@@ -14268,13 +13239,12 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
-    //NOW PRINTING 2ND ROW USING THE CODE OF THE FIRST ROW
+    // NOW PRINTING 2ND ROW USING THE CODE OF THE FIRST ROW
 
     glPushMatrix();
     glTranslatef(0, 1 * -3.8, 0);
 
-    //BACKGROUND AREA OF HORIZONTAL WINDOWS
+    // BACKGROUND AREA OF HORIZONTAL WINDOWS
 
     glColor3f(0.5, 0.56, 0.59);
 
@@ -14285,7 +13255,7 @@ void building_11() {
     glVertex2f(119, 56.5);
     glEnd();
 
-    //MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
+    // MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
 
     glColor3f(0.91, 0.93, 0.94);
     if (countfire > 5)
@@ -14299,7 +13269,7 @@ void building_11() {
     glVertex2f(118.5, 57);
     glEnd();
 
-    //VERTICAL LINES IN EACH HORIZONTAL WINDOWS
+    // VERTICAL LINES IN EACH HORIZONTAL WINDOWS
 
     glLineWidth(3);
     glColor3f(0.69, 0.76, 0.8);
@@ -14308,7 +13278,7 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
 
-    //NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
+    // NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
 
     glPushMatrix();
     glTranslatef(1 * 1.9, 0, 0);
@@ -14319,7 +13289,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 1.9, 0, 0);
 
@@ -14329,7 +13298,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 1.9, 0, 0);
 
@@ -14338,7 +13306,6 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 1.9, 0, 0);
@@ -14360,13 +13327,12 @@ void building_11() {
 
     glPopMatrix();
 
-
-    //3RD ROW
+    // 3RD ROW
 
     glPushMatrix();
     glTranslatef(0, 2 * -3.8, 0);
 
-    //BACKGROUND AREA OF HORIZONTAL WINDOWS
+    // BACKGROUND AREA OF HORIZONTAL WINDOWS
 
     glColor3f(0.5, 0.56, 0.59);
     glBegin(GL_POLYGON);
@@ -14376,7 +13342,7 @@ void building_11() {
     glVertex2f(119, 56.5);
     glEnd();
 
-    //MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
+    // MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
 
     glColor3f(0.91, 0.93, 0.94);
     if (countfire > 15)
@@ -14390,7 +13356,7 @@ void building_11() {
     glVertex2f(118.5, 57);
     glEnd();
 
-    //VERTICAL LINES IN EACH HORIZONTAL WINDOWS
+    // VERTICAL LINES IN EACH HORIZONTAL WINDOWS
 
     glLineWidth(3);
     glColor3f(0.69, 0.76, 0.8);
@@ -14399,7 +13365,7 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
 
-    //NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
+    // NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
 
     glPushMatrix();
     glTranslatef(1 * 1.9, 0, 0);
@@ -14410,7 +13376,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 1.9, 0, 0);
 
@@ -14420,7 +13385,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 1.9, 0, 0);
 
@@ -14429,7 +13393,6 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 1.9, 0, 0);
@@ -14451,14 +13414,12 @@ void building_11() {
 
     glPopMatrix();
 
-
-
-    //4TH ROW
+    // 4TH ROW
 
     glPushMatrix();
     glTranslatef(0, 3 * -3.8, 0);
 
-    //BACKGROUND AREA OF HORIZONTAL WINDOWS
+    // BACKGROUND AREA OF HORIZONTAL WINDOWS
 
     glColor3f(0.5, 0.56, 0.59);
     glBegin(GL_POLYGON);
@@ -14468,7 +13429,7 @@ void building_11() {
     glVertex2f(119, 56.5);
     glEnd();
 
-    //MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
+    // MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
 
     glColor3f(0.91, 0.93, 0.94);
     if (countfire > 16)
@@ -14482,7 +13443,7 @@ void building_11() {
     glVertex2f(118.5, 57);
     glEnd();
 
-    //VERTICAL LINES IN EACH HORIZONTAL WINDOWS
+    // VERTICAL LINES IN EACH HORIZONTAL WINDOWS
 
     glLineWidth(3);
     glColor3f(0.69, 0.76, 0.8);
@@ -14491,7 +13452,7 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
 
-    //NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
+    // NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
 
     glPushMatrix();
     glTranslatef(1 * 1.9, 0, 0);
@@ -14502,7 +13463,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 1.9, 0, 0);
 
@@ -14512,7 +13472,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 1.9, 0, 0);
 
@@ -14521,7 +13480,6 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 1.9, 0, 0);
@@ -14543,13 +13501,12 @@ void building_11() {
 
     glPopMatrix();
 
-
-    //5TH ROW
+    // 5TH ROW
 
     glPushMatrix();
     glTranslatef(0, 4 * -3.8, 0);
 
-    //BACKGROUND AREA OF HORIZONTAL WINDOWS
+    // BACKGROUND AREA OF HORIZONTAL WINDOWS
 
     glColor3f(0.5, 0.56, 0.59);
     glBegin(GL_POLYGON);
@@ -14559,7 +13516,7 @@ void building_11() {
     glVertex2f(119, 56.5);
     glEnd();
 
-    //MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
+    // MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
 
     glColor3f(0.91, 0.93, 0.94);
     if (countfire > 17)
@@ -14573,7 +13530,7 @@ void building_11() {
     glVertex2f(118.5, 57);
     glEnd();
 
-    //VERTICAL LINES IN EACH HORIZONTAL WINDOWS
+    // VERTICAL LINES IN EACH HORIZONTAL WINDOWS
 
     glLineWidth(3);
     glColor3f(0.69, 0.76, 0.8);
@@ -14582,7 +13539,7 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
 
-    //NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
+    // NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
 
     glPushMatrix();
     glTranslatef(1 * 1.9, 0, 0);
@@ -14593,7 +13550,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 1.9, 0, 0);
 
@@ -14603,7 +13559,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 1.9, 0, 0);
 
@@ -14612,7 +13567,6 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 1.9, 0, 0);
@@ -14634,12 +13588,11 @@ void building_11() {
 
     glPopMatrix();
 
-
-    //6TH ROW
+    // 6TH ROW
     glPushMatrix();
     glTranslatef(0, 5 * -3.8, 0);
 
-    //BACKGROUND AREA OF HORIZONTAL WINDOWS
+    // BACKGROUND AREA OF HORIZONTAL WINDOWS
 
     glColor3f(0.5, 0.56, 0.59);
     glBegin(GL_POLYGON);
@@ -14649,7 +13602,7 @@ void building_11() {
     glVertex2f(119, 56.5);
     glEnd();
 
-    //MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
+    // MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
 
     glColor3f(0.91, 0.93, 0.94);
     if (countfire > 18)
@@ -14663,7 +13616,7 @@ void building_11() {
     glVertex2f(118.5, 57);
     glEnd();
 
-    //VERTICAL LINES IN EACH HORIZONTAL WINDOWS
+    // VERTICAL LINES IN EACH HORIZONTAL WINDOWS
 
     glLineWidth(3);
     glColor3f(0.69, 0.76, 0.8);
@@ -14672,7 +13625,7 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
 
-    //NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
+    // NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
 
     glPushMatrix();
     glTranslatef(1 * 1.9, 0, 0);
@@ -14683,7 +13636,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 1.9, 0, 0);
 
@@ -14693,7 +13645,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 1.9, 0, 0);
 
@@ -14702,7 +13653,6 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 1.9, 0, 0);
@@ -14724,13 +13674,12 @@ void building_11() {
 
     glPopMatrix();
 
-
-    //7TH ROW
+    // 7TH ROW
 
     glPushMatrix();
     glTranslatef(0, 6 * -3.8, 0);
 
-    //BACKGROUND AREA OF HORIZONTAL WINDOWS
+    // BACKGROUND AREA OF HORIZONTAL WINDOWS
 
     glColor3f(0.5, 0.56, 0.59);
     glBegin(GL_POLYGON);
@@ -14740,7 +13689,7 @@ void building_11() {
     glVertex2f(119, 56.5);
     glEnd();
 
-    //MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
+    // MAIN WHITISH AREA OF EACH HORIZONTAL WINDOWS
 
     glColor3f(0.91, 0.93, 0.94);
     if (countfire > 18)
@@ -14754,7 +13703,7 @@ void building_11() {
     glVertex2f(118.5, 57);
     glEnd();
 
-    //VERTICAL LINES IN EACH HORIZONTAL WINDOWS
+    // VERTICAL LINES IN EACH HORIZONTAL WINDOWS
 
     glLineWidth(3);
     glColor3f(0.69, 0.76, 0.8);
@@ -14763,7 +13712,7 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
 
-    //NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
+    // NOW PRINTING REST OF TEH VERTICAL LINES IN ECH WINDOWS
 
     glPushMatrix();
     glTranslatef(1 * 1.9, 0, 0);
@@ -14774,7 +13723,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(2 * 1.9, 0, 0);
 
@@ -14784,7 +13732,6 @@ void building_11() {
     glEnd();
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslatef(3 * 1.9, 0, 0);
 
@@ -14793,7 +13740,6 @@ void building_11() {
     glVertex2f(107, 57);
     glEnd();
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslatef(4 * 1.9, 0, 0);
@@ -14814,41 +13760,34 @@ void building_11() {
     glPopMatrix();
 
     glPopMatrix();
-
 
     /*  glVertex2f(104, 35);
      glVertex2f(104, 60);
      glVertex2f(120, 60);
      glVertex2f(120, 35); */
 
-
-    if (vanishfire < 6) {
+    if (vanishfire < 6)
+    {
         glColor3f(0.47, 0.75, 0.95);
-        //glColor3f(0, 0, 0);
+        // glColor3f(0, 0, 0);
         glVertex2f(104, 35);
         glVertex2f(104, 60);
         glVertex2f(120, 60);
         glVertex2f(120, 35);
         ApplyTexture(120, 35, 120, 60, 104, 60, 104, 35, textures[10].textureID);
     }
-
-
-
-
-
-
 }
-
 
 ;
 
-//ID - 33
-void bird01() {
+// ID - 33
+void bird01()
+{
     glPushMatrix();
-    glTranslatef(40 + 135, 0, 0);//translated 40 + 130(after scaling by 0.5)value in x axis , so that is appear from the outside screen of the right 
+    glTranslatef(40 + 135, 0, 0); // translated 40 + 130(after scaling by 0.5)value in x axis , so that is appear from the outside screen of the right
     // side with fly aniomation
     glTranslatef(move_bird, 0, 0);
-    //glScalef(2, 2, 1);
+    // glScalef(2, 2, 1);
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(97.08, 70.6);
@@ -14859,9 +13798,7 @@ void bird01() {
     glVertex2f(96.4, 70);
     glVertex2f(97.25, 69.85);
 
-
     glEnd();
-
 
     glBegin(GL_POLYGON);
     glVertex2f(99, 70.5);
@@ -14870,7 +13807,6 @@ void bird01() {
     glVertex2f(97.25, 69.85);
     glVertex2f(97.75, 69.5);
     glVertex2f(98.45, 69.6);
-
 
     glEnd();
 
@@ -14884,13 +13820,11 @@ void bird01() {
     glVertex2f(99.2708976830173, 69.7946980991128);
     glVertex2f(100.12, 70.1);
 
-
     glEnd();
 
-
-
-    //wing 1
-    if (state) {
+    // wing 1
+    if (state)
+    {
         /*glColor3f(1, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.4, 71.5);
@@ -14902,7 +13836,6 @@ void bird01() {
 
         glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.8, 71.8);
@@ -14911,12 +13844,12 @@ void bird01() {
         glVertex2f(97.35, 70.25);
         glVertex2f(98.85, 70.35);
 
-
         glEnd();
     }
 
     // wing 2
-    if (!state) {
+    if (!state)
+    {
         /*
 glColor3f(1, 0, 0);
 glBegin(GL_POLYGON);
@@ -14929,15 +13862,12 @@ glVertex2f(98.3, 69.9);
 
 glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98, 69.4);
         glVertex2f(100, 68.5);
         glVertex2f(98.6, 70.55);
         glVertex2f(97.4, 70.2);
-
-
 
         glEnd();
 
@@ -14951,12 +13881,9 @@ glEnd();*/
 
         glEnd();
         */
-
-
-
     }
 
-    //left leg
+    // left leg
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(98.62, 69.34);
@@ -14966,10 +13893,9 @@ glEnd();*/
     glVertex2f(98.45, 69.6);
     glVertex2f(98.59, 69.49);
 
-
     glEnd();
 
-    //leg2
+    // leg2
     glBegin(GL_POLYGON);
     glVertex2f(98.72, 69.44);
     glVertex2f(98.95, 69.35);
@@ -14977,21 +13903,18 @@ glEnd();*/
     glVertex2f(98.7270945266668, 69.6650693284027);
     glVertex2f(98.653547, 69.64827);
 
-
-
     glEnd();
 
     glPopMatrix();
-
-
 }
 
 // ID - 34
-void bird02() {
+void bird02()
+{
     glPushMatrix();
     glTranslatef(45 + 135, -5, 0);
     glTranslatef(move_bird, 0, 0);
-    //glScalef(2, 2, 1);
+    // glScalef(2, 2, 1);
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(97.08, 70.6);
@@ -15002,9 +13925,7 @@ void bird02() {
     glVertex2f(96.4, 70);
     glVertex2f(97.25, 69.85);
 
-
     glEnd();
-
 
     glBegin(GL_POLYGON);
     glVertex2f(99, 70.5);
@@ -15013,7 +13934,6 @@ void bird02() {
     glVertex2f(97.25, 69.85);
     glVertex2f(97.75, 69.5);
     glVertex2f(98.45, 69.6);
-
 
     glEnd();
 
@@ -15027,13 +13947,11 @@ void bird02() {
     glVertex2f(99.2708976830173, 69.7946980991128);
     glVertex2f(100.12, 70.1);
 
-
     glEnd();
 
-
-
-    //wing 1
-    if (state) {
+    // wing 1
+    if (state)
+    {
         /*glColor3f(1, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.4, 71.5);
@@ -15045,7 +13963,6 @@ void bird02() {
 
         glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.8, 71.8);
@@ -15054,12 +13971,12 @@ void bird02() {
         glVertex2f(97.35, 70.25);
         glVertex2f(98.85, 70.35);
 
-
         glEnd();
     }
 
     // wing 2
-    if (!state) {
+    if (!state)
+    {
         /*
 glColor3f(1, 0, 0);
         glBegin(GL_POLYGON);
@@ -15072,15 +13989,12 @@ glColor3f(1, 0, 0);
 
         glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98, 69.4);
         glVertex2f(100, 68.5);
         glVertex2f(98.6, 70.55);
         glVertex2f(97.4, 70.2);
-
-
 
         glEnd();
 
@@ -15094,12 +14008,9 @@ glColor3f(1, 0, 0);
 
         glEnd();
         */
-
-
-
     }
 
-    //left leg
+    // left leg
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(98.62, 69.34);
@@ -15109,10 +14020,9 @@ glColor3f(1, 0, 0);
     glVertex2f(98.45, 69.6);
     glVertex2f(98.59, 69.49);
 
-
     glEnd();
 
-    //leg2
+    // leg2
     glBegin(GL_POLYGON);
     glVertex2f(98.72, 69.44);
     glVertex2f(98.95, 69.35);
@@ -15120,21 +14030,18 @@ glColor3f(1, 0, 0);
     glVertex2f(98.7270945266668, 69.6650693284027);
     glVertex2f(98.653547, 69.64827);
 
-
-
     glEnd();
 
     glPopMatrix();
-
-
 }
 
-//ID - 35
-void bird03() {
+// ID - 35
+void bird03()
+{
     glPushMatrix();
     glTranslatef(50 + 135, 0, 0);
     glTranslatef(move_bird, 0, 0);
-    //glScalef(2, 2, 1);
+    // glScalef(2, 2, 1);
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(97.08, 70.6);
@@ -15145,9 +14052,7 @@ void bird03() {
     glVertex2f(96.4, 70);
     glVertex2f(97.25, 69.85);
 
-
     glEnd();
-
 
     glBegin(GL_POLYGON);
     glVertex2f(99, 70.5);
@@ -15156,7 +14061,6 @@ void bird03() {
     glVertex2f(97.25, 69.85);
     glVertex2f(97.75, 69.5);
     glVertex2f(98.45, 69.6);
-
 
     glEnd();
 
@@ -15170,13 +14074,11 @@ void bird03() {
     glVertex2f(99.2708976830173, 69.7946980991128);
     glVertex2f(100.12, 70.1);
 
-
     glEnd();
 
-
-
-    //wing 1
-    if (state) {
+    // wing 1
+    if (state)
+    {
         /*glColor3f(1, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.4, 71.5);
@@ -15188,7 +14090,6 @@ void bird03() {
 
         glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.8, 71.8);
@@ -15197,12 +14098,12 @@ void bird03() {
         glVertex2f(97.35, 70.25);
         glVertex2f(98.85, 70.35);
 
-
         glEnd();
     }
 
     // wing 2
-    if (!state) {
+    if (!state)
+    {
         /*
 glColor3f(1, 0, 0);
 glBegin(GL_POLYGON);
@@ -15215,15 +14116,12 @@ glVertex2f(98.3, 69.9);
 
 glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98, 69.4);
         glVertex2f(100, 68.5);
         glVertex2f(98.6, 70.55);
         glVertex2f(97.4, 70.2);
-
-
 
         glEnd();
 
@@ -15237,12 +14135,9 @@ glEnd();*/
 
         glEnd();
         */
-
-
-
     }
 
-    //left leg
+    // left leg
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(98.62, 69.34);
@@ -15252,10 +14147,9 @@ glEnd();*/
     glVertex2f(98.45, 69.6);
     glVertex2f(98.59, 69.49);
 
-
     glEnd();
 
-    //leg2
+    // leg2
     glBegin(GL_POLYGON);
     glVertex2f(98.72, 69.44);
     glVertex2f(98.95, 69.35);
@@ -15263,21 +14157,18 @@ glEnd();*/
     glVertex2f(98.7270945266668, 69.6650693284027);
     glVertex2f(98.653547, 69.64827);
 
-
-
     glEnd();
 
     glPopMatrix();
-
-
 }
 
-//ID-36
-void bird04() {
+// ID-36
+void bird04()
+{
     glPushMatrix();
     glTranslatef(55 + 135, -5, 0);
     glTranslatef(move_bird, 0, 0);
-    //glScalef(2, 2, 1);
+    // glScalef(2, 2, 1);
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(97.08, 70.6);
@@ -15288,9 +14179,7 @@ void bird04() {
     glVertex2f(96.4, 70);
     glVertex2f(97.25, 69.85);
 
-
     glEnd();
-
 
     glBegin(GL_POLYGON);
     glVertex2f(99, 70.5);
@@ -15299,7 +14188,6 @@ void bird04() {
     glVertex2f(97.25, 69.85);
     glVertex2f(97.75, 69.5);
     glVertex2f(98.45, 69.6);
-
 
     glEnd();
 
@@ -15313,13 +14201,11 @@ void bird04() {
     glVertex2f(99.2708976830173, 69.7946980991128);
     glVertex2f(100.12, 70.1);
 
-
     glEnd();
 
-
-
-    //wing 1
-    if (state) {
+    // wing 1
+    if (state)
+    {
         /*glColor3f(1, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.4, 71.5);
@@ -15331,7 +14217,6 @@ void bird04() {
 
         glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.8, 71.8);
@@ -15340,12 +14225,12 @@ void bird04() {
         glVertex2f(97.35, 70.25);
         glVertex2f(98.85, 70.35);
 
-
         glEnd();
     }
 
     // wing 2
-    if (!state) {
+    if (!state)
+    {
         /*
 glColor3f(1, 0, 0);
 glBegin(GL_POLYGON);
@@ -15358,15 +14243,12 @@ glVertex2f(98.3, 69.9);
 
 glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98, 69.4);
         glVertex2f(100, 68.5);
         glVertex2f(98.6, 70.55);
         glVertex2f(97.4, 70.2);
-
-
 
         glEnd();
 
@@ -15380,12 +14262,9 @@ glEnd();*/
 
         glEnd();
         */
-
-
-
     }
 
-    //left leg
+    // left leg
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(98.62, 69.34);
@@ -15395,10 +14274,9 @@ glEnd();*/
     glVertex2f(98.45, 69.6);
     glVertex2f(98.59, 69.49);
 
-
     glEnd();
 
-    //leg2
+    // leg2
     glBegin(GL_POLYGON);
     glVertex2f(98.72, 69.44);
     glVertex2f(98.95, 69.35);
@@ -15406,23 +14284,19 @@ glEnd();*/
     glVertex2f(98.7270945266668, 69.6650693284027);
     glVertex2f(98.653547, 69.64827);
 
-
-
     glEnd();
 
     glPopMatrix();
-
-
 }
 
-
-//ID-37
-void bird05() {
+// ID-37
+void bird05()
+{
     glPushMatrix();
-    glTranslatef(52.5 + 135, -10, 0);//translated 40 value in x axis , so that is appear from the outside screen of the right 
+    glTranslatef(52.5 + 135, -10, 0); // translated 40 value in x axis , so that is appear from the outside screen of the right
     // side with fly aniomation
     glTranslatef(move_bird, 0, 0);
-    //glScalef(2, 2, 1);
+    // glScalef(2, 2, 1);
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(97.08, 70.6);
@@ -15433,9 +14307,7 @@ void bird05() {
     glVertex2f(96.4, 70);
     glVertex2f(97.25, 69.85);
 
-
     glEnd();
-
 
     glBegin(GL_POLYGON);
     glVertex2f(99, 70.5);
@@ -15444,7 +14316,6 @@ void bird05() {
     glVertex2f(97.25, 69.85);
     glVertex2f(97.75, 69.5);
     glVertex2f(98.45, 69.6);
-
 
     glEnd();
 
@@ -15458,13 +14329,11 @@ void bird05() {
     glVertex2f(99.2708976830173, 69.7946980991128);
     glVertex2f(100.12, 70.1);
 
-
     glEnd();
 
-
-
-    //wing 1
-    if (state) {
+    // wing 1
+    if (state)
+    {
         /*glColor3f(1, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.4, 71.5);
@@ -15476,7 +14345,6 @@ void bird05() {
 
         glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98.8, 71.8);
@@ -15485,12 +14353,12 @@ void bird05() {
         glVertex2f(97.35, 70.25);
         glVertex2f(98.85, 70.35);
 
-
         glEnd();
     }
 
     // wing 2
-    if (!state) {
+    if (!state)
+    {
         /*
 glColor3f(1, 0, 0);
 glBegin(GL_POLYGON);
@@ -15503,15 +14371,12 @@ glVertex2f(98.3, 69.9);
 
         glEnd();*/
 
-
         glColor3f(0, 0, 0);
         glBegin(GL_POLYGON);
         glVertex2f(98, 69.4);
         glVertex2f(100, 68.5);
         glVertex2f(98.6, 70.55);
         glVertex2f(97.4, 70.2);
-
-
 
         glEnd();
 
@@ -15525,12 +14390,9 @@ glVertex2f(98.3, 69.9);
 
         glEnd();
         */
-
-
-
     }
 
-    //left leg
+    // left leg
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(98.62, 69.34);
@@ -15540,10 +14402,9 @@ glVertex2f(98.3, 69.9);
     glVertex2f(98.45, 69.6);
     glVertex2f(98.59, 69.49);
 
-
     glEnd();
 
-    //leg2
+    // leg2
     glBegin(GL_POLYGON);
     glVertex2f(98.72, 69.44);
     glVertex2f(98.95, 69.35);
@@ -15551,23 +14412,15 @@ glVertex2f(98.3, 69.9);
     glVertex2f(98.7270945266668, 69.6650693284027);
     glVertex2f(98.653547, 69.64827);
 
-
-
     glEnd();
 
     glPopMatrix();
-
-
-
-
-
 }
 
-
-
-//fire
-// ID - 57
-void fire() {
+// fire
+//  ID - 57
+void fire()
+{
 
     glPushMatrix();
     glTranslatef(fireleftmove, fireupmove, 0);
@@ -15588,10 +14441,7 @@ void fire() {
     glVertex2f(116.6, 49.85);
     glVertex2f(116.3, 49.9);
 
-
-
     glEnd();
-
 
     glColor3f(0.98, 0.65, 0.02);
     glBegin(GL_POLYGON);
@@ -15608,9 +14458,7 @@ void fire() {
     glVertex2f(116.6, 49.85);
     glVertex2f(116.3, 49.9);
 
-
     glEnd();
-
 
     glColor3f(1, 0.95, 0.01);
     glBegin(GL_POLYGON);
@@ -15624,12 +14472,11 @@ void fire() {
     glVertex2f(116.6, 49.8);
     glVertex2f(116.6, 49.85);
 
-
     glEnd();
 
-
-    //middle
-    if (statefire == 1) {
+    // middle
+    if (statefire == 1)
+    {
 
         glColor3f(1, 0.09, 0);
         glBegin(GL_POLYGON);
@@ -15640,10 +14487,10 @@ void fire() {
         glEnd();
     }
 
+    // left
 
-    //left
-
-    if (statefire == 2) {
+    if (statefire == 2)
+    {
 
         glColor3f(1, 0.09, 0);
         glBegin(GL_POLYGON);
@@ -15654,8 +14501,9 @@ void fire() {
         glEnd();
     }
 
-    //right
-    if (statefire == 3) {
+    // right
+    if (statefire == 3)
+    {
 
         glColor3f(1, 0.09, 0);
         glBegin(GL_POLYGON);
@@ -15666,11 +14514,11 @@ void fire() {
         glEnd();
     }
 
-
     // glPushMatrix();
 
-     //first edge
-    if (statefireedge == 1) {
+    // first edge
+    if (statefireedge == 1)
+    {
         glColor3f(1, 0.09, 0);
         glBegin(GL_POLYGON);
         glVertex2f(116, 53.2);
@@ -15690,8 +14538,7 @@ void fire() {
 
         glEnd();
 
-        //glPopMatrix();
-
+        // glPopMatrix();
     }
 
     if (statefireedge == 1)
@@ -15720,12 +14567,11 @@ void fire() {
     glPopMatrix();
 }
 
+// ID - 55
+void helicopter()
+{
 
-
-//ID - 55
-void helicopter() {
-
-    //MAIN BODY OF THE HELICOPTER
+    // MAIN BODY OF THE HELICOPTER
     glColor3f(0.82, 0.13, 0.2);
     glBegin(GL_POLYGON);
     glVertex2f(101.4, 70.8);
@@ -15762,8 +14608,7 @@ void helicopter() {
 
     glEnd();
 
-
-    //TOP ROUNDED PORTION OF THE HELICOPTER
+    // TOP ROUNDED PORTION OF THE HELICOPTER
     glColor3f(0.98, 0.93, 0.94);
     glBegin(GL_POLYGON);
     glVertex2f(105, 74);
@@ -15775,8 +14620,7 @@ void helicopter() {
 
     glEnd();
 
-
-    //RIGHT SIDE REDISH AREA OF THE TOP ROUNDED PROTION OF THE HELICOPTER
+    // RIGHT SIDE REDISH AREA OF THE TOP ROUNDED PROTION OF THE HELICOPTER
     glColor3f(0.82, 0.13, 0.2);
     glBegin(GL_POLYGON);
     glVertex2f(109, 74);
@@ -15789,10 +14633,8 @@ void helicopter() {
 
     glEnd();
 
-
-
-    //FOUR FAN'S AT THE BACK OF THE HELICOPTER
-    //PRINTING FROM TOP TO RIGHT
+    // FOUR FAN'S AT THE BACK OF THE HELICOPTER
+    // PRINTING FROM TOP TO RIGHT
 
     glPushMatrix();
 
@@ -15800,7 +14642,7 @@ void helicopter() {
     glRotatef(_angle2, 0, 0, 1);
     glTranslatef(-125.42, -76.54, 0);
 
-    //1ST FAN
+    // 1ST FAN
     glColor3f(0.98, 0.93, 0.94);
     glBegin(GL_POLYGON);
     glVertex2f(125.35, 76.9);
@@ -15809,7 +14651,7 @@ void helicopter() {
     glVertex2f(125.55, 76.9);
     glEnd();
 
-    //2ND FAN
+    // 2ND FAN
 
     glBegin(GL_POLYGON);
     glVertex2f(125.85, 76.55);
@@ -15818,8 +14660,7 @@ void helicopter() {
     glVertex2f(125.8, 76.35);
     glEnd();
 
-
-    //3RD FAN
+    // 3RD FAN
 
     glBegin(GL_POLYGON);
     glVertex2f(125.5, 76.2);
@@ -15828,8 +14669,7 @@ void helicopter() {
     glVertex2f(125.3, 76.2);
     glEnd();
 
-
-    //4TH FAN
+    // 4TH FAN
 
     glBegin(GL_POLYGON);
     glVertex2f(125.1, 76.55);
@@ -15840,13 +14680,11 @@ void helicopter() {
 
     glPopMatrix();
 
+    // CIRCLES AT THE BACK OF THE HELICOPTER
 
-
-    //CIRCLES AT THE BACK OF THE HELICOPTER
-
-    //BIG CIRCLE REDISH
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    // BIG CIRCLE REDISH
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.89, 0.1, 0.22);
         float pi = 3.1416;
@@ -15859,10 +14697,10 @@ void helicopter() {
 
     glEnd();
 
-    //SMALL WHITISH CIRCLE
+    // SMALL WHITISH CIRCLE
 
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.87, 0.49, 0.54);
         float pi = 3.1416;
@@ -15875,8 +14713,7 @@ void helicopter() {
 
     glEnd();
 
-
-    //WHITISH AREA OF BODY 
+    // WHITISH AREA OF BODY
 
     glColor3f(0.98, 0.93, 0.94);
     glBegin(GL_POLYGON);
@@ -15900,9 +14737,8 @@ void helicopter() {
     glVertex2f(101.4, 70.8);
     glEnd();
 
-
-    //DRAWING A WHITISH TRIANGLE TO ADJUST THE SHAPE
-    //BELOW THE FIRST WINDOW
+    // DRAWING A WHITISH TRIANGLE TO ADJUST THE SHAPE
+    // BELOW THE FIRST WINDOW
     glColor3f(0.82, 0.13, 0.2);
     glBegin(GL_POLYGON);
     glVertex2f(101.4, 70.8);
@@ -15910,10 +14746,9 @@ void helicopter() {
     glVertex2f(102.4, 69.4);
     glEnd();
 
+    // WINDOW'S AND DOOR'S OF THE HELICOPTER
 
-    //WINDOW'S AND DOOR'S OF THE HELICOPTER
-
-    //FIRST WINDOW
+    // FIRST WINDOW
     glColor3f(0.43, 0.68, 0.79);
     glBegin(GL_POLYGON);
     glVertex2f(101.4, 70.8);
@@ -15927,8 +14762,7 @@ void helicopter() {
     glVertex2f(101.4, 70.8);
     glEnd();
 
-
-    //BLACK OUTINE OF THE FIRST WINDOW
+    // BLACK OUTINE OF THE FIRST WINDOW
     glLineWidth(1);
     glColor3f(0, 0, 0);
     glBegin(GL_LINES);
@@ -15958,8 +14792,7 @@ void helicopter() {
 
     glEnd();
 
-
-    //SECOND WINDOW SAME COLOR
+    // SECOND WINDOW SAME COLOR
     glColor3f(0.43, 0.68, 0.79);
     glBegin(GL_POLYGON);
     glVertex2f(104.4, 73.8);
@@ -15970,8 +14803,7 @@ void helicopter() {
     glVertex2f(103.4, 70.8);
     glEnd();
 
-
-    //BLACK OUTLINE OF SECOND WINDOW
+    // BLACK OUTLINE OF SECOND WINDOW
     glLineWidth(1);
     glColor3f(0, 0, 0);
     glBegin(GL_LINES);
@@ -15994,8 +14826,7 @@ void helicopter() {
     glVertex2f(104.4, 73.8);
     glEnd();
 
-
-    //3RD WINDOW
+    // 3RD WINDOW
     glColor3f(0.43, 0.68, 0.79);
     glBegin(GL_POLYGON);
     glVertex2f(106.2, 73.2);
@@ -16004,7 +14835,7 @@ void helicopter() {
     glVertex2f(106.2, 71.4);
     glEnd();
 
-    //BLACK OUTLINE OF THIRD WINDOW
+    // BLACK OUTLINE OF THIRD WINDOW
     glLineWidth(1);
     glColor3f(0, 0, 0);
     glBegin(GL_LINES);
@@ -16021,10 +14852,9 @@ void helicopter() {
     glVertex2f(106.2, 73.2);
     glEnd();
 
+    // MAIN DOOR OF THE HELICOPTER
 
-    //MAIN DOOR OF THE HELICOPTER
-
-    //MAIN BLACK OUTLINE OF THE MAIN DOOR
+    // MAIN BLACK OUTLINE OF THE MAIN DOOR
     glLineWidth(1);
     glColor3f(0, 0, 0);
     glBegin(GL_LINES);
@@ -16049,14 +14879,12 @@ void helicopter() {
     glVertex2f(108.8, 69.8);
     glVertex2f(108.6, 70);
 
-
     glVertex2f(108.6, 70);
     glVertex2f(108.6, 73.6);
 
     glEnd();
 
-
-    //FIRST WINDOW INSIDE THE MAIN DOOR
+    // FIRST WINDOW INSIDE THE MAIN DOOR
 
     glColor3f(0.43, 0.68, 0.79);
     glBegin(GL_POLYGON);
@@ -16066,7 +14894,7 @@ void helicopter() {
     glVertex2f(109, 71.6);
     glEnd();
 
-    //BLACK OUTLINE OF THE FIRST WINDOWS INSIDE THE MAIN DOOR
+    // BLACK OUTLINE OF THE FIRST WINDOWS INSIDE THE MAIN DOOR
 
     glLineWidth(1);
     glColor3f(0, 0, 0);
@@ -16084,8 +14912,7 @@ void helicopter() {
     glVertex2f(109, 73.2);
     glEnd();
 
-
-    //SECOND WINDOW OF THE MAIN DOOR
+    // SECOND WINDOW OF THE MAIN DOOR
 
     glColor3f(0.43, 0.68, 0.79);
     glBegin(GL_POLYGON);
@@ -16095,8 +14922,7 @@ void helicopter() {
     glVertex2f(110.8, 71.6);
     glEnd();
 
-
-    //BLACK OUTLINE OF THE SECOND WINDOW OF THE MAIN DOOR
+    // BLACK OUTLINE OF THE SECOND WINDOW OF THE MAIN DOOR
     glLineWidth(1);
     glColor3f(0, 0, 0);
     glBegin(GL_LINES);
@@ -16113,9 +14939,8 @@ void helicopter() {
     glVertex2f(110.8, 73.2);
     glEnd();
 
-
-    //BLACK VERTICLE LINE BELOW THE FIRST WINDOW
-    // OF THE MAIN DOOR
+    // BLACK VERTICLE LINE BELOW THE FIRST WINDOW
+    //  OF THE MAIN DOOR
     glLineWidth(3);
     glColor3f(0, 0, 0);
     glBegin(GL_LINES);
@@ -16123,9 +14948,7 @@ void helicopter() {
     glVertex2f(109, 70.8);
     glEnd();
 
-
-
-    //SECOND WINDOW 
+    // SECOND WINDOW
     glColor3f(0.43, 0.68, 0.79);
     glBegin(GL_POLYGON);
     glVertex2f(112.8, 73.2);
@@ -16134,8 +14957,7 @@ void helicopter() {
     glVertex2f(112.8, 71.4);
     glEnd();
 
-
-    //BLACK OUTLINE OF THE SECOND WINDOW
+    // BLACK OUTLINE OF THE SECOND WINDOW
     glLineWidth(1);
     glColor3f(0, 0, 0);
     glBegin(GL_LINES);
@@ -16152,8 +14974,7 @@ void helicopter() {
     glVertex2f(112.8, 73.2);
     glEnd();
 
-
-    //WHITISH STRIP LIKE ANGLED PORTION
+    // WHITISH STRIP LIKE ANGLED PORTION
     glColor3f(0.98, 0.93, 0.94);
     glBegin(GL_POLYGON);
     glVertex2f(102, 68);
@@ -16162,7 +14983,7 @@ void helicopter() {
     glVertex2f(102.8, 68);
     glEnd();
 
-    //NOW PRINTING THE REST OF THE WHITISH STRIP LIKE ANGLED PORTION
+    // NOW PRINTING THE REST OF THE WHITISH STRIP LIKE ANGLED PORTION
 
     glPushMatrix();
     glTranslatef(1 * 1.9, 0, 0);
@@ -16234,11 +15055,9 @@ void helicopter() {
     glEnd();
     glPopMatrix();
 
+    // NOW CODING THE BOTTOM PART OF THE HELICOPTER
 
-    //NOW CODING THE BOTTOM PART OF THE HELICOPTER
-
-
-    //BOTTOM ROUNDED AREA
+    // BOTTOM ROUNDED AREA
     glColor3f(0.91, 0.76, 0.81);
     glBegin(GL_POLYGON);
     glVertex2f(104.3, 68);
@@ -16250,7 +15069,7 @@ void helicopter() {
     glVertex2f(113.8, 68);
     glEnd();
 
-    //BOTTOM RECTANGLE PART (FROM WHERE WATER WILL BE FALLING)
+    // BOTTOM RECTANGLE PART (FROM WHERE WATER WILL BE FALLING)
 
     glColor3f(0.98, 0.93, 0.94);
     glBegin(GL_POLYGON);
@@ -16260,9 +15079,8 @@ void helicopter() {
     glVertex2f(113.2, 66.2);
     glEnd();
 
-
-    //TWO BLACK SQUARES INSIDE THE BOTTOM RECTANGLE
-    //FIRST BLACK SQUARE
+    // TWO BLACK SQUARES INSIDE THE BOTTOM RECTANGLE
+    // FIRST BLACK SQUARE
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(105.8, 66.4);
@@ -16271,7 +15089,7 @@ void helicopter() {
     glVertex2f(106, 66.4);
     glEnd();
 
-    //SECOND BLACK SQUARE
+    // SECOND BLACK SQUARE
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(112.8, 66.4);
@@ -16280,10 +15098,9 @@ void helicopter() {
     glVertex2f(113, 66.4);
     glEnd();
 
-    //TOW HORIZONTAL RECTANGLE ABOVE THE BOTTOM RECTANGLE
+    // TOW HORIZONTAL RECTANGLE ABOVE THE BOTTOM RECTANGLE
 
-
-    //FIRST HORIZONTAL RECTANGLE
+    // FIRST HORIZONTAL RECTANGLE
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
     glVertex2f(106, 67.6);
@@ -16292,8 +15109,7 @@ void helicopter() {
     glVertex2f(106.6, 67.6);
     glEnd();
 
-
-    //SECOND HORIZONTAL RECTANLGE
+    // SECOND HORIZONTAL RECTANLGE
 
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
@@ -16303,10 +15119,10 @@ void helicopter() {
     glVertex2f(112.8, 67.6);
     glEnd();
 
-    //NOW CODING THE WHEELS OF THE HELICOPTER
+    // NOW CODING THE WHEELS OF THE HELICOPTER
     glPushMatrix();
     glTranslatef(1, 0, 0);
-    //REDISH AREA OF LEFT WHEEL
+    // REDISH AREA OF LEFT WHEEL
     glColor3f(0.82, 0.13, 0.2);
     glBegin(GL_POLYGON);
     glVertex2f(102.4, 68);
@@ -16317,7 +15133,7 @@ void helicopter() {
     glVertex2f(102.8, 68);
     glEnd();
 
-    //BLACKISH AREA BELOW THE REDISH AREA OF LEFT WINDOW
+    // BLACKISH AREA BELOW THE REDISH AREA OF LEFT WINDOW
     glColor3f(0.13, 0.25, 0.36);
     glBegin(GL_POLYGON);
     glVertex2f(102.5, 66.5);
@@ -16327,11 +15143,10 @@ void helicopter() {
 
     glEnd();
 
+    // BLACKISH WHEEL OF LEFT WHEEL
 
-    //BLACKISH WHEEL OF LEFT WHEEL
-
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.13, 0.25, 0.36);
         float pi = 3.1416;
@@ -16344,10 +15159,10 @@ void helicopter() {
 
     glEnd();
 
-    //WHITISH SMALL CIRLCE IN THE MIDDLE OF THE BLAKISH WHEEL
+    // WHITISH SMALL CIRLCE IN THE MIDDLE OF THE BLAKISH WHEEL
 
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.69, 0.76, 0.78);
         float pi = 3.1416;
@@ -16360,7 +15175,7 @@ void helicopter() {
 
     glEnd();
 
-    //BLACKISH ROUNDED CURVE IN THE LEFT WHEEL
+    // BLACKISH ROUNDED CURVE IN THE LEFT WHEEL
 
     glLineWidth(0.5);
     glColor3f(0.13, 0.25, 0.36);
@@ -16389,17 +15204,16 @@ void helicopter() {
 
     glPopMatrix();
 
-
-    //NOW CODING THE SECOND RIGHT WHEEL OF THE HELICOPTER
-    //USING THE CODES OF THE LEFT WHEEL
-    //JUST TRANSLATING IN X AXIS
+    // NOW CODING THE SECOND RIGHT WHEEL OF THE HELICOPTER
+    // USING THE CODES OF THE LEFT WHEEL
+    // JUST TRANSLATING IN X AXIS
 
     glPushMatrix();
     glTranslatef(11, 0, 0);
 
     glPushMatrix();
     glTranslatef(1, 0, 0);
-    //REDISH AREA OF LEFT WHEEL
+    // REDISH AREA OF LEFT WHEEL
     glColor3f(0.82, 0.13, 0.2);
     glBegin(GL_POLYGON);
     glVertex2f(102.4, 68);
@@ -16410,7 +15224,7 @@ void helicopter() {
     glVertex2f(102.8, 68);
     glEnd();
 
-    //BLACKISH AREA BELOW THE REDISH AREA OF LEFT WINDOW
+    // BLACKISH AREA BELOW THE REDISH AREA OF LEFT WINDOW
     glColor3f(0.13, 0.25, 0.36);
     glBegin(GL_POLYGON);
     glVertex2f(102.5, 66.5);
@@ -16420,11 +15234,10 @@ void helicopter() {
 
     glEnd();
 
+    // BLACKISH WHEEL OF LEFT WHEEL
 
-    //BLACKISH WHEEL OF LEFT WHEEL
-
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.13, 0.25, 0.36);
         float pi = 3.1416;
@@ -16437,10 +15250,10 @@ void helicopter() {
 
     glEnd();
 
-    //WHITISH SMALL CIRLCE IN THE MIDDLE OF THE BLAKISH WHEEL
+    // WHITISH SMALL CIRLCE IN THE MIDDLE OF THE BLAKISH WHEEL
 
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 360;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 360; i++)
     {
         glColor3f(0.69, 0.76, 0.78);
         float pi = 3.1416;
@@ -16453,7 +15266,7 @@ void helicopter() {
 
     glEnd();
 
-    //BLACKISH ROUNDED CURVE IN THE LEFT WHEEL
+    // BLACKISH ROUNDED CURVE IN THE LEFT WHEEL
 
     glLineWidth(0.5);
     glColor3f(0.13, 0.25, 0.36);
@@ -16484,10 +15297,8 @@ void helicopter() {
 
     glPopMatrix();
 
-
-
-    //NOW CODING THE TOP MAIN FAN  PORTION OF THE HELICOPTER
-    //VERTICLE RECTANGLE TYPE AREA BLACKISH BELOW THE REDISH ROUNDED AREA
+    // NOW CODING THE TOP MAIN FAN  PORTION OF THE HELICOPTER
+    // VERTICLE RECTANGLE TYPE AREA BLACKISH BELOW THE REDISH ROUNDED AREA
 
     glColor3f(0.13, 0.25, 0.36);
     glBegin(GL_POLYGON);
@@ -16498,8 +15309,7 @@ void helicopter() {
 
     glEnd();
 
-
-    //HORIZONTAL RECTANGLE JUST BELOW THE REDISH ROUNDED AREA
+    // HORIZONTAL RECTANGLE JUST BELOW THE REDISH ROUNDED AREA
     glBegin(GL_POLYGON);
     glVertex2f(109.4, 76.8);
     glVertex2f(109.4, 77);
@@ -16508,8 +15318,7 @@ void helicopter() {
 
     glEnd();
 
-
-    //NOW CODING THE REDISH ROUNDED AREA
+    // NOW CODING THE REDISH ROUNDED AREA
     glColor3f(0.82, 0.13, 0.2);
     glBegin(GL_POLYGON);
     glVertex2f(109.4, 77);
@@ -16521,15 +15330,12 @@ void helicopter() {
 
     glEnd();
 
-
-
     glPushMatrix();
     glTranslatef(110, 77, 0);
     glRotatef(2 * _angle1, 0, 1, 0);
     glTranslatef(-110, -77, 0);
 
-
-    //NOW CODING THE MAIN BIG FAN OF THE HELICOPTER
+    // NOW CODING THE MAIN BIG FAN OF THE HELICOPTER
     glColor3f(0.13, 0.25, 0.36);
     glBegin(GL_POLYGON);
     glVertex2f(106.8, 76.8);
@@ -16551,13 +15357,11 @@ void helicopter() {
     glEnd();
 
     glPopMatrix();
-
-
 }
 
-
-//ID - 28
-void sky() {
+// ID - 28
+void sky()
+{
     // glColor3f(0.46, 0.72, 0.83);
     glColor3f(1, 1, 1);
     glBegin(GL_POLYGON);
@@ -16568,20 +15372,13 @@ void sky() {
 
     glEnd();
 
-
     ApplyTexture(0, 21.9, 0, 80 + 3, 130, 80 + 3, 130, 21.9, textures[9].textureID);
-    //ApplyTexture(130, 21.9, 130, 80 + 3, 0, 80 + 3, 0, 21.9, textures[2].textureID);
-
-
+    // ApplyTexture(130, 21.9, 130, 80 + 3, 0, 80 + 3, 0, 21.9, textures[2].textureID);
 }
 
-
-
-
-
-
-//ID - 38
-void tree_01() {
+// ID - 38
+void tree_01()
+{
 
     /* circle_tree(1.34536240, 7.4, 27.4, 0, 1, 0);
     circle_tree(1.34536240, 6, 28.5, 0, 1, 0);
@@ -16619,7 +15416,6 @@ void tree_01() {
 
     circle_tree(5.3060466689, 10.7267674451223, 31.7585937438858, 0, 1, 0); */
 
-
     glPushMatrix();
     glTranslatef(0, -1.5, 0);
 
@@ -16636,15 +15432,11 @@ void tree_01() {
     circle_tree(1.978286377, 13.3191639169871, 26.892150700686, 0.55, 0.57, 0.09);
     circle_tree(1.978286377, 10.2795932569127, 26.9200677905146, 0.55, 0.57, 0.09);
 
-
     circle_tree(1.377951522914, 8.6087181572226, 35.4344206921267, 0.55, 0.57, 0.09);
-
 
     circle_tree(5.28069547, 11.6014149525288, 31.919713021566, 0.55, 0.57, 0.09);
 
-
-    //tree leafs
-
+    // tree leafs
 
     circle_tree_leaf(1.978286377, 8.5163239098084, 33.9199531415653, 0.06, 0.43, 0.14, 40, 120, 1);
     circle_tree_leaf(1.978286377, 11.1558290630765, 36.2177328533492, 0.06, 0.43, 0.14, 0, 100, 1);
@@ -16654,14 +15446,12 @@ void tree_01() {
     circle_tree_leaf(1.978286377, 8.5181431378536, 31.28728916235547, 0.06, 0.43, 0.14, 40, 120, 1);
     circle_tree_leaf(1.978286377, 14.4022117402738, 29.9075765245464, 0.06, 0.43, 0.14, 120, 200, 2);
 
-
     circle_tree_leaf(1.978286377, 10.8514806870892, 30.1162707469795, 0.06, 0.43, 0.14, 0, 100, 1);
     circle_tree_leaf(1.978286377, 12.8514806870892, 30.1162707469795, 0.06, 0.43, 0.14, 0, 100, 1);
 
     glPopMatrix();
 
-
-    //tree wood brown color
+    // tree wood brown color
 
     glColor3f(0.29, 0.14, 0.02);
     glBegin(GL_POLYGON);
@@ -16676,7 +15466,6 @@ void tree_01() {
 
     glEnd();
 
-
     glBegin(GL_POLYGON);
 
     glVertex2f(14, 27.6);
@@ -16684,7 +15473,6 @@ void tree_01() {
     glVertex2f(13.04, 26.12);
     glVertex2f(13.4, 26);
     glEnd();
-
 
     glBegin(GL_POLYGON);
     glVertex2f(13.04, 26.12);
@@ -16694,7 +15482,6 @@ void tree_01() {
     glVertex2f(13.4, 26);
 
     glEnd();
-
 
     glBegin(GL_POLYGON);
     glVertex2f(10.99, 26.3);
@@ -16709,7 +15496,6 @@ void tree_01() {
     glVertex2f(11.84, 27.53);
     glVertex2f(10.99, 26.3);
     glVertex2f(11.54, 26.36);
-
 
     glEnd();
 
@@ -16736,26 +15522,20 @@ void tree_01() {
     glVertex2f(10, 29);
 
     glEnd();
-
-
-
-
 }
 
-
-//ID - 39
-void tree_02() {
+// ID - 39
+void tree_02()
+{
 
     glPushMatrix();
 
-
-    //TRANSLATING TREE 02 TO -2 Y AXIS TO LOOK MORE ACCURATE AND BEAUTIFUL
+    // TRANSLATING TREE 02 TO -2 Y AXIS TO LOOK MORE ACCURATE AND BEAUTIFUL
     glTranslatef(0, -2, 0);
 
+    // LOWER PORTION OF TREE O2
 
-    //LOWER PORTION OF TREE O2
-
-    //LEFT LOWER PORTION
+    // LEFT LOWER PORTION
     glColor3f(0, 0.5, 0.4);
     glBegin(GL_POLYGON);
     glVertex2f(72, 32.56);
@@ -16769,8 +15549,7 @@ void tree_02() {
 
     glEnd();
 
-
-    //RIGHT LOWER PORTION
+    // RIGHT LOWER PORTION
     glBegin(GL_POLYGON);
     glVertex2f(77.7, 33.5);
     glVertex2f(77.6, 33.3);
@@ -16786,8 +15565,7 @@ void tree_02() {
 
     glEnd();
 
-
-    //UPPER PORTION BACK MORE DEEPER
+    // UPPER PORTION BACK MORE DEEPER
 
     glBegin(GL_POLYGON);
     glVertex2f(71.6, 36.5);
@@ -16808,7 +15586,7 @@ void tree_02() {
 
     glEnd();
 
-    //UPPER PORTOIN MAIN MORE LIGHTER PORTION
+    // UPPER PORTOIN MAIN MORE LIGHTER PORTION
     glColor3f(0.04, 0.66, 0.52);
     glBegin(GL_POLYGON);
     glVertex2f(71.6, 36.5);
@@ -16826,17 +15604,12 @@ void tree_02() {
 
     glEnd();
 
+    // THREE CIRCLES ABOVE THE MAIN BIG PORTION
 
+    // 3RD SMALL CIRCLE ABOVE THE TWO BIG CIRLCES
 
-
-    //THREE CIRCLES ABOVE THE MAIN BIG PORTION
-
-
-
-    //3RD SMALL CIRCLE ABOVE THE TWO BIG CIRLCES
-
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 200;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 200; i++)
     {
         glColor3f(0.05, 0.73, 0.48);
         float pi = 3.1416;
@@ -16848,11 +15621,10 @@ void tree_02() {
     }
     glEnd();
 
+    // 2ND BIG CIRCLE
 
-    //2ND BIG CIRCLE
-
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 200;i++)
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 200; i++)
     {
         glColor3f(0.05, 0.73, 0.48);
         float pi = 3.1416;
@@ -16864,10 +15636,9 @@ void tree_02() {
     }
     glEnd();
 
-
-    //FIRST BIG CIRCLE
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 200;i++)
+    // FIRST BIG CIRCLE
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 200; i++)
     {
         glColor3f(0.07, 0.8, 0.51);
         float pi = 3.1416;
@@ -16879,10 +15650,9 @@ void tree_02() {
     }
     glEnd();
 
-
-    //MORE LIGHTER COLOR CIRCLE OVER THE FIRST BIG CIRCLE
-    glBegin(GL_POLYGON);// Draw a Red 1x1 Square centered at origin
-    for (int i = 0;i < 200;i++)
+    // MORE LIGHTER COLOR CIRCLE OVER THE FIRST BIG CIRCLE
+    glBegin(GL_POLYGON); // Draw a Red 1x1 Square centered at origin
+    for (int i = 0; i < 200; i++)
     {
         glColor3f(0.2, 0.83, 0.58);
         float pi = 3.1416;
@@ -16894,9 +15664,7 @@ void tree_02() {
     }
     glEnd();
 
-
-
-    //BELOW BROWND KANDO OF TREE 03
+    // BELOW BROWND KANDO OF TREE 03
     glColor3f(0.43, 0.29, 0.28);
     glBegin(GL_POLYGON);
     glVertex2f(76, 21.9);
@@ -16905,16 +15673,14 @@ void tree_02() {
     glVertex2f(76.6, 21.9);
     glEnd();
 
-
-    //RIGHT TRIANGLE TYPE EXTENSION
+    // RIGHT TRIANGLE TYPE EXTENSION
     glBegin(GL_POLYGON);
     glVertex2f(79.4, 33.4);
     glVertex2f(76.6, 27.9);
     glVertex2f(76.6, 26.9);
     glEnd();
 
-
-    //LEFT TRIANGLE TYPE EXTENSION
+    // LEFT TRIANGLE TYPE EXTENSION
 
     glBegin(GL_POLYGON);
     glVertex2f(73.6, 33.4);
@@ -16922,7 +15688,7 @@ void tree_02() {
     glVertex2f(76, 29.6);
     glEnd();
 
-    //BEAUTIFICATOINS WHITE DOTS
+    // BEAUTIFICATOINS WHITE DOTS
 
     circle_tree(0.3, 73.81122716838, 38.4727225768801, 1, 1, 1);
     circle_tree(0.3, 72.7037208494535, 37.7068937393247, 1, 1, 1);
@@ -16932,9 +15698,8 @@ void tree_02() {
     circle_tree(0.3, 75.4017947540725, 37.9660973458819, 1, 1, 1);
     circle_tree(0.3, 74, 37, 1, 1, 1);
 
-
-    //NOW PRINTING THE DOTS OF THE SIDE SIDE BIG CIRCLE
-    //JUST TRANSLATING TO X AXIS BY 4 VALUE
+    // NOW PRINTING THE DOTS OF THE SIDE SIDE BIG CIRCLE
+    // JUST TRANSLATING TO X AXIS BY 4 VALUE
 
     glPushMatrix();
     glTranslatef(4.5, 0, 0);
@@ -16947,17 +15712,14 @@ void tree_02() {
     circle_tree(0.3, 74, 37, 1, 1, 1);
     glPopMatrix();
 
-
-
     glPopMatrix();
-
-
 }
 
-//ID - 40
-void tree_03() {
+// ID - 40
+void tree_03()
+{
 
-    //FIRST BLUE TRIANGLE (FROM BOTTOM);
+    // FIRST BLUE TRIANGLE (FROM BOTTOM);
     glColor3f(0, 0.4, 0);
     glBegin(GL_POLYGON);
     glVertex2f(124, 35);
@@ -16965,7 +15727,7 @@ void tree_03() {
     glVertex2f(129, 26);
     glEnd();
 
-    //2ND
+    // 2ND
 
     glBegin(GL_POLYGON);
     glVertex2f(124, 37);
@@ -16973,29 +15735,23 @@ void tree_03() {
     glVertex2f(128, 29.5);
     glEnd();
 
-    //3RD
+    // 3RD
     glBegin(GL_POLYGON);
     glVertex2f(124, 38.6);
     glVertex2f(121.2, 32.8);
     glVertex2f(127, 32.8);
     glEnd();
 
-    //4TH
+    // 4TH
     glBegin(GL_POLYGON);
     glVertex2f(124, 40);
     glVertex2f(122.2, 36);
     glVertex2f(125.9, 36);
     glEnd();
 
+    // DALL'S OF TREE 03
 
-
-
-
-
-
-    //DALL'S OF TREE 03
-
-    //01 (STARTING FROM LEFT  THEN RIGHT)
+    // 01 (STARTING FROM LEFT  THEN RIGHT)
     glColor3f(0.29, 0.14, 0.02);
     // glColor3f(0.43, 0.29, 0.28);
     glBegin(GL_POLYGON);
@@ -17004,14 +15760,14 @@ void tree_03() {
     glVertex2f(123.8, 27.2);
     glEnd();
 
-    //02
+    // 02
     glBegin(GL_POLYGON);
     glVertex2f(125.8, 31.7);
     glVertex2f(124, 29.5);
     glVertex2f(124, 28.4);
     glEnd();
 
-    //03
+    // 03
 
     glBegin(GL_POLYGON);
     glVertex2f(122.6, 33.6);
@@ -17019,14 +15775,14 @@ void tree_03() {
     glVertex2f(124, 32);
     glEnd();
 
-    //04
+    // 04
     glBegin(GL_POLYGON);
     glVertex2f(125.1, 35.5);
     glVertex2f(124, 34);
     glVertex2f(124, 33.4);
     glEnd();
 
-    //05
+    // 05
 
     glBegin(GL_POLYGON);
     glVertex2f(123, 37.1);
@@ -17034,7 +15790,7 @@ void tree_03() {
     glVertex2f(124, 35.6);
     glEnd();
 
-    //06
+    // 06
 
     glBegin(GL_POLYGON);
     glVertex2f(124.5, 38.4);
@@ -17042,8 +15798,7 @@ void tree_03() {
     glVertex2f(124, 37.2);
     glEnd();
 
-
-    //MAIN VERTICLE KANDO OF TREE 03
+    // MAIN VERTICLE KANDO OF TREE 03
     glColor3f(0.29, 0.14, 0.02);
     // glColor3f(0.43, 0.29, 0.28);
 
@@ -17055,7 +15810,8 @@ void tree_03() {
 }
 
 // ID - 41
-void tree_04() {
+void tree_04()
+{
 
     glPushMatrix();
     glTranslatef(3, -7, 0);
@@ -17063,29 +15819,24 @@ void tree_04() {
 
     tree_03();
 
-
     glPopMatrix();
-
 }
 
-
-//ID - 42
-void tree_05() {
+// ID - 42
+void tree_05()
+{
 
     glPushMatrix();
     glTranslatef(45, 6.5, 0);
     glScalef(0.6, 0.7, 1);
     tree_03();
 
-
     glPopMatrix();
-
-
-
 }
 
-//ID - 43
-void tree_06() {
+// ID - 43
+void tree_06()
+{
 
     glPushMatrix();
     glTranslatef(84, 11, 0);
@@ -17095,9 +15846,9 @@ void tree_06() {
     glPopMatrix();
 }
 
-
-//ID - 44
-void tree_07() {
+// ID - 44
+void tree_07()
+{
 
     glPushMatrix();
     glTranslatef(48, 14, 0);
@@ -17108,12 +15859,13 @@ void tree_07() {
 }
 
 // ID - 45
-void tree_08() {
+void tree_08()
+{
 
-    //MAIN BIG CIRCLE OF SMALL TREE 08 LIKE THE FIRST TREE
+    // MAIN BIG CIRCLE OF SMALL TREE 08 LIKE THE FIRST TREE
     circle_tree(2.26726732, 48, 26, 0.55, 0.57, 0.09);
 
-    //SMALL CIRCLE'S
+    // SMALL CIRCLE'S
 
     circle_tree(1.148834028, 47.3663855270599, 24.165032917969, 0.55, 0.57, 0.09);
     circle_tree(1.148834028, 45.6543150861946, 24.9342298577172, 0.55, 0.57, 0.09);
@@ -17126,10 +15878,9 @@ void tree_08() {
     circle_tree(1.148834028, 49.9898164098124, 25.4464140443566, 0.55, 0.57, 0.09);
     circle_tree(1.148834028, 49.30487881857022, 24.14587152720956, 0.55, 0.57, 0.09);
 
+    // KANDO OR TREE 08 BROWN
 
-    //KANDO OR TREE 08 BROWN
-
-    //MAIN VERTICLE PORTION
+    // MAIN VERTICLE PORTION
     glColor3f(0.29, 0.14, 0.02);
     glBegin(GL_POLYGON);
     glVertex2f(48, 21.9);
@@ -17140,29 +15891,29 @@ void tree_08() {
     glVertex2f(49.4, 21.9);
     glEnd();
 
-    //EXTENSOINS OF THE KANDO (FROM LEFT)
-    //FIRST
+    // EXTENSOINS OF THE KANDO (FROM LEFT)
+    // FIRST
     glBegin(GL_POLYGON);
     glVertex2f(46.6, 24.6);
     glVertex2f(48, 22.64);
     glVertex2f(48.2, 23.2);
     glEnd();
 
-    //SECOND
+    // SECOND
     glBegin(GL_POLYGON);
     glVertex2f(47.8, 27.6);
     glVertex2f(48.2, 23.2);
     glVertex2f(48.8, 23.8);
     glEnd();
 
-    //THIRD
+    // THIRD
     glBegin(GL_POLYGON);
     glVertex2f(50, 28);
     glVertex2f(48.8, 23.8);
     glVertex2f(49.4, 23.5);
     glEnd();
 
-    //BEATIFICATION SMALL DOTS
+    // BEATIFICATION SMALL DOTS
     circle_tree(0.3, 47.3663855270599, 24.165032917969, 0.85, 0.11, 0.55);
     circle_tree(0.3, 45.6543150861946, 24.9342298577172, 0.85, 0.11, 0.55);
     circle_tree(0.3, 44.9628140397705, 26.3155968802804, 0.85, 0.11, 0.55);
@@ -17179,13 +15930,11 @@ void tree_08() {
     circle_tree(0.3, 48.7302617069536, 26.5506259851119, 0.85, 0.11, 0.55);
     circle_tree(0.3, 49.063778328327, 25.4987658715499, 0.85, 0.11, 0.55);
     circle_tree(0.3, 48.7430892693139, 27.5255207245108, 0.85, 0.11, 0.55);
-
-
 }
 
-
 // ID - 46
-void tree_09() {
+void tree_09()
+{
 
     glPushMatrix();
     glTranslatef(50, 0, 0);
@@ -17194,7 +15943,8 @@ void tree_09() {
 }
 
 // ID - 47
-void trees_back_tree01() {
+void trees_back_tree01()
+{
     glPushMatrix();
     glTranslatef(-125, 0, 0);
     tree_04();
@@ -17234,29 +15984,25 @@ void trees_back_tree01() {
     glTranslatef(-7, 2, 0);
     tree_04();
     glPopMatrix();
-
-
-
 }
 
+// ID - 48
+void upper_road_area()
+{
 
-//ID - 48
-void upper_road_area() {
-
-    //green area of upper  area
+    // green area of upper  area
 
     glColor3f(0.35, 0.58, 0.19);
-    //glColor3f(1, 1, 1);
+    // glColor3f(1, 1, 1);
     glBegin(GL_POLYGON);
     glVertex2f(0, 20.5);
     glVertex2f(0, 21.9);
     glVertex2f(130, 21.9);
     glVertex2f(130, 20.5);
 
-
     glEnd();
 
-    //TRIED TO APPLY TEXTURE ON THE UPPER GREEEN AREA BUT DIDN'T LOOK GOOD
+    // TRIED TO APPLY TEXTURE ON THE UPPER GREEEN AREA BUT DIDN'T LOOK GOOD
 
     /*   ApplyTexture(0, 20.5, 0, 21.9, 15, 21.9, 15, 20.5, textures[0].textureID);
       ApplyTexture(0, 20.5, 0, 21.9, 30, 21.9, 30, 20.5, textures[0].textureID);
@@ -17264,10 +16010,7 @@ void upper_road_area() {
       ApplyTexture(0, 20.5, 0, 21.9, 60, 21.9, 60, 20.5, textures[0].textureID);
       ApplyTexture(0, 20.5, 0, 21.9, 75, 21.9, 75, 20.5, textures[0].textureID); */
 
-
-
-
-      //whitish area under the green area 
+    // whitish area under the green area
 
     glColor3f(0.84, 0.87, 0.88);
     glBegin(GL_POLYGON);
@@ -17278,7 +16021,7 @@ void upper_road_area() {
 
     glEnd();
 
-    //deep whitish area under the green area
+    // deep whitish area under the green area
     glColor3f(0.58, 0.65, 0.65);
     glBegin(GL_POLYGON);
     glVertex2f(0, 17.9);
@@ -17287,27 +16030,23 @@ void upper_road_area() {
     glVertex2f(130, 17.9);
 
     glEnd();
-
-
-
 }
 
+// FLYING CARS
 
-//FLYING CARS
+// ID - 29
+void flying_car_01()
+{
 
-//ID - 29
-void flying_car_01() {
-
-    //SCALING WITH 0.7 TO IT'S ORIGINAL SIZE TO LOOK MORE ACCURATE WITH
-    // THE SCENARIO
+    // SCALING WITH 0.7 TO IT'S ORIGINAL SIZE TO LOOK MORE ACCURATE WITH
+    //  THE SCENARIO
 
     glPushMatrix();
     glScalef(0.5, 0.5, 1);
     glTranslatef(60 + 160, 75, 0);
     glTranslatef(_move_fly_car_01, 0, 0);
 
-
-    //RIGHT SIDE LEG WITH FAN
+    // RIGHT SIDE LEG WITH FAN
 
     glColor3f(0.69, 0.8, 0.85);
     glBegin(GL_POLYGON);
@@ -17322,17 +16061,16 @@ void flying_car_01() {
     glVertex2f(61.2, 69.85);
     glEnd();
 
-
-    //NOW PRINTING THE FAN OF THE RIGHT SIDE LEG
-   //USING THE CODE OF THE LEFT LEG FAN.. JUST TRANSLATING
-   // IN X AXIS AND Y AXIS TO MATCH THE DESIGN
+    // NOW PRINTING THE FAN OF THE RIGHT SIDE LEG
+    // USING THE CODE OF THE LEFT LEG FAN.. JUST TRANSLATING
+    //  IN X AXIS AND Y AXIS TO MATCH THE DESIGN
 
     glPushMatrix();
     glTranslatef(25.94, -0.33, 0);
 
-    //RIGHT SIDE FAN
+    // RIGHT SIDE FAN
 
-    //CYLINDER TYPE PORTOIN BELOW THE TWO FAN'S
+    // CYLINDER TYPE PORTOIN BELOW THE TWO FAN'S
     glColor3f(0.75, 0.87, 0.91);
     glBegin(GL_POLYGON);
 
@@ -17343,8 +16081,7 @@ void flying_car_01() {
 
     glEnd();
 
-
-    //LEFT SIDE FAN OF RIGHT LEG
+    // LEFT SIDE FAN OF RIGHT LEG
     glPushMatrix();
     glTranslatef(44.75, 70.05, 0);
     glRotatef(3 * _angle1, 0, 1, 0);
@@ -17362,7 +16099,7 @@ void flying_car_01() {
 
     glEnd();
 
-    //RIGHT SIDE FAN OF RIGHT LEG
+    // RIGHT SIDE FAN OF RIGHT LEG
 
     glColor3f(0.75, 0.87, 0.91);
     glBegin(GL_POLYGON);
@@ -17378,7 +16115,7 @@ void flying_car_01() {
 
     glPopMatrix();
 
-    //VERTICAL CYLINDER TYPE AREA BETWEEN LEFT AND RIGHT FAN
+    // VERTICAL CYLINDER TYPE AREA BETWEEN LEFT AND RIGHT FAN
     glColor3f(0.69, 0.81, 0.84);
     glBegin(GL_POLYGON);
 
@@ -17393,9 +16130,7 @@ void flying_car_01() {
 
     glPopMatrix();
 
-
-
-    //LEFT SIDE LEG WITH FAN
+    // LEFT SIDE LEG WITH FAN
 
     glColor3f(0.69, 0.8, 0.85);
     glBegin(GL_POLYGON);
@@ -17407,9 +16142,9 @@ void flying_car_01() {
 
     glEnd();
 
-    //LEFT SIDE FAN
+    // LEFT SIDE FAN
 
-    //CYLINDER TYPE PORTOIN BELOW THE TWO FAN'S
+    // CYLINDER TYPE PORTOIN BELOW THE TWO FAN'S
     glColor3f(0.75, 0.87, 0.91);
     glBegin(GL_POLYGON);
 
@@ -17420,8 +16155,7 @@ void flying_car_01() {
 
     glEnd();
 
-
-    //LEFT SIDE FAN OF LEFT LEG
+    // LEFT SIDE FAN OF LEFT LEG
 
     glPushMatrix();
     glTranslatef(44.75, 70.05, 0);
@@ -17440,7 +16174,7 @@ void flying_car_01() {
 
     glEnd();
 
-    //RIGHT SIDE FAN OF LEFT LEG
+    // RIGHT SIDE FAN OF LEFT LEG
 
     glColor3f(0.75, 0.87, 0.91);
     glBegin(GL_POLYGON);
@@ -17456,7 +16190,7 @@ void flying_car_01() {
 
     glPopMatrix();
 
-    //VERTICAL CYLINDER TYPE AREA BETWEEN LEFT AND RIGHT FAN
+    // VERTICAL CYLINDER TYPE AREA BETWEEN LEFT AND RIGHT FAN
     glColor3f(0.69, 0.81, 0.84);
     glBegin(GL_POLYGON);
 
@@ -17469,8 +16203,7 @@ void flying_car_01() {
 
     glEnd();
 
-
-    //UPPER MORE LIGHTER AREA OF FLYING CAR 01
+    // UPPER MORE LIGHTER AREA OF FLYING CAR 01
     glColor3f(0.83, 0.94, 0.98);
     glBegin(GL_POLYGON);
     glVertex2f(53.96, 76.32);
@@ -17487,8 +16220,7 @@ void flying_car_01() {
 
     glEnd();
 
-
-    //LOWER MORE DEEPR AREA UNDER THE UPPER AREA
+    // LOWER MORE DEEPR AREA UNDER THE UPPER AREA
     glColor3f(0.76, 0.87, 0.91);
     glBegin(GL_POLYGON);
 
@@ -17506,8 +16238,7 @@ void flying_car_01() {
 
     glEnd();
 
-
-    //RIGHT SQUARE TYPE WINDOW SMALL MORE DEPER
+    // RIGHT SQUARE TYPE WINDOW SMALL MORE DEPER
     glColor3f(0.76, 0.87, 0.91);
     glBegin(GL_POLYGON);
 
@@ -17522,10 +16253,8 @@ void flying_car_01() {
 
     glEnd();
 
-
-
-    //NOW PRINTING THE WINDOW'S
-    //LEFT SIDE WINDOW
+    // NOW PRINTING THE WINDOW'S
+    // LEFT SIDE WINDOW
 
     glColor3f(0.2, 0.33, 0.38);
     glBegin(GL_POLYGON);
@@ -17539,8 +16268,7 @@ void flying_car_01() {
 
     glEnd();
 
-
-    //RIGHT SIDE WINDOW
+    // RIGHT SIDE WINDOW
     glColor3f(0.2, 0.33, 0.38);
     glBegin(GL_POLYGON);
 
@@ -17554,10 +16282,8 @@ void flying_car_01() {
 
     glEnd();
 
-
-
-    //TWO SMALL VERTICAL LEG'S
-    //LEFT SMALL LEG
+    // TWO SMALL VERTICAL LEG'S
+    // LEFT SMALL LEG
 
     glColor3f(0.83, 0.94, 0.98);
     glBegin(GL_POLYGON);
@@ -17572,8 +16298,7 @@ void flying_car_01() {
 
     glEnd();
 
-
-    //RIGHT SMALL LEG
+    // RIGHT SMALL LEG
 
     glColor3f(0.83, 0.94, 0.98);
     glBegin(GL_POLYGON);
@@ -17585,21 +16310,18 @@ void flying_car_01() {
 
     glEnd();
 
-
     glPopMatrix();
-
-
 }
 
-//ID - 30
-void flying_car_02() {
+// ID - 30
+void flying_car_02()
+{
 
     glPushMatrix();
     glTranslatef(-30, 3, 0);
     glTranslatef(_move_fly_car_02, 0, 0);
 
-
-    //MAIN AREA MORE LIGHTER
+    // MAIN AREA MORE LIGHTER
     glColor3f(0.72, 0.79, 0.84);
     glBegin(GL_POLYGON);
 
@@ -17628,14 +16350,11 @@ void flying_car_02() {
     glVertex2f(31.128062916799, 72.4350248264099);
     glVertex2f(31.0488509773851, 72.2244378853392);
 
-
     glEnd();
 
-
-    //LEFT SIDE DEEPER PORTION OF THE MAIN PORTION
+    // LEFT SIDE DEEPER PORTION OF THE MAIN PORTION
     glColor3f(0.65, 0.73, 0.78);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(23.014280, 72.50957);
     glVertex2f(23.6151327676788, 72.7455576281073);
@@ -17657,12 +16376,10 @@ void flying_car_02() {
 
     glEnd();
 
-
-    //NOW PRINTING THE WINDOW
-    //MORE DEEPER BACKWORD PORTOIN OF THE MAIN WINDOW
+    // NOW PRINTING THE WINDOW
+    // MORE DEEPER BACKWORD PORTOIN OF THE MAIN WINDOW
     glColor3f(0.42, 0.47, 0.49);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(25.5060040204583, 74.1255285484125);
     glVertex2f(26.0107503829645, 74.1094196219497);
@@ -17685,11 +16402,10 @@ void flying_car_02() {
 
     glEnd();
 
-    //UPPER PORTION OF THE WINDOW
+    // UPPER PORTION OF THE WINDOW
 
     glColor3f(0.49, 0.71, 0.76);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(25.631719443444, 74.3644302489317);
     glVertex2f(26.2624253949546, 74.3171273025687);
@@ -17711,11 +16427,10 @@ void flying_car_02() {
 
     glEnd();
 
-    //LOWER PORTION SMALL AREA UNDER THE MAIN AREA
+    // LOWER PORTION SMALL AREA UNDER THE MAIN AREA
 
     glColor3f(0.57, 0.63, 0.66);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(23.3973974744114, 72.226756756407);
     glVertex2f(23.3821474135114, 72.107798031219);
@@ -17726,15 +16441,11 @@ void flying_car_02() {
     glVertex2f(30.861220862812, 72.0520518811328);
     glVertex2f(30.865341680, 72.226756756407);
 
-
     glEnd();
 
-
-
-    //MOST LOWER PORTOIN MORE DEPER COLOR
+    // MOST LOWER PORTOIN MORE DEPER COLOR
     glColor3f(0.57, 0.63, 0.66);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(24.1423893085185, 71.979282668863);
     glVertex2f(24.0937370010056, 71.5844537836782);
@@ -17750,11 +16461,10 @@ void flying_car_02() {
 
     glEnd();
 
-    //MOST LOWER PORTION  WHITE
+    // MOST LOWER PORTION  WHITE
 
     glColor3f(1, 1, 1);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(24.54127, 71.979282668863);
     glVertex2f(24.507070462386, 71.8404083321477);
@@ -17769,14 +16479,12 @@ void flying_car_02() {
 
     glEnd();
 
+    // NOW PRINTING THE LEFT LEG WITH FAN
 
-    //NOW PRINTING THE LEFT LEG WITH FAN
-
-    //LEFT LEG 
+    // LEFT LEG
 
     glColor3f(0.65, 0.73, 0.78);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(22.5, 74);
     glVertex2f(20.4188675344889, 73.9497895532655);
@@ -17784,7 +16492,7 @@ void flying_car_02() {
     glVertex2f(22.6682902481801, 73.2787862353348);
     glEnd();
 
-    //U SHAPE PORTIN OF LEFT LEG
+    // U SHAPE PORTIN OF LEFT LEG
 
     glColor3f(0.72, 0.79, 0.84);
     glBegin(GL_POLYGON);
@@ -17801,7 +16509,7 @@ void flying_car_02() {
     glVertex2f(19.8349479574266, 74.1462291338987);
     glEnd();
 
-    //SMALL AREA ABOVE THE U SHAPE
+    // SMALL AREA ABOVE THE U SHAPE
     glColor3f(0.42, 0.52, 0.56);
     glBegin(GL_POLYGON);
 
@@ -17810,16 +16518,14 @@ void flying_car_02() {
     glVertex2f(20.2991166755112, 74.1462291338987);
     glVertex2f(20.2991166755112, 74.3664991942913);
 
-
     glEnd();
-
 
     glPushMatrix();
     glTranslatef(20.0979686535922, 74.6325550068853, 0);
     glRotatef(2 * _angle1, 0, 1, 0);
     glTranslatef(-20.0979686535922, -74.6325550068853, 0);
 
-    //PORTION AVOBE THE SMALL AREA
+    // PORTION AVOBE THE SMALL AREA
 
     glColor3f(0.58, 0.65, 0.7);
     glBegin(GL_POLYGON);
@@ -17831,11 +16537,9 @@ void flying_car_02() {
     glVertex2f(21.2612685140361, 74.4029224004772);
     glVertex2f(21.2897244, 74.5074763421821);
 
-
-
     glEnd();
 
-    //MOST UPPER FAN
+    // MOST UPPER FAN
 
     glColor3f(0.71, 0.78, 0.83);
     glBegin(GL_POLYGON);
@@ -17850,19 +16554,16 @@ void flying_car_02() {
     glVertex2f(22.0537502366293, 74.7516954759165);
     glVertex2f(21.959819800577, 74.8315363465604);
 
-
-
     glEnd();
 
     glPopMatrix();
 
-    //NOW PRINTING THE RIGHT SIDE LEG WITH FAN
+    // NOW PRINTING THE RIGHT SIDE LEG WITH FAN
 
-    //RIGHT  LEG
+    // RIGHT  LEG
 
     glColor3f(0.65, 0.73, 0.78);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(30.9520363847681, 73.9136476954586);
     glVertex2f(33.6314974186771, 73.9400556605716);
@@ -17870,13 +16571,13 @@ void flying_car_02() {
     glVertex2f(31.2072748562129, 73.4031707525728);
     glEnd();
 
-    //NOW PRINTING THE U SHAPE AND REST OF THE DESIGN
-    //USING THE CODE OF THE LEFT LEG..JUST TRANSLATING IN 
-    //X AXIS
+    // NOW PRINTING THE U SHAPE AND REST OF THE DESIGN
+    // USING THE CODE OF THE LEFT LEG..JUST TRANSLATING IN
+    // X AXIS
     glPushMatrix();
     glTranslatef(12.7, 0, 0);
 
-    //U SHAPE PORTIN OF LEFT LEG
+    // U SHAPE PORTIN OF LEFT LEG
 
     glColor3f(0.72, 0.79, 0.84);
     glBegin(GL_POLYGON);
@@ -17893,7 +16594,7 @@ void flying_car_02() {
     glVertex2f(19.8349479574266, 74.1462291338987);
     glEnd();
 
-    //SMALL AREA ABOVE THE U SHAPE
+    // SMALL AREA ABOVE THE U SHAPE
     glColor3f(0.42, 0.52, 0.56);
     glBegin(GL_POLYGON);
 
@@ -17902,7 +16603,6 @@ void flying_car_02() {
     glVertex2f(20.2991166755112, 74.1462291338987);
     glVertex2f(20.2991166755112, 74.3664991942913);
 
-
     glEnd();
 
     glPushMatrix();
@@ -17910,7 +16610,7 @@ void flying_car_02() {
     glRotatef(2 * _angle1, 0, 1, 0);
     glTranslatef(-20.0979686535922, -74.6325550068853, 0);
 
-    //PORTION AVOBE THE SMALL AREA
+    // PORTION AVOBE THE SMALL AREA
 
     glColor3f(0.58, 0.65, 0.7);
     glBegin(GL_POLYGON);
@@ -17922,11 +16622,9 @@ void flying_car_02() {
     glVertex2f(21.2612685140361, 74.4029224004772);
     glVertex2f(21.2897244, 74.5074763421821);
 
-
-
     glEnd();
 
-    //MOST UPPER FAN
+    // MOST UPPER FAN
 
     glColor3f(0.71, 0.78, 0.83);
     glBegin(GL_POLYGON);
@@ -17941,23 +16639,20 @@ void flying_car_02() {
     glVertex2f(22.0537502366293, 74.7516954759165);
     glVertex2f(21.959819800577, 74.8315363465604);
 
-
-
     glEnd();
 
     glPopMatrix();
 
     glPopMatrix();
 
-
     glPopMatrix();
-
 }
 
-//ID - 31
-void flying_car_03() {
+// ID - 31
+void flying_car_03()
+{
 
-    //MAIN BACKGROUND OF FLYING CAR 03 MORE LIGHETER
+    // MAIN BACKGROUND OF FLYING CAR 03 MORE LIGHETER
     glPushMatrix();
     glTranslatef(100, 0, 0);
     glTranslatef(_move_fly_car_03, 0, 0);
@@ -17985,12 +16680,10 @@ void flying_car_03() {
 
     glEnd();
 
-
-    //LOWER PORTION MORE DEEPER COLOR
+    // LOWER PORTION MORE DEEPER COLOR
 
     glColor3f(0.28, 0.39, 0.44);
     glBegin(GL_POLYGON);
-
 
     glVertex2f(79.0333784196964, 73.1845106118903);
     glVertex2f(79.0333784196964, 72.7422050655661);
@@ -18002,12 +16695,11 @@ void flying_car_03() {
     glVertex2f(83.9423437986156, 72.7791145796931);
     glVertex2f(83.9423437986156, 73.1845106118903);
 
-
     glEnd();
 
-    //WINDOW OF FLYING CAR 3
+    // WINDOW OF FLYING CAR 3
 
-    //LEFT WINDOW
+    // LEFT WINDOW
     glColor3f(0.31, 0.36, 0.38);
     glBegin(GL_POLYGON);
 
@@ -18023,7 +16715,7 @@ void flying_car_03() {
 
     glEnd();
 
-    //RIGHT WINDOW
+    // RIGHT WINDOW
 
     glBegin(GL_POLYGON);
 
@@ -18039,9 +16731,8 @@ void flying_car_03() {
 
     glEnd();
 
-
-    //BOTTOM PART ROUNDED PROTION 
-    //LEFT ROUNDED PORTION
+    // BOTTOM PART ROUNDED PROTION
+    // LEFT ROUNDED PORTION
 
     glColor3f(0.34, 0.45, 0.5);
     glBegin(GL_POLYGON);
@@ -18073,8 +16764,7 @@ void flying_car_03() {
 
     glEnd();
 
-
-    //RIGHT ROUNDED PORTION
+    // RIGHT ROUNDED PORTION
 
     glColor3f(0.34, 0.45, 0.5);
     glBegin(GL_POLYGON);
@@ -18106,8 +16796,7 @@ void flying_car_03() {
 
     glEnd();
 
-
-    //MOST LOWER PORTION
+    // MOST LOWER PORTION
     glColor3f(0.34, 0.45, 0.5);
     glBegin(GL_POLYGON);
 
@@ -18119,10 +16808,9 @@ void flying_car_03() {
     glVertex2f(84.8174107408269, 71.419693462796);
     glEnd();
 
+    // FAN OF FLYING CAR 03
 
-    //FAN OF FLYING CAR 03
-
-    //LEFT ROUNDED PART(PRINTING THE WHOLE FAN DIVEDED BY 3 PARTS)
+    // LEFT ROUNDED PART(PRINTING THE WHOLE FAN DIVEDED BY 3 PARTS)
     glPushMatrix();
     glTranslatef(82, 75.9, 0);
     glRotatef(1.5 * _angle1, 0, 1, 0);
@@ -18140,8 +16828,7 @@ void flying_car_03() {
     glVertex2f(80.3556685932533, 75.8199509368937);
     glEnd();
 
-
-    //MIDDLE PART
+    // MIDDLE PART
     glBegin(GL_POLYGON);
 
     glVertex2f(80.3556685932533, 75.8199509368937);
@@ -18151,7 +16838,7 @@ void flying_car_03() {
 
     glEnd();
 
-    //RIDHT ROUNDED PART
+    // RIDHT ROUNDED PART
     glBegin(GL_POLYGON);
 
     glVertex2f(83.6412647086226, 75.8199509368937);
@@ -18166,8 +16853,7 @@ void flying_car_03() {
     glEnd();
     glPopMatrix();
 
-
-    //TOP ROUNDED PORTION UNDER THE FAN
+    // TOP ROUNDED PORTION UNDER THE FAN
     glColor3f(0.28, 0.39, 0.44);
     glBegin(GL_POLYGON);
 
@@ -18181,8 +16867,7 @@ void flying_car_03() {
 
     glEnd();
 
-
-    //PORTINO UNDER THE ROUNDED PORTION
+    // PORTINO UNDER THE ROUNDED PORTION
     glColor3f(0.5, 0.61, 0.66);
     glBegin(GL_POLYGON);
 
@@ -18195,16 +16880,14 @@ void flying_car_03() {
 
     glEnd();
 
-
     glPopMatrix();
-
-
 }
 
-//ID - 32
-void flying_car_04() {
+// ID - 32
+void flying_car_04()
+{
 
-    //MAIN BACKGROUND COLOR PORTION OF FLYING CAR 04
+    // MAIN BACKGROUND COLOR PORTION OF FLYING CAR 04
     glPushMatrix();
     glTranslatef(-30, 0, 0);
     glTranslatef(_move_fly_car_04, 0, 0);
@@ -18231,8 +16914,7 @@ void flying_car_04() {
     glVertex2f(16.144684805263, 68.5007957177801);
     glEnd();
 
-
-    //LOWER PORTION OF FLYING CAR 04
+    // LOWER PORTION OF FLYING CAR 04
     glColor3f(0.25, 0.29, 0.31);
     glBegin(GL_POLYGON);
 
@@ -18243,11 +16925,10 @@ void flying_car_04() {
     glVertex2f(16.0132623193645, 68.3484444922708);
     glVertex2f(16.0152536933369, 68.5007957177801);
 
-
     glEnd();
 
-    //WINDOWS
-    //LEFT WINDW
+    // WINDOWS
+    // LEFT WINDW
     glColor3f(0.25, 0.29, 0.31);
     glBegin(GL_POLYGON);
 
@@ -18266,7 +16947,7 @@ void flying_car_04() {
 
     glEnd();
 
-    //RIGHT WINDOW
+    // RIGHT WINDOW
 
     glBegin(GL_POLYGON);
 
@@ -18284,9 +16965,8 @@ void flying_car_04() {
 
     glEnd();
 
-
-    //LOWER BIG FAN LEG PORTION
-    //BIG LEG
+    // LOWER BIG FAN LEG PORTION
+    // BIG LEG
     glColor3f(0.28, 0.59, 0.65);
     glBegin(GL_POLYGON);
 
@@ -18299,8 +16979,7 @@ void flying_car_04() {
 
     glEnd();
 
-
-    //CYLINDER TYPE PORTION ABOVE THE BIG LEG
+    // CYLINDER TYPE PORTION ABOVE THE BIG LEG
     glColor3f(0.2, 0.5, 0.58);
     glBegin(GL_POLYGON);
 
@@ -18311,7 +16990,7 @@ void flying_car_04() {
 
     glEnd();
 
-    //LEFT FAN
+    // LEFT FAN
     glPushMatrix();
     glTranslatef(9.48, 71.75, 0);
     glRotatef(2.5 * _angle1, 0, 1, 0);
@@ -18329,7 +17008,7 @@ void flying_car_04() {
 
     glEnd();
 
-    //RIGHT FAN
+    // RIGHT FAN
     glBegin(GL_POLYGON);
 
     glVertex2f(9.5603813372627, 71.7693984334549);
@@ -18343,9 +17022,8 @@ void flying_car_04() {
 
     glPopMatrix();
 
-
     // UPPER SMALL FAN PORTION
-    //SMALL LEG
+    // SMALL LEG
     glColor3f(0.28, 0.59, 0.65);
     glBegin(GL_POLYGON);
 
@@ -18356,7 +17034,7 @@ void flying_car_04() {
 
     glEnd();
 
-    //CYLINDER TYPE PORTION ABOVE THE SMALL LEG
+    // CYLINDER TYPE PORTION ABOVE THE SMALL LEG
     glColor3f(0.2, 0.5, 0.58);
     glBegin(GL_POLYGON);
 
@@ -18367,7 +17045,7 @@ void flying_car_04() {
 
     glEnd();
 
-    //LEFT FAN
+    // LEFT FAN
     glPushMatrix();
     glTranslatef(11.62277077615, 71.4006119201347, 0);
     glRotatef(2.5 * _angle1, 0, 1, 0);
@@ -18385,7 +17063,7 @@ void flying_car_04() {
 
     glEnd();
 
-    //RIGHT FAN
+    // RIGHT FAN
     glBegin(GL_POLYGON);
 
     glVertex2f(11.7, 71.45);
@@ -18399,13 +17077,12 @@ void flying_car_04() {
 
     glPopMatrix();
 
-
     glPopMatrix();
-
 }
 
-//ID - 59
-void fire_smoke() {
+// ID - 59
+void fire_smoke()
+{
     glPushMatrix();
     glTranslatef(4, 0, 0);
     glTranslatef(0, _move_fire_smoke, 0);
@@ -18421,15 +17098,13 @@ void fire_smoke() {
     glPopMatrix();
 }
 
-
-
-//FLOWER BEATIFICATION
+// FLOWER BEATIFICATION
 
 // ID - 54
-void flowers_right_grass() {
+void flowers_right_grass()
+{
 
-
-    //MORE DEEPER COLOER BACKGROUND
+    // MORE DEEPER COLOER BACKGROUND
     glColor3f(0, 0.26, 0.19);
     glBegin(GL_POLYGON);
     glVertex2f(130.0085395409084, 9.6981464118944);
@@ -18442,7 +17117,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //ROUNDED BACKGROUND MORE DEEPER
+    // ROUNDED BACKGROUND MORE DEEPER
     glBegin(GL_POLYGON);
     glVertex2f(130.0085395409084, 9.6981464118944);
     glVertex2f(129.0776815826929, 10.5568596715978);
@@ -18451,15 +17126,12 @@ void flowers_right_grass() {
     glVertex2f(129.1582866345719, 12.9980412429428);
     glVertex2f(130.0085395409084, 13.5441968846533);
 
-
     glEnd();
 
-
-
-    //2ND MOST LOWER JUNGLE WITH LEAF
+    // 2ND MOST LOWER JUNGLE WITH LEAF
     glPushMatrix();
     glTranslatef(0, move_jungle_leaf_top2, 0);
-    //LINE IN THE MIDDLE
+    // LINE IN THE MIDDLE
     glLineWidth(4);
     glColor3f(0.01, 0.35, 0.28);
     glBegin(GL_LINES);
@@ -18467,8 +17139,8 @@ void flowers_right_grass() {
     glVertex2f(118.4407282343576, 10.1627805720573);
     glEnd();
 
-    //NOW PRINTING THE LEAFS
-    //FIRST LEAF FROM LEFT
+    // NOW PRINTING THE LEAFS
+    // FIRST LEAF FROM LEFT
     glColor3f(0.01, 0.35, 0.28);
     glBegin(GL_POLYGON);
     glVertex2f(120.4596167411045, 8.2762527296593);
@@ -18480,8 +17152,7 @@ void flowers_right_grass() {
     glVertex2f(120.8130582116226, 8.0052809355783);
     glEnd();
 
-
-    //2ND LEAF RIGHT
+    // 2ND LEAF RIGHT
     glBegin(GL_POLYGON);
     glVertex2f(120.8112614755588, 8.4489441516369);
     glVertex2f(120.7670089793324, 8.998939461915);
@@ -18492,7 +17163,7 @@ void flowers_right_grass() {
     glVertex2f(121.3991874968533, 8.0506716855734);
     glEnd();
 
-    //3RD LEAF LEFT
+    // 3RD LEAF LEFT
 
     glBegin(GL_POLYGON);
     glVertex2f(120.1805313680693, 8.7386478067188);
@@ -18507,7 +17178,7 @@ void flowers_right_grass() {
     glVertex2f(119.8565814119504, 8.9742477748202);
     glEnd();
 
-    //4TH LEAF RIGHT
+    // 4TH LEAF RIGHT
     glBegin(GL_POLYGON);
     glVertex2f(120.2776909055924, 8.8222099310806);
     glVertex2f(119.9805078195497, 9.094362909464);
@@ -18521,7 +17192,7 @@ void flowers_right_grass() {
     glVertex2f(120.4348632423604, 9.1473940761386);
     glEnd();
 
-    //5TH LEAF LEFT
+    // 5TH LEAF LEFT
 
     glBegin(GL_POLYGON);
     glVertex2f(119.1449661337121, 9.5321953144573);
@@ -18537,8 +17208,7 @@ void flowers_right_grass() {
     glVertex2f(118.7444356101894, 9.8921222979231);
     glEnd();
 
-
-    //6TH LEAF RIGHT
+    // 6TH LEAF RIGHT
     glBegin(GL_POLYGON);
     glVertex2f(119.2529828242102, 9.7127085416454);
     glVertex2f(118.9259877014899, 10.0114448266186);
@@ -18551,7 +17221,7 @@ void flowers_right_grass() {
     glVertex2f(119.4467577117481, 10.1809978532251);
     glEnd();
 
-    // 7TH LEAF TOP 
+    // 7TH LEAF TOP
     glBegin(GL_POLYGON);
     glVertex2f(118.4, 10.2);
     glVertex2f(117.9934460552136, 10.1123692472177);
@@ -18565,15 +17235,12 @@ void flowers_right_grass() {
     glVertex2f(118.3688848998184, 10.4595492540785);
     glEnd();
 
-
-
     glPopMatrix();
 
-
-    //MOST LOWER JUNGLE WITH LEAF
+    // MOST LOWER JUNGLE WITH LEAF
     glPushMatrix();
     glTranslatef(move_jungle_leaf_top1, 0, 0);
-    //LINE IN THE MIDDLE
+    // LINE IN THE MIDDLE
     glLineWidth(4);
     glColor3f(0.01, 0.49, 0.38);
     glBegin(GL_LINES);
@@ -18581,8 +17248,7 @@ void flowers_right_grass() {
     glVertex2f(117.4932624429417, 7.4724043405514);
     glEnd();
 
-
-    //DEEP COLOR BACKGROUND TRIANGLE AT THE LOW
+    // DEEP COLOR BACKGROUND TRIANGLE AT THE LOW
     glColor3f(0, 0.26, 0.19);
     glBegin(GL_POLYGON);
     glVertex2f(123.0526077768708, 5.6189204541679);
@@ -18591,9 +17257,8 @@ void flowers_right_grass() {
 
     glEnd();
 
-
     // NOW PRINTING THE LEAFS
-    //FIRST LEAF FROM RIGHT
+    // FIRST LEAF FROM RIGHT
     glColor3f(0.01, 0.49, 0.38);
 
     glBegin(GL_POLYGON);
@@ -18604,7 +17269,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //2ND LEAF RIGHT
+    // 2ND LEAF RIGHT
 
     glBegin(GL_POLYGON);
     glVertex2f(121.1521225902613, 6.2918645652024);
@@ -18621,7 +17286,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //3RD LEAF LEFT
+    // 3RD LEAF LEFT
 
     glBegin(GL_POLYGON);
     glVertex2f(118.5765071019106, 7.1011891689992);
@@ -18636,7 +17301,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //4TH LEAF RIGHT
+    // 4TH LEAF RIGHT
     glBegin(GL_POLYGON);
     glVertex2f(118.9273344341202, 7.017295676509);
     glVertex2f(118.8196730033842, 7.2257940625867);
@@ -18652,8 +17317,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //TOP MOST LEAF
+    // TOP MOST LEAF
     glBegin(GL_POLYGON);
     glVertex2f(117.4932624429417, 7.4724043405514);
     glVertex2f(117.4397306681328, 7.3339661143176);
@@ -18670,14 +17334,9 @@ void flowers_right_grass() {
 
     glPopMatrix();
 
+    // BELOW 4 LEAFS
 
-
-
-
-
-    //BELOW 4 LEAFS
-
-    //FIRST
+    // FIRST
 
     glBegin(GL_POLYGON);
     glColor3f(0, 0.35, 0.28);
@@ -18692,7 +17351,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //2ND
+    // 2ND
     glBegin(GL_POLYGON);
     glColor3f(0.03, 0.48, 0.39);
     glVertex2f(123.341506637074, 5.6071038707283);
@@ -18707,8 +17366,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //3RD
+    // 3RD
     glBegin(GL_POLYGON);
     glColor3f(0, 0.35, 0.28);
     glVertex2f(124.6970423745345, 5.5956808167602);
@@ -18723,8 +17381,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //4TH
+    // 4TH
     glBegin(GL_POLYGON);
 
     glColor3f(0.03, 0.48, 0.39);
@@ -18739,9 +17396,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-
-    //BIG LEAF ABOVE THE FOUR LOWER LEAF
+    // BIG LEAF ABOVE THE FOUR LOWER LEAF
 
     glBegin(GL_POLYGON);
 
@@ -18756,8 +17411,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //SMALL LEAF MORE DEEPER ABOFE THE LAST LEAF
-
+    // SMALL LEAF MORE DEEPER ABOFE THE LAST LEAF
 
     glBegin(GL_POLYGON);
 
@@ -18774,8 +17428,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //3RD LOWER JUNGLE AREA LEAF
+    // 3RD LOWER JUNGLE AREA LEAF
     glPushMatrix();
     glTranslatef(move_jungle_leaf_top3, 0, 0);
 
@@ -18788,7 +17441,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //FIRST LEAF FROM RIGHT
+    // FIRST LEAF FROM RIGHT
 
     glColor3f(0.02, 0.48, 0.4);
     glBegin(GL_POLYGON);
@@ -18804,7 +17457,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //SECOND LEAF LEFT
+    // SECOND LEAF LEFT
 
     glBegin(GL_POLYGON);
 
@@ -18821,7 +17474,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //TOP LEAF
+    // TOP LEAF
     glBegin(GL_POLYGON);
 
     glVertex2f(122.1414899391982, 10.6796966136569);
@@ -18837,9 +17490,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    glPopMatrix();  //THIRD LOWER JUNGLE LEAF ENDS HERE
-
+    glPopMatrix(); // THIRD LOWER JUNGLE LEAF ENDS HERE
 
     // LEAF BESIDE FIRST BIG FLOWER 1
 
@@ -18883,8 +17534,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //UPPER LEAF
+    // UPPER LEAF
     glBegin(GL_POLYGON);
 
     glVertex2f(129.2488350778611, 8.2758343410982);
@@ -18896,10 +17546,9 @@ void flowers_right_grass() {
     glVertex2f(130.072933632121, 9.1628848683091);
     glVertex2f(129.8268486471684, 8.3445092206242);
 
-
     glEnd();
 
-    //SMALL LEAF BESIDE UPPER LEAF
+    // SMALL LEAF BESIDE UPPER LEAF
 
     glBegin(GL_POLYGON);
 
@@ -18913,14 +17562,12 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-
-    //4TH LOWER JUNGLE AREA
+    // 4TH LOWER JUNGLE AREA
 
     glPushMatrix();
     glTranslatef(0, move_jungle_leaf_top4, 0);
 
-    //LINE IN THE MIDDLE
+    // LINE IN THE MIDDLE
     glLineWidth(2);
     glColor3f(0.01, 0.34, 0.3);
 
@@ -18929,8 +17576,7 @@ void flowers_right_grass() {
     glVertex2f(125.9577111019027, 12.6432525231311);
     glEnd();
 
-
-    //FIRST LEAF FROM LEFT
+    // FIRST LEAF FROM LEFT
     glColor3f(0.01, 0.34, 0.3);
 
     glBegin(GL_POLYGON);
@@ -18947,8 +17593,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //SECDOND LEAF RIGHT
+    // SECDOND LEAF RIGHT
     glBegin(GL_POLYGON);
 
     glVertex2f(127.1429939744784, 10.5102322410708);
@@ -18963,7 +17608,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //THIRD LEAF LEFT
+    // THIRD LEAF LEFT
     glBegin(GL_POLYGON);
 
     glVertex2f(126.2987307946965, 11.6308289264416);
@@ -18979,8 +17624,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //FOURTH LEAF RIGHT
+    // FOURTH LEAF RIGHT
     glBegin(GL_POLYGON);
 
     glVertex2f(126.544471994041, 11.7891954771403);
@@ -18994,7 +17638,7 @@ void flowers_right_grass() {
     glVertex2f(127.1287899569269, 12.4008180177698);
     glEnd();
 
-    //TOP LEAF
+    // TOP LEAF
     glBegin(GL_POLYGON);
 
     glVertex2f(125.9577111019027, 12.6432525231311);
@@ -19009,16 +17653,13 @@ void flowers_right_grass() {
     glVertex2f(126, 13);
     glEnd();
 
-
     glPopMatrix();
 
-
-
-    //5TH LOWER JUNGLE AREA
+    // 5TH LOWER JUNGLE AREA
 
     glPushMatrix();
     glTranslatef(0, move_jungle_leaf_top5, 0);
-    //LINE IN THE MIDDLE
+    // LINE IN THE MIDDLE
     glLineWidth(3);
     glColor3f(0.04, 0.48, 0.39);
     glBegin(GL_LINES);
@@ -19027,9 +17668,8 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //LEAFS
-    //FIRST LEAF FROM LEFT
+    // LEAFS
+    // FIRST LEAF FROM LEFT
     glColor3f(0.04, 0.48, 0.39);
     glBegin(GL_POLYGON);
 
@@ -19044,7 +17684,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //SECOND LEAF RIGHT
+    // SECOND LEAF RIGHT
 
     glBegin(GL_POLYGON);
 
@@ -19062,7 +17702,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //THIRD LEAF LEFT
+    // THIRD LEAF LEFT
     glBegin(GL_POLYGON);
     glVertex2f(128.5, 14.5);
     glVertex2f(127.8307746577624, 14.1074077575964);
@@ -19077,8 +17717,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //FOURTH LEAF RIGHT
+    // FOURTH LEAF RIGHT
 
     glBegin(GL_POLYGON);
     glVertex2f(127.8994031265671, 15.7459124504324);
@@ -19095,8 +17734,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //FIFTH LEAF LEFT
+    // FIFTH LEAF LEFT
 
     glBegin(GL_POLYGON);
     glVertex2f(127.1530685283157, 16.5608755175497);
@@ -19112,7 +17750,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //TOP LEAF
+    // TOP LEAF
     glBegin(GL_POLYGON);
     glVertex2f(126.6359980565857, 17.5235168371634);
     glVertex2f(126.3466840198601, 17.4702027292807);
@@ -19129,10 +17767,8 @@ void flowers_right_grass() {
 
     glPopMatrix();
 
-
-
-    //5TH JUNGLE PORTION(TOP MOST JUNGLE PORTION)
-    //LINE IN THE MIDDLE
+    // 5TH JUNGLE PORTION(TOP MOST JUNGLE PORTION)
+    // LINE IN THE MIDDLE
     glPushMatrix();
     glTranslatef(move_jungle_leaf_top6, 0, 0);
 
@@ -19143,7 +17779,6 @@ void flowers_right_grass() {
     glVertex2f(129.6290073771841, 18.70640783517);
     glVertex2f(127.9268079257261, 23.0023304184023);
     glEnd();
-
 
     // ONE SINGLE LEAF UNDER THE TOP FLOWER(HALF LEAF)
     glBegin(GL_POLYGON);
@@ -19157,12 +17792,10 @@ void flowers_right_grass() {
     glVertex2f(129.8050449902536, 17.1212655268309);
     glVertex2f(130.1799472418426, 17.0275399639266);
 
-
     glEnd();
 
-
-    //LEAFS
-    //FIRST LEAF FROM LEFT
+    // LEAFS
+    // FIRST LEAF FROM LEFT
     glBegin(GL_POLYGON);
     glVertex2f(129.7145119367097, 18.1059386681311);
     glVertex2f(129.3192434777344, 17.6118530943748);
@@ -19176,13 +17809,9 @@ void flowers_right_grass() {
     glVertex2f(128.8853175964697, 18.7790152169418);
     glVertex2f(129.6290073771841, 18.70640783517);
 
-
     glEnd();
 
-
-
-
-    //SECOND LEAF RIGHT
+    // SECOND LEAF RIGHT
     glBegin(GL_POLYGON);
     glVertex2f(129.5649850763913, 19.3338852949069);
     glVertex2f(129.4640246857281, 19.8542196160562);
@@ -19194,7 +17823,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //THIRD LEAF LEFT
+    // THIRD LEAF LEFT
     glBegin(GL_POLYGON);
     glVertex2f(129.5, 19);
     glVertex2f(129.1796221155745, 18.9621089545806);
@@ -19212,10 +17841,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-
-
-    //FOURTH LEAF RIGHT
+    // FOURTH LEAF RIGHT
     glBegin(GL_POLYGON);
     glVertex2f(128.8494756587903, 20.537069920669);
     glVertex2f(128.5842760459638, 20.4017639957473);
@@ -19232,7 +17858,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //FIFTH LEAF LEFT
+    // FIFTH LEAF LEFT
 
     glBegin(GL_POLYGON);
     glVertex2f(129.0389039536665, 20.6290779496158);
@@ -19251,7 +17877,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-    //SIXTH LEAF RIGHT
+    // SIXTH LEAF RIGHT
     glBegin(GL_POLYGON);
     glVertex2f(128.2658335979135, 22.0176901456793);
     glVertex2f(127.9954028081865, 21.9166858748098);
@@ -19266,8 +17892,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //SEVENTH LEAF LEFT
+    // SEVENTH LEAF LEFT
     glBegin(GL_POLYGON);
     glVertex2f(128.4515511282079, 22.0958870005459);
     glVertex2f(128.3440304527743, 22.4119326222988);
@@ -19283,8 +17908,7 @@ void flowers_right_grass() {
 
     glEnd();
 
-
-    //TOP LEAF
+    // TOP LEAF
     glBegin(GL_POLYGON);
     glVertex2f(127.9268079257261, 23.0023304184023);
     glVertex2f(127.6032898017189, 23.1071118427262);
@@ -19305,8 +17929,7 @@ void flowers_right_grass() {
 
     glPopMatrix();
 
-
-    //ALL FLOWERS START HERE
+    // ALL FLOWERS START HERE
 
     // NOW PRINTING THE SMALL FLOWER BETWEEN THE LOWER TWO JUNGLE AREA
     glPushMatrix();
@@ -19318,11 +17941,9 @@ void flowers_right_grass() {
 
     glPopMatrix();
 
+    // ADDED ONE MORE SMALL FLOWER
 
-
-    //ADDED ONE MORE SMALL FLOWER
-
-    //CHECKING FORANOTHER SMALL FLOWER
+    // CHECKING FORANOTHER SMALL FLOWER
 
     glPushMatrix();
     glTranslatef(91, 6.9, 0);
@@ -19331,19 +17952,14 @@ void flowers_right_grass() {
 
     flower();
 
-
     glPopMatrix();
 
-
-    //INITIAL BIG FLOWER
+    // INITIAL BIG FLOWER
     flower();
 
-
-
-
-    //NOW PRINTING THE THIRD BIG FLOWER (HALF FLOWER ACTUALLY)
-    //USING THE CODE OF THE FIRST BIG FLOWER
-    //JUST TRANSLATING IT IN X AXIS AND Y AXIS
+    // NOW PRINTING THE THIRD BIG FLOWER (HALF FLOWER ACTUALLY)
+    // USING THE CODE OF THE FIRST BIG FLOWER
+    // JUST TRANSLATING IT IN X AXIS AND Y AXIS
 
     glPushMatrix();
     glTranslatef(5, -2, 0);
@@ -19352,11 +17968,9 @@ void flowers_right_grass() {
 
     glPopMatrix();
 
-
-
-    //NOW PRINTING THE FOURTH FLOWER
-    //USING THE CODE OF THE FIRST BIG FLOWER
-    //JUST SCALING AND TRANSLATING THE CODES
+    // NOW PRINTING THE FOURTH FLOWER
+    // USING THE CODE OF THE FIRST BIG FLOWER
+    // JUST SCALING AND TRANSLATING THE CODES
 
     glPushMatrix();
     glTranslatef(29, 5, 0);
@@ -19364,14 +17978,11 @@ void flowers_right_grass() {
 
     flower();
 
-
     glPopMatrix();
 
-
-
-    //NOW PRINTING THE TOP SMALL FLOWER
-    //USING THE CODE OF THE FIRST BIG FLOWER
-    //JUST TRANSLATING IT AND SCALING IT
+    // NOW PRINTING THE TOP SMALL FLOWER
+    // USING THE CODE OF THE FIRST BIG FLOWER
+    // JUST TRANSLATING IT AND SCALING IT
 
     glPushMatrix();
     glTranslatef(54.5, 13.3, 0);
@@ -19381,29 +17992,26 @@ void flowers_right_grass() {
     flower();
 
     glPopMatrix();
-
 }
 
-
-//CARS START HERE
+// CARS START HERE
 
 // ID - 49
-void cybertruck_01() {
+void cybertruck_01()
+{
 
-
-
-    //TRANSLATING AND SCALING  THE WHOLE CYBERTRUCK TO MATCH WITH THE DESIGN
+    // TRANSLATING AND SCALING  THE WHOLE CYBERTRUCK TO MATCH WITH THE DESIGN
 
     glPushMatrix();
     glTranslatef(0 + 50, 4.5, 0);
-    glTranslatef(move_cybertruck_01, 0, 0); //FOR MOVEMENT OF THE CYBERTRUCK
+    glTranslatef(move_cybertruck_01, 0, 0); // FOR MOVEMENT OF THE CYBERTRUCK
 
     glTranslatef(97.1975634782184, 18.8855629184604, 0);
     glScalef(2, 2, 0);
     glTranslatef(-97.1975634782184, -18.8855629184604, 0);
-    //TRIANGLE SHAPE AT THE TOP
-   // glColor3f(0.38, 0.38, 0.38);
-    //glColor3f(0.46, 0.46, 0.46);
+    // TRIANGLE SHAPE AT THE TOP
+    // glColor3f(0.38, 0.38, 0.38);
+    // glColor3f(0.46, 0.46, 0.46);
     glColor3f(0.7, 0.71, 0.7);
 
     glBegin(GL_POLYGON);
@@ -19430,11 +18038,10 @@ void cybertruck_01() {
 
     glEnd(); */
 
+    // LEFT WHEEL ABOVE AREA (DIVIDED BY 3 PARTS )
+    //  glColor3f(0.38, 0.38, 0.38);
 
-    //LEFT WHEEL ABOVE AREA (DIVIDED BY 3 PARTS )
-    // glColor3f(0.38, 0.38, 0.38);
-
-    //FIRST PART
+    // FIRST PART
     glColor3f(0.8, 0.8, 0.8);
 
     glBegin(GL_POLYGON);
@@ -19446,10 +18053,9 @@ void cybertruck_01() {
     glVertex2f(89.3237813913763, 19.0947360207571);
     glVertex2f(90.332507, 19.43658);
 
-
     glEnd();
 
-    //2ND PART
+    // 2ND PART
 
     glBegin(GL_POLYGON);
 
@@ -19460,7 +18066,7 @@ void cybertruck_01() {
 
     glEnd();
 
-    //3RD PART
+    // 3RD PART
 
     glBegin(GL_POLYGON);
 
@@ -19470,9 +18076,7 @@ void cybertruck_01() {
 
     glEnd();
 
-
-
-    //MIDDLE BIG PART
+    // MIDDLE BIG PART
 
     glBegin(GL_POLYGON);
 
@@ -19483,9 +18087,8 @@ void cybertruck_01() {
 
     glEnd();
 
-
-    //RIGHT WHEEL PART
-    //FIRST PART FROM LEFT
+    // RIGHT WHEEL PART
+    // FIRST PART FROM LEFT
     glBegin(GL_POLYGON);
 
     glVertex2f(102.21562738043, 17.7359600394586);
@@ -19495,7 +18098,7 @@ void cybertruck_01() {
 
     glEnd();
 
-    //SECOND PART
+    // SECOND PART
 
     glBegin(GL_POLYGON);
 
@@ -19506,8 +18109,7 @@ void cybertruck_01() {
 
     glEnd();
 
-
-    //3RD PART
+    // 3RD PART
 
     glBegin(GL_POLYGON);
 
@@ -19517,13 +18119,11 @@ void cybertruck_01() {
     glVertex2f(108.1678836905354, 20.2900967951374);
     glVertex2f(107.95, 18.19815);
 
-
     glEnd();
 
-
-    //SMALL STRIP'S ABOVE THE WHEELS
-    //FROM LEFT TO RIGHT (VIDED INTO SMALL PARTS)
-   // glColor3f(0.4, 0.4, 0.4);
+    // SMALL STRIP'S ABOVE THE WHEELS
+    // FROM LEFT TO RIGHT (VIDED INTO SMALL PARTS)
+    // glColor3f(0.4, 0.4, 0.4);
     glColor3f(0.62, 0.62, 0.62);
 
     // glColor3f(1, 1, 0);
@@ -19535,7 +18135,6 @@ void cybertruck_01() {
     glVertex2f(89.9781692501741, 18.0949507363866);
     glVertex2f(90.129437008946, 17.8735609019);
 
-
     glEnd();
 
     glBegin(GL_POLYGON);
@@ -19545,7 +18144,6 @@ void cybertruck_01() {
     glVertex2f(90.7367759386753, 19.1809561009779);
     glVertex2f(90.8544262963508, 18.9448137295578);
 
-
     glEnd();
 
     glBegin(GL_POLYGON);
@@ -19554,7 +18152,6 @@ void cybertruck_01() {
     glVertex2f(90.7367759386753, 19.1809561009779);
     glVertex2f(93.012596004179, 19.2687947701727);
     glVertex2f(92.8833142275211, 19.042200350254);
-
 
     glEnd();
 
@@ -19584,7 +18181,6 @@ void cybertruck_01() {
     glVertex2f(102.4963285496896, 17.115057446107);
 
     glEnd();
-
 
     glBegin(GL_POLYGON);
 
@@ -19621,7 +18217,6 @@ void cybertruck_01() {
     glVertex2f(106.1597335364132, 17.9650104386214);
 
     glEnd();
-
 
     glBegin(GL_POLYGON);
 
@@ -19632,16 +18227,14 @@ void cybertruck_01() {
 
     glEnd();
 
-    //SMALL STRIPS END'S HERE
+    // SMALL STRIPS END'S HERE
 
+    // IMMEDIATE PORTION ABOVE THE LEFT WHEEL
+    // DEVIDED INTO SMALL PARTS
 
-    //IMMEDIATE PORTION ABOVE THE LEFT WHEEL
-    //DEVIDED INTO SMALL PARTS
-
-
-    //FIRST PART
+    // FIRST PART
     glColor3f(0.26, 0.26, 0.26);
-    //glColor3f(1, 0, 0);
+    // glColor3f(1, 0, 0);
 
     glBegin(GL_POLYGON);
 
@@ -19656,7 +18249,7 @@ void cybertruck_01() {
 
     glEnd();
 
-    //SECOND PART
+    // SECOND PART
 
     glBegin(GL_POLYGON);
 
@@ -19670,8 +18263,7 @@ void cybertruck_01() {
 
     glEnd();
 
-
-    //THIRD PART
+    // THIRD PART
     glBegin(GL_POLYGON);
 
     glVertex2f(92.8833142275211, 19.042200350254);
@@ -19685,9 +18277,7 @@ void cybertruck_01() {
 
     glEnd();
 
-
-
-    //FOURTH PART HORIZONTAL BIG
+    // FOURTH PART HORIZONTAL BIG
     glBegin(GL_POLYGON);
 
     glVertex2f(93.8193078597677, 17.0295435225331);
@@ -19697,8 +18287,7 @@ void cybertruck_01() {
 
     glEnd();
 
-
-    //FIFTH PART ABOVE THE RIGHT WHEEL
+    // FIFTH PART ABOVE THE RIGHT WHEEL
 
     glBegin(GL_POLYGON);
 
@@ -19713,8 +18302,7 @@ void cybertruck_01() {
 
     glEnd();
 
-
-    //SIXTH PART
+    // SIXTH PART
     glBegin(GL_POLYGON);
 
     glVertex2f(105.3743339357353, 19.0516592012032);
@@ -19725,8 +18313,7 @@ void cybertruck_01() {
     glVertex2f(105.1178371202739, 18.4310614927384);
     glEnd();
 
-
-    //SEVENTH PART
+    // SEVENTH PART
     glBegin(GL_POLYGON);
 
     glVertex2f(106.1597335364132, 17.9650104386214);
@@ -19737,9 +18324,7 @@ void cybertruck_01() {
     glVertex2f(105.9560287608325, 17.0979886452683);
     glEnd();
 
-
-
-    //EIGHTH PART
+    // EIGHTH PART
     glBegin(GL_POLYGON);
 
     glVertex2f(105.9560287608325, 17.0979886452683);
@@ -19748,8 +18333,7 @@ void cybertruck_01() {
     glVertex2f(107.8430647420637, 17.1857577606744);
     glEnd();
 
-
-    //MAIN BIG WINDOW
+    // MAIN BIG WINDOW
     glColor3f(0.16, 0.2, 0.22);
     glBegin(GL_POLYGON);
 
@@ -19759,8 +18343,7 @@ void cybertruck_01() {
     glVertex2f(101.1725779116027, 21.0704956347861);
     glEnd();
 
-
-    //LEFT WHEEL
+    // LEFT WHEEL
 
     glPushMatrix();
     glTranslatef(91.8741956430409, 17.0838695713061, 0);
@@ -19774,8 +18357,8 @@ void cybertruck_01() {
 
     glPopMatrix();
 
-    //RIGHT WHEEL
-    //USING THE CODE OF THE FIRET WHEEL, JUST TRANSLATING IT WITH X AXIS
+    // RIGHT WHEEL
+    // USING THE CODE OF THE FIRET WHEEL, JUST TRANSLATING IT WITH X AXIS
 
     glPushMatrix();
     glTranslatef(12.5, 0, 0);
@@ -19789,11 +18372,9 @@ void cybertruck_01() {
     circle_tree(0.2942081, 91.8741956430409, 17.0838695713061, 0.6, 0.6, 0.6);
     circle_tree(0.179184, 91.9376001481839, 17.8032379181287, 0.6, 0.6, 0.6);
 
-
     glPopMatrix();
 
-
-    //VERTICLE LINES IN THE BODY
+    // VERTICLE LINES IN THE BODY
 
     glColor3f(0, 0, 0);
     glLineWidth(1);
@@ -19812,16 +18393,12 @@ void cybertruck_01() {
     glVertex2f(101.2264509132645, 17.2489320700953);
     glEnd();
 
-
-
     glPopMatrix();
-
-
 }
 
-
 // ID - 50
-void eco_car02() {
+void eco_car02()
+{
 
     glPushMatrix();
     glTranslatef(-30, 5.7, 0);
@@ -19832,7 +18409,7 @@ void eco_car02() {
     glScalef(2, 2, 1);
     glTranslatef(-14.0082396802296, -18.5732220707545, 0);
 
-    //MAIN BODY AREA
+    // MAIN BODY AREA
     glColor3f(0.92, 0.92, 0.92);
     glBegin(GL_POLYGON);
 
@@ -19875,9 +18452,8 @@ void eco_car02() {
     glVertex2f(20.1323298142474, 16.5691573881198);
     glEnd();
 
-
-    //WINDOW AREA
-    //WINDOW BACKGROUND MORE LIGHTER
+    // WINDOW AREA
+    // WINDOW BACKGROUND MORE LIGHTER
 
     glColor3f(0.76, 0.77, 0.77);
     glBegin(GL_POLYGON);
@@ -19930,8 +18506,7 @@ void eco_car02() {
 
     glEnd();
 
-
-    //MORE DEEPER WINDOW AREA
+    // MORE DEEPER WINDOW AREA
     glColor3f(0.4, 0.48, 0.51);
     glBegin(GL_POLYGON);
     glVertex2f(11.5401778376359, 20.7612937050871);
@@ -19972,9 +18547,7 @@ void eco_car02() {
     glVertex2f(10.5461695026757, 20.4069608898987);
     glEnd();
 
-
-
-    //LEFT RED LIGHT 
+    // LEFT RED LIGHT
     glColor3f(0.93, 0.16, 0.16);
     glBegin(GL_POLYGON);
     glVertex2f(8.8389043875314, 16.9252294371196);
@@ -20000,9 +18573,7 @@ void eco_car02() {
 
     glEnd();
 
-
-
-    //RIGHT SIDE AREA
+    // RIGHT SIDE AREA
 
     glBegin(GL_POLYGON);
     glVertex2f(19.5077586230381, 18.8044970010345);
@@ -20025,34 +18596,32 @@ void eco_car02() {
     glVertex2f(19.394046031215, 18.7925272545268);
     glVertex2f(19.5077586230381, 18.8044970010345);
 
-
     glEnd();
 
-
-    //RIGHT SIDE ROUND WHEEL
+    // RIGHT SIDE ROUND WHEEL
 
     glPushMatrix();
     glTranslatef(18.0317399138357, 17.2165732149627, 0);
     glRotatef(-_angle1, 0, 0, 1);
     glTranslatef(-18.0317399138357, -17.2165732149627, 0);
 
-    //MOST BIG CIRLCLE
+    // MOST BIG CIRLCLE
     circle_tree(1.189376, 18.0317399138357, 17.2165732149627, 0.22, 0.28, 0.3);
-    //3RD BIG CIRCLE
+    // 3RD BIG CIRCLE
     circle_tree(0.900029837, 18.0317399138357, 17.2165732149627, 0.4, 0.48, 0.51);
-    //2ND BIG CIRLCE
+    // 2ND BIG CIRLCE
     circle_tree(0.77071985, 18.0317399138357, 17.2165732149627, 0.55, 0.64, 0.67);
-    //MOST SMALL CIRCLE
+    // MOST SMALL CIRCLE
     circle_tree(0.331054, 18.0317399138357, 17.2165732149627, 0.22, 0.28, 0.3);
 
-    //ADDING ONE MORE SMALL CIRCLE FOR IDENTIFY THE WHEEL ROTATION
+    // ADDING ONE MORE SMALL CIRCLE FOR IDENTIFY THE WHEEL ROTATION
     circle_tree(0.16498857, 18.1527741956522, 17.7523663277882, 1, 1, 1);
 
     glPopMatrix();
 
-    //NOW PRINTING THE LEFT WHEEL
-    //USING THE CODE OF THE RIGHT WHEEL
-    //JUST TRANSLATING IT WITH -X VALUE
+    // NOW PRINTING THE LEFT WHEEL
+    // USING THE CODE OF THE RIGHT WHEEL
+    // JUST TRANSLATING IT WITH -X VALUE
 
     glPushMatrix();
     glTranslatef(-7, 0, 0);
@@ -20061,34 +18630,26 @@ void eco_car02() {
     glRotatef(-_angle1, 0, 0, 1);
     glTranslatef(-18.0317399138357, -17.2165732149627, 0);
 
-    //MOST BIG CIRLCLE
+    // MOST BIG CIRLCLE
     circle_tree(1.189376, 18.0317399138357, 17.2165732149627, 0.22, 0.28, 0.3);
-    //3RD BIG CIRCLE
+    // 3RD BIG CIRCLE
     circle_tree(0.900029837, 18.0317399138357, 17.2165732149627, 0.4, 0.48, 0.51);
-    //2ND BIG CIRLCE
+    // 2ND BIG CIRLCE
     circle_tree(0.77071985, 18.0317399138357, 17.2165732149627, 0.55, 0.64, 0.67);
-    //MOST SMALL CIRCLE
+    // MOST SMALL CIRCLE
     circle_tree(0.331054, 18.0317399138357, 17.2165732149627, 0.22, 0.28, 0.3);
 
-    //ADDING ONE MORE SMALL CIRCLE FOR IDENTIFY THE WHEEL ROTATION
+    // ADDING ONE MORE SMALL CIRCLE FOR IDENTIFY THE WHEEL ROTATION
     circle_tree(0.16498857, 18.1527741956522, 17.7523663277882, 1, 1, 1);
 
     glPopMatrix();
 
-
-
-
-
     glPopMatrix();
-
-
-
 }
 
-
 // ID - 51
-void auto_motorcycle03() {
-
+void auto_motorcycle03()
+{
 
     glPushMatrix();
 
@@ -20099,7 +18660,7 @@ void auto_motorcycle03() {
     glTranslatef(75.7906049248812, 19.6415974655871, 0);
     glScalef(2.5, 2.5, 1);
     glTranslatef(-75.7906049248812, -19.6415974655871, 0);
-    //MAIN BLACKISH BACKGROUND PART
+    // MAIN BLACKISH BACKGROUND PART
 
     glColor3f(0.24, 0.24, 0.24);
     glBegin(GL_POLYGON);
@@ -20119,30 +18680,26 @@ void auto_motorcycle03() {
 
     glEnd();
 
-
-    //NOW PRINTING THE LEFT WHEEL + IT'S AREA
+    // NOW PRINTING THE LEFT WHEEL + IT'S AREA
 
     glPushMatrix();
     glTranslatef(72.2324129015567, 18.7378761470537, 0);
     glRotatef(_angle1, 0, 0, 1);
     glTranslatef(-72.2324129015567, -18.7378761470537, 0);
 
-    //BIG BLACK WHEEL CIRCLE
+    // BIG BLACK WHEEL CIRCLE
     circle_tree(0.788769, 72.2324129015567, 18.7378761470537, 0.23, 0.27, 0.31);
-    //SMALL WHITISH CIRCLE IN THTE BLACK WHEEL
+    // SMALL WHITISH CIRCLE IN THTE BLACK WHEEL
     circle_tree(0.5965217, 72.2324129015567, 18.7378761470537, 0.6, 0.65, 0.68);
 
-
-    //NOW ADDING AN EXTRA SMALL RED CIRCLE TO IDENTIFY THE WHEEL ROTATION
+    // NOW ADDING AN EXTRA SMALL RED CIRCLE TO IDENTIFY THE WHEEL ROTATION
     circle_tree(0.1, 72.2384339342806, 18.2450066394858, 1, 0, 0);
 
     glPopMatrix();
 
+    // NOW PRINTING THE COVER OF THE WHEEL
 
-    //NOW PRINTING THE COVER OF THE WHEEL
-
-
-    //BACK WHITISH AREA COVER
+    // BACK WHITISH AREA COVER
     glColor3f(0.72, 0.8, 0.85);
     glBegin(GL_POLYGON);
 
@@ -20174,8 +18731,7 @@ void auto_motorcycle03() {
 
     glEnd();
 
-
-    //MAIN MORE DEEP COLOR COVER AREA
+    // MAIN MORE DEEP COLOR COVER AREA
 
     glColor3f(0.4, 0.49, 0.58);
     glBegin(GL_POLYGON);
@@ -20207,10 +18763,7 @@ void auto_motorcycle03() {
 
     glEnd();
 
-
-
-
-    //MOPRE WHITISH COVER 
+    // MOPRE WHITISH COVER
     glColor3f(0.68, 0.73, 0.78);
     glBegin(GL_POLYGON);
 
@@ -20231,14 +18784,11 @@ void auto_motorcycle03() {
 
     glEnd();
 
+    // NOW PRINTING THE RIGHT SIDE WHEEL AND IT'S COVER AREA
 
-
-    //NOW PRINTING THE RIGHT SIDE WHEEL AND IT'S COVER AREA
-
-    //NOW PRINTING THE RIGHT WHEEL
-    //USING THE CODE OF THE FIRST WHEEL
-    //JUST TRANSLATING IT TO +X AXIS
-
+    // NOW PRINTING THE RIGHT WHEEL
+    // USING THE CODE OF THE FIRST WHEEL
+    // JUST TRANSLATING IT TO +X AXIS
 
     glPushMatrix();
     glTranslatef(6.5, 0, 0);
@@ -20247,12 +18797,12 @@ void auto_motorcycle03() {
     glRotatef(_angle1, 0, 0, 1);
     glTranslatef(-72.2324129015567, -18.7378761470537, 0);
 
-    //BIG BLACK WHEEL CIRCLE
+    // BIG BLACK WHEEL CIRCLE
     circle_tree(0.788769, 72.2324129015567, 18.7378761470537, 0.23, 0.27, 0.31);
-    //SMALL WHITISH CIRCLE IN THTE BLACK WHEEL
+    // SMALL WHITISH CIRCLE IN THTE BLACK WHEEL
     circle_tree(0.5965217, 72.2324129015567, 18.7378761470537, 0.6, 0.65, 0.68);
 
-    //NOW ADDING AN EXTRA SMALL RED CIRCLE TO IDENTIFY THE WHEEL ROTATION
+    // NOW ADDING AN EXTRA SMALL RED CIRCLE TO IDENTIFY THE WHEEL ROTATION
     circle_tree(0.1, 72.2384339342806, 18.2450066394858, 1, 0, 0);
 
     glPopMatrix();
@@ -20282,8 +18832,7 @@ void auto_motorcycle03() {
 
     glEnd();
 
-
-    //MAIN MORE DEEP COLOR COVER AREA
+    // MAIN MORE DEEP COLOR COVER AREA
 
     glColor3f(0.4, 0.49, 0.58);
     glBegin(GL_POLYGON);
@@ -20310,8 +18859,7 @@ void auto_motorcycle03() {
 
     glEnd();
 
-
-    //MOPRE WHITISH COVER 
+    // MOPRE WHITISH COVER
     glColor3f(0.68, 0.73, 0.78);
     glBegin(GL_POLYGON);
 
@@ -20332,11 +18880,9 @@ void auto_motorcycle03() {
 
     glEnd();
 
+    // NOW PRINTING THE UPPER AREA OF THE AUTO MOTORCYCLE
 
-
-    //NOW PRINTING THE UPPER AREA OF THE AUTO MOTORCYCLE
-
-    //MAIN BLACK WINDOW AREA
+    // MAIN BLACK WINDOW AREA
     glColor3f(0.23, 0.23, 0.22);
     glBegin(GL_POLYGON);
 
@@ -20361,13 +18907,9 @@ void auto_motorcycle03() {
     glVertex2f(74, 20.2);
     glVertex2f(73.1175585025977, 20.0272194345945);
 
-
-
     glEnd();
 
-
-
-    //LOWER MORE WHITISH UNDER THE BLACK WINDOW AREA
+    // LOWER MORE WHITISH UNDER THE BLACK WINDOW AREA
 
     glColor3f(0.46, 0.55, 0.63);
     glBegin(GL_POLYGON);
@@ -20404,19 +18946,14 @@ void auto_motorcycle03() {
 
     glEnd();
 
-
     glPopMatrix();
-
-
-
 }
 
-
 // ID - 52
-void eco_car04() {
+void eco_car04()
+{
 
     glPushMatrix();
-
 
     glTranslatef(-110, 5.5, 0);
 
@@ -20426,9 +18963,8 @@ void eco_car04() {
     glScalef(2, 2, 1);
     glTranslatef(-28.9050771280319, -18.9650436824854, 0);
 
-
-    //MAIN BODY AREA(DIVIDED INTO SMALL PARTS)
-    //1ST PART FROM LEFT
+    // MAIN BODY AREA(DIVIDED INTO SMALL PARTS)
+    // 1ST PART FROM LEFT
     glColor3f(0.74, 0.77, 0.83);
     glBegin(GL_POLYGON);
     glVertex2f(22.7894025960132, 16.5817230855369);
@@ -20446,8 +18982,7 @@ void eco_car04() {
     glVertex2f(22.7894025960132, 16.5817230855369);
     glEnd();
 
-
-    //2ND PART
+    // 2ND PART
 
     glBegin(GL_POLYGON);
     glVertex2f(24.0009960447768, 17.4277495454493);
@@ -20461,8 +18996,7 @@ void eco_car04() {
 
     glEnd();
 
-
-    //3RD PART
+    // 3RD PART
 
     glBegin(GL_POLYGON);
 
@@ -20483,8 +19017,7 @@ void eco_car04() {
 
     glEnd();
 
-
-    //4TH PART
+    // 4TH PART
     glBegin(GL_POLYGON);
 
     glVertex2f(31.7449954022483, 18.7580408305858);
@@ -20502,8 +19035,7 @@ void eco_car04() {
 
     glEnd();
 
-
-    //5TH PART
+    // 5TH PART
 
     glBegin(GL_POLYGON);
 
@@ -20520,8 +19052,7 @@ void eco_car04() {
 
     glEnd();
 
-
-    //6TH PART (LAST PART)
+    // 6TH PART (LAST PART)
 
     glBegin(GL_POLYGON);
 
@@ -20542,8 +19073,7 @@ void eco_car04() {
 
     glEnd();
 
-
-    //SMALL BLAKISH CURVER AREA UNDER THE MAIN BODY
+    // SMALL BLAKISH CURVER AREA UNDER THE MAIN BODY
 
     glColor3f(0.09, 0.09, 0.15);
 
@@ -20565,9 +19095,8 @@ void eco_car04() {
 
     glEnd();
 
-
-    //NOW PRINTING UPPER WINDOW AREA
-    //BLACKISH CURVE UNDER THE MAIN GLASS WINDW
+    // NOW PRINTING UPPER WINDOW AREA
+    // BLACKISH CURVE UNDER THE MAIN GLASS WINDW
 
     glColor3f(0.08, 0.1, 0.14);
 
@@ -20596,8 +19125,7 @@ void eco_car04() {
 
     glEnd();
 
-
-    //MAIN GLASS WINDOW
+    // MAIN GLASS WINDOW
 
     glColor3f(0.49, 0.77, 0.8);
 
@@ -20634,8 +19162,7 @@ void eco_car04() {
 
     glEnd();
 
-
-    //LEFT WHITE LIGHT TYPE SMALL AREA
+    // LEFT WHITE LIGHT TYPE SMALL AREA
 
     glColor3f(1, 1, 1);
     glBegin(GL_POLYGON);
@@ -20648,11 +19175,9 @@ void eco_car04() {
     glVertex2f(22.1744339371399, 19.4744725845589);
     glVertex2f(22.1858188754247, 19.2574685443034);
 
-
     glEnd();
 
-
-    //RIGHT SIDE BLUE COLOR SMALL AREA
+    // RIGHT SIDE BLUE COLOR SMALL AREA
     glColor3f(0.33, 0.74, 0.81);
     glBegin(GL_POLYGON);
 
@@ -20663,8 +19188,7 @@ void eco_car04() {
 
     glEnd();
 
-
-    //RIGHT SIDE BLACK COLOR SMALL AREA
+    // RIGHT SIDE BLACK COLOR SMALL AREA
 
     glColor3f(0, 0, 0);
     glBegin(GL_POLYGON);
@@ -20677,126 +19201,120 @@ void eco_car04() {
 
     glEnd();
 
-
-    //LEFT SIDE WHEEL (TOTAL 3 CIRCLES)
-
+    // LEFT SIDE WHEEL (TOTAL 3 CIRCLES)
 
     glPushMatrix();
     glTranslatef(24.1620839604869, 17.7457923637786, 0);
     glRotatef(-_angle1, 0, 0, 1);
     glTranslatef(-24.1620839604869, -17.7457923637786, 0);
 
-    //MOST BIG CIRCLE BLAKISH
+    // MOST BIG CIRCLE BLAKISH
     circle_tree(1.422257, 24.1620839604869, 17.7457923637786, 0.33, 0.36, 0.38);
 
-    //2ND MOST BIG CIRCLE MORE BLAKISH
+    // 2ND MOST BIG CIRCLE MORE BLAKISH
     circle_tree(1.121743, 24.1620839604869, 17.7457923637786, 0.15, 0.16, 0.2);
 
-
-    //SMALL CIRCLE WHITISH
+    // SMALL CIRCLE WHITISH
     circle_tree(0.793409, 24.1620839604869, 17.7457923637786, 0.82, 0.86, 0.88);
 
-    //ADDING EXTRA SMALL CIRCLE TO IDENTIFY WHEEL ROTATION
+    // ADDING EXTRA SMALL CIRCLE TO IDENTIFY WHEEL ROTATION
     circle_tree(0.2124966, 24.7379151688819, 18.6402067757037, 1, 0, 0);
 
     glPopMatrix();
 
-
-    //RIGHT SIDE WHEEL
+    // RIGHT SIDE WHEEL
 
     glPushMatrix();
     glTranslatef(33.26786152524787, 17.476000047967773, 0);
     glRotatef(-_angle1, 0, 0, 1);
     glTranslatef(-33.26786152524787, -17.476000047967773, 0);
 
-
-    //MOST BIG CIRCLE BLAKISH
+    // MOST BIG CIRCLE BLAKISH
     circle_tree(1.09028, 33.26786152524787, 17.476000047967773, 0.33, 0.36, 0.38);
 
-    //2ND MOST BIG CIRCLE MORE BLAKISH
+    // 2ND MOST BIG CIRCLE MORE BLAKISH
     circle_tree(0.831846, 33.26786152524787, 17.476000047967773, 0.15, 0.16, 0.2);
 
-
-    //SMALL CIRCLE WHITISH
+    // SMALL CIRCLE WHITISH
     circle_tree(00.62824, 33.26786152524787, 17.476000047967773, 0.82, 0.86, 0.88);
 
-    //ADDING EXTRA SMALL CIRCLE TO IDENTIFY WHEEL ROTATION
+    // ADDING EXTRA SMALL CIRCLE TO IDENTIFY WHEEL ROTATION
     circle_tree(0.2124966, 32.4891303493756, 17.8957075110131, 1, 0, 0);
 
     glPopMatrix();
 
-
-
-
     glPopMatrix();
-
-
 }
 
-
-
-
 // ID - 71
-void move_fire_smoke(int value) {
+void move_fire_smoke(int value)
+{
     _move_fire_smoke += 0.1;
-    if (_move_fire_smoke > 15) {
+    if (_move_fire_smoke > 15)
+    {
         _move_fire_smoke = 0;
     }
     glutPostRedisplay();
     glutTimerFunc(20, move_fire_smoke, 0);
 }
 
-
 // ID - 70
-void  move_flying_car(int vlaue) {
+void move_flying_car(int vlaue)
+{
 
     _move_fly_car_01 -= 0.65;
     _move_fly_car_03 -= 0.35;
     _move_fly_car_02 += 0.35;
     _move_fly_car_04 += 0.45;
 
-    if (_move_fly_car_01 < -300) {
+    if (_move_fly_car_01 < -300)
+    {
         _move_fly_car_01 = 0;
     }
 
-    if (_move_fly_car_02 > 150) {
+    if (_move_fly_car_02 > 150)
+    {
         _move_fly_car_02 = 0;
     }
 
-    if (_move_fly_car_03 < -190) {
+    if (_move_fly_car_03 < -190)
+    {
         _move_fly_car_03 = 0;
     }
 
-    if (_move_fly_car_04 > 170) {
+    if (_move_fly_car_04 > 170)
+    {
         _move_fly_car_04 = 0;
     }
 
-
-
     glutPostRedisplay();
     glutTimerFunc(20, move_flying_car, 0);
-
 }
 
 // ID - 73
-void move_cars(int value) {
+void move_cars(int value)
+{
     move_cybertruck_01 -= 0.45;
     move_ecocar_02 += 0.4;
     move_auto_motorcycle_03 -= 0.7;
     move_ecocar_04 += 0.5;
 
-    if (move_cybertruck_01 < -170) {
+    if (move_cybertruck_01 < -170)
+    {
         move_cybertruck_01 = 0;
     }
-    if (move_ecocar_02 > 170) {
+    if (move_ecocar_02 > 170)
+    {
         move_ecocar_02 = 0;
     }
 
-    if (move_auto_motorcycle_03 < -230) {
+    if (move_auto_motorcycle_03 < -230)
+    {
         move_auto_motorcycle_03 = 0;
     }
 
-    if (move_ecocar_04 > 220) {
+    if (move_ecocar_04 > 220)
+    {
         move_ecocar_04 = 0;
     }
     glutPostRedisplay();
@@ -20804,7 +19322,8 @@ void move_cars(int value) {
 }
 
 // ID - 67
-void rotate_fan1(int value) {
+void rotate_fan1(int value)
+{
 
     _angle1 += 15.0f;
     _angle2 += 30.0f;
@@ -20821,78 +19340,86 @@ void rotate_fan1(int value) {
     {
         _angle2 -= 360;
     }
-    if (rotate_smoke > 360.0) {
+    if (rotate_smoke > 360.0)
+    {
         rotate_smoke -= 360;
     }
-    glutPostRedisplay(); //Notify GLUT that the display has changed
+    glutPostRedisplay(); // Notify GLUT that the display has changed
 
-    glutTimerFunc(20, rotate_fan1, 0); //Notify GLUT to call update again in 25 milliseconds
+    glutTimerFunc(20, rotate_fan1, 0); // Notify GLUT to call update again in 25 milliseconds
 }
 
-
-
-
 // ID - 64
-void wave_fire(int value) {
+void wave_fire(int value)
+{
 
     statefire++;
     statefireedge++;
 
-    if (statefire > 3) {
+    if (statefire > 3)
+    {
         statefire = 1;
     }
 
-    if (statefireedge > 2) {
+    if (statefireedge > 2)
+    {
         statefireedge = 1;
     }
 
-    glutPostRedisplay(); //Notify GLUT that the display has changed
+    glutPostRedisplay(); // Notify GLUT that the display has changed
 
-    glutTimerFunc(300, wave_fire, 0); //Notify GLUT to call update again in 25 milliseconds
+    glutTimerFunc(300, wave_fire, 0); // Notify GLUT to call update again in 25 milliseconds
 }
 
 // ID - 65
-void zoom_fire(int value) {
+void zoom_fire(int value)
+{
 
-    switch (statefirezoom) {
+    switch (statefirezoom)
+    {
     case 1:
-        if (zoom < 1.5) {
+        if (zoom < 1.5)
+        {
             zoom += 0.01;
             fireleftmove -= 1.17;
             fireupmove -= 0.5;
         }
-        else {
+        else
+        {
             statefirezoom = 2;
         }
         break;
     case 2:
-        if (zoom > 1) {
+        if (zoom > 1)
+        {
             zoom -= 0.01;
             fireleftmove += 1.17;
             fireupmove += 0.5;
         }
-        else {
+        else
+        {
             statefirezoom = 1;
         }
         break;
 
-        //cout << state1 << endl;
-
+        // cout << state1 << endl;
     }
 
+    glutPostRedisplay(); // Notify GLUT that the display has changed
 
-    glutPostRedisplay(); //Notify GLUT that the display has changed
-
-    glutTimerFunc(20, zoom_fire, 0); //Notify GLUT to call update again in 25 milliseconds
+    glutTimerFunc(20, zoom_fire, 0); // Notify GLUT to call update again in 25 milliseconds
 }
 
 // ID - 74
-void zoom_to_fire_animation(int value) {
-    if (zoom_to_fire && zoom_fire_value <= 1.7) {
+void zoom_to_fire_animation(int value)
+{
+    if (zoom_to_fire && zoom_fire_value <= 1.7)
+    {
         zoom_fire_value += 0.005;
     }
 
-    if (!zoom_to_fire && zoom_fire_value > 1) {
+    if (!zoom_to_fire && zoom_fire_value > 1)
+    {
         zoom_fire_value -= 0.005;
     }
 
@@ -20900,91 +19427,95 @@ void zoom_to_fire_animation(int value) {
     glutTimerFunc(20, zoom_to_fire_animation, 0);
 }
 
-
-
-
 //This funtion is for the wing chanigng functionality of the birds...\
 // ID - 61
-void change_wing(int value) {
+void change_wing(int value)
+{
     state = !state;
 
     glutPostRedisplay();
     glutTimerFunc(80, change_wing, 0);
-
 }
 
-void PlayMusic_run(const string& path) {
+void PlayMusic_run(const string &path)
+{
     // if (_ismovetrain)
     PlaySound(path.c_str(), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
     glutPostRedisplay();
 }
 
-void PlayMusic_brake(const string& path) {
+void PlayMusic_brake(const string &path)
+{
     // if (_ismovetrain)
     PlaySound(path.c_str(), NULL, SND_FILENAME | SND_ASYNC);
     glutPostRedisplay();
 }
 
-void PlayMusic_birds(const string& path) {
+void PlayMusic_birds(const string &path)
+{
     // if (_ismovetrain)
     PlaySound(path.c_str(), NULL, SND_FILENAME | SND_ASYNC);
-    //glutPostRedisplay();
+    // glutPostRedisplay();
 }
 
-void PlayMusic_misson(const string& path) {
+void PlayMusic_misson(const string &path)
+{
     // if (_ismovetrain)
     PlaySound(path.c_str(), NULL, SND_FILENAME | SND_ASYNC);
-    //glutPostRedisplay();
+    // glutPostRedisplay();
 }
 
 // ID - 68
-void move_helicopter(int value) {
-    if (countfire > 15 && showfire) {
-        if (_movehelicopter > -50) {
+void move_helicopter(int value)
+{
+    if (countfire > 15 && showfire)
+    {
+        if (_movehelicopter > -50)
+        {
             //_movehelicopter = 0;
             _movehelicopter -= 0.5;
         }
     }
-    if (!showfire) {
+    if (!showfire)
+    {
         _movehelicopter = 0;
     }
 
-    if (vanishfire < 7) {
+    if (vanishfire < 7)
+    {
         _movehelicopter -= 0.5;
-
     }
 
-    if (_movehelicopter == -75) {
+    if (_movehelicopter == -75)
+    {
         // PlayMusic_misson("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/misson_accomplished.wav");
         PlayMusic_misson((soundsFolderPath + "misson_accomplished.wav").c_str());
-
     }
 
-
-    //cout << _movehelicopter << endl;
+    // cout << _movehelicopter << endl;
 
     glutPostOverlayRedisplay();
     glutTimerFunc(20, move_helicopter, 0);
 }
 
-
 // This function is for the movement of the birds.. The flying animation...\
 // ID - 62
-void fly(int value) {
+void fly(int value)
+{
 
     if (_isflybird)
     {
         move_bird -= 0.5;
-        //cout << move_bird<< endl;
+        // cout << move_bird<< endl;
 
-        if (move_bird == -0.5) {
+        if (move_bird == -0.5)
+        {
             // PlayMusic_birds("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/BIRDS_CHIRPING.wav");
-             //sndPlaySound("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/BIRDS_CHIRPING.wav", SND_ASYNC);
+            // sndPlaySound("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/BIRDS_CHIRPING.wav", SND_ASYNC);
             PlayMusic_birds((soundsFolderPath + "BIRDS_CHIRPING.wav").c_str());
-
-
         }
-        if (move_bird < -150 - 135) {
+        if (move_bird < -150 - 135)
+        {
             move_bird = 0;
         }
 
@@ -20992,31 +19523,31 @@ void fly(int value) {
     }
 
     glutTimerFunc(20, fly, 0);
-
 }
 
+// This function is for the movement of the train..
+//  ID - 63
+void _move_train(int value)
+{
 
-
-//This function is for the movement of the train..
-// ID - 63
-void _move_train(int value) {
-
-    if (_ismovetrain) {
+    if (_ismovetrain)
+    {
         _movetrain -= 0.8;
 
-        if (_movetrain == -(float)0.8) {
+        if (_movetrain == -(float)0.8)
+        {
 
-            //PlayMusic_run("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/trainsound.wav");
+            // PlayMusic_run("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/trainsound.wav");
             PlayMusic_run((soundsFolderPath + "train_run.wav").c_str());
             // cout << "if executed" << endl;
         }
 
-        if (_movetrain < -330) {
+        if (_movetrain < -330)
+        {
             _movetrain = 0;
-
         }
 
-        //cout << _movetrain << endl;
+        // cout << _movetrain << endl;
 
         // train_music("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/trainsound.wav");
         glutPostRedisplay();
@@ -21024,30 +19555,28 @@ void _move_train(int value) {
     glutTimerFunc(20, _move_train, 0);
 }
 
-
-
-
-
-//This function is used for the keypress functionality to the toggle the movement of the train;
+// This function is used for the keypress functionality to the toggle the movement of the train;
 
 // ID - 75
-void keypress_handle(unsigned char key, int x, int y) {
-    switch (key) {
+void keypress_handle(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
     case 'a':
-        if (!_ismovetrain) {
+        if (!_ismovetrain)
+        {
             _ismovetrain = true;
             // PlayMusic_run("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/trainsound.wav");
             PlayMusic_run((soundsFolderPath + "train_run.wav").c_str());
-
         }
 
         break;
     case 'w':
-        if (_ismovetrain) {
+        if (_ismovetrain)
+        {
             _ismovetrain = false;
             // PlayMusic_brake("E:/SPRING 23-24/COMPUTER GRAPHICS/Computer-Graphics-main/OpenGL Programming/TRAIN_BRAKE_02.wav");
             PlayMusic_brake((soundsFolderPath + "TRAIN_BRAKE_02.wav").c_str());
-
         }
         break;
     case 'b':
@@ -21059,11 +19588,13 @@ void keypress_handle(unsigned char key, int x, int y) {
         countfire = 0;
         vanishfire = 20;
 
-        //FLYING CARS RESET POSITION
-        if (showfire) {
+        // FLYING CARS RESET POSITION
+        if (showfire)
+        {
             is_fly_car = false;
         }
-        if (!showfire) {
+        if (!showfire)
+        {
             is_fly_car = true;
         }
         _move_fly_car_01 = 0;
@@ -21073,7 +19604,7 @@ void keypress_handle(unsigned char key, int x, int y) {
         break;
 
     case 'z':
-        //if (showfire) {
+        // if (showfire) {
         zoom_to_fire = !zoom_to_fire;
         //}
     }
@@ -21082,16 +19613,20 @@ void keypress_handle(unsigned char key, int x, int y) {
 }
 
 // ID - 66
-void fire_animation(int value) {
-    if (showfire) {
+void fire_animation(int value)
+{
+    if (showfire)
+    {
         countfire++;
     }
 
-    if (countfire > 20) {
+    if (countfire > 20)
+    {
         vanishfire--;
     }
 
-    if (vanishfire == 5) {
+    if (vanishfire == 5)
+    {
         is_fly_car = true;
         _move_fly_car_01 = 0;
         _move_fly_car_02 = 0;
@@ -21099,21 +19634,20 @@ void fire_animation(int value) {
         _move_fly_car_04 = 0;
     }
 
-    //cout << vanishfire << endl;
+    // cout << vanishfire << endl;
 
     glutPostRedisplay();
     glutTimerFunc(1000, fire_animation, 0);
-
 }
 
 // ID - 58
-void smoke_fire_all() {
-    //LEFT SIDE SMOKE
+void smoke_fire_all()
+{
+    // LEFT SIDE SMOKE
     glPushMatrix();
     glTranslatef(0, 5, 0);
 
     fire_smoke();
-
 
     glPushMatrix();
     glTranslatef(0, -5, 0);
@@ -21137,15 +19671,13 @@ void smoke_fire_all() {
     glScalef(0.3, 0.3, 0);
     glTranslatef(46 + 61 + 143, 30 + 40 + 100, 0);
     fire_smoke();
-    glPopMatrix();//LEFT SIDE SMOKE ENDS HERE
+    glPopMatrix(); // LEFT SIDE SMOKE ENDS HERE
 
-
-    //MIDDLE FIRE SOMKE
+    // MIDDLE FIRE SOMKE
     glPushMatrix();
     glTranslatef(5, 0, 0);
 
     fire_smoke();
-
 
     glPushMatrix();
     glTranslatef(0, -5, 0);
@@ -21173,15 +19705,13 @@ void smoke_fire_all() {
 
     glPopMatrix(); // RIGHT SIDE SMOKE FIRE END HERE
 
-
-    //RIGHT SIDE FIRE SMOKE
+    // RIGHT SIDE FIRE SMOKE
 
     glPushMatrix();
     glTranslatef(10, 0, 0);
 
     fire_smoke();
 
-
     glPushMatrix();
     glTranslatef(0, -5, 0);
 
@@ -21211,137 +19741,171 @@ void smoke_fire_all() {
     glPopMatrix();
 }
 
-
-
 // ID - 72
-void move_jungle_leaf(int valule) {
-    switch (state_leaf6) { //top jungle 6
+void move_jungle_leaf(int valule)
+{
+    switch (state_leaf6)
+    { // top jungle 6
     case 1:
-        if (move_jungle_leaf_top6 < 0.5) {
+        if (move_jungle_leaf_top6 < 0.5)
+        {
             move_jungle_leaf_top6 += 0.01;
         }
-        else {
+        else
+        {
             state_leaf6 = 2;
         }
         break;
     case 2:
-        if (move_jungle_leaf_top6 > -0.5) {
+        if (move_jungle_leaf_top6 > -0.5)
+        {
             move_jungle_leaf_top6 -= 0.01;
         }
-        else {
+        else
+        {
             state_leaf6 = 1;
         }
         break;
     }
 
-    switch (state_leaf5) { //top jungle 5
+    switch (state_leaf5)
+    { // top jungle 5
     case 1:
-        if (move_jungle_leaf_top5 < 0.5) {
+        if (move_jungle_leaf_top5 < 0.5)
+        {
             move_jungle_leaf_top5 += 0.01;
         }
-        else {
+        else
+        {
             state_leaf5 = 2;
         }
         break;
     case 2:
-        if (move_jungle_leaf_top5 > -0.5) {
+        if (move_jungle_leaf_top5 > -0.5)
+        {
             move_jungle_leaf_top5 -= 0.01;
         }
-        else {
+        else
+        {
             state_leaf5 = 1;
         }
         break;
     }
 
-    switch (state_leaf4) { //top jungle 4
+    switch (state_leaf4)
+    { // top jungle 4
     case 1:
-        if (move_jungle_leaf_top4 < 0.5) {
+        if (move_jungle_leaf_top4 < 0.5)
+        {
             move_jungle_leaf_top4 += 0.01;
         }
-        else {
+        else
+        {
             state_leaf4 = 2;
         }
         break;
     case 2:
-        if (move_jungle_leaf_top4 > -0.5) {
+        if (move_jungle_leaf_top4 > -0.5)
+        {
             move_jungle_leaf_top4 -= 0.01;
         }
-        else {
+        else
+        {
             state_leaf4 = 1;
         }
         break;
     }
 
-    switch (state_leaf3) { //top jungle 3
+    switch (state_leaf3)
+    { // top jungle 3
     case 1:
-        if (move_jungle_leaf_top3 < 0.5) {
+        if (move_jungle_leaf_top3 < 0.5)
+        {
             move_jungle_leaf_top3 += 0.01;
         }
-        else {
+        else
+        {
             state_leaf3 = 2;
         }
         break;
     case 2:
-        if (move_jungle_leaf_top3 > -0.5) {
+        if (move_jungle_leaf_top3 > -0.5)
+        {
             move_jungle_leaf_top3 -= 0.01;
         }
-        else {
+        else
+        {
             state_leaf3 = 1;
         }
         break;
     }
-    switch (state_leaf2) { //top jungle 2
+    switch (state_leaf2)
+    { // top jungle 2
     case 1:
-        if (move_jungle_leaf_top2 < 0.5) {
+        if (move_jungle_leaf_top2 < 0.5)
+        {
             move_jungle_leaf_top2 += 0.01;
         }
-        else {
+        else
+        {
             state_leaf2 = 2;
         }
         break;
     case 2:
-        if (move_jungle_leaf_top2 > -0.5) {
+        if (move_jungle_leaf_top2 > -0.5)
+        {
             move_jungle_leaf_top2 -= 0.01;
         }
-        else {
+        else
+        {
             state_leaf2 = 1;
         }
         break;
     }
 
-    switch (state_leaf1) { //top jungle 1(MOST LOWER)
+    switch (state_leaf1)
+    { // top jungle 1(MOST LOWER)
     case 1:
-        if (move_jungle_leaf_top1 < 0.5) {
+        if (move_jungle_leaf_top1 < 0.5)
+        {
             move_jungle_leaf_top1 += 0.01;
         }
-        else {
+        else
+        {
             state_leaf1 = 2;
         }
         break;
     case 2:
-        if (move_jungle_leaf_top1 > -0.5) {
+        if (move_jungle_leaf_top1 > -0.5)
+        {
             move_jungle_leaf_top1 -= 0.01;
         }
-        else {
+        else
+        {
             state_leaf1 = 1;
         }
         break;
     }
 
-    switch (state_flower_zoom) { //FOR FLOWER ZOOM IN AND ZOOM OUT
+    switch (state_flower_zoom)
+    { // FOR FLOWER ZOOM IN AND ZOOM OUT
     case 1:
-        if (zoom_flower < 1.3) {
+        if (zoom_flower < 1.3)
+        {
             zoom_flower += 0.004;
         }
-        else {
+        else
+        {
             state_flower_zoom = 2;
         }
         break;
     case 2:
-        if (zoom_flower > 1) {
+        if (zoom_flower > 1)
+        {
             zoom_flower -= 0.004;
         }
-        else {
+        else
+        {
             state_flower_zoom = 1;
         }
         break;
@@ -21351,48 +19915,51 @@ void move_jungle_leaf(int valule) {
     glutTimerFunc(20, move_jungle_leaf, 0);
 }
 
-//ID - 56
-void fire_show() {
-    //first fire shape
-    if (showfire) {
+// ID - 56
+void fire_show()
+{
+    // first fire shape
+    if (showfire)
+    {
 
         if (countfire > 1 && vanishfire > 15)
             fire();
 
-        //NOW PRINTING REST OF THE FIRE SHAPE
-        if (countfire > 3 && vanishfire > 15) {
+        // NOW PRINTING REST OF THE FIRE SHAPE
+        if (countfire > 3 && vanishfire > 15)
+        {
             glPushMatrix();
             glTranslatef(-5, 0, 0);
             fire();
             glPopMatrix();
         }
 
-        if (countfire > 5 && vanishfire > 15) {
+        if (countfire > 5 && vanishfire > 15)
+        {
 
             glPushMatrix();
             glTranslatef(-10, 0, 0);
             fire();
             glPopMatrix();
         }
-
-
 
         glPushMatrix();
         glTranslatef(0, 6, 0);
-        if (countfire > 7 && vanishfire > 17) {
+        if (countfire > 7 && vanishfire > 17)
+        {
             fire();
-
         }
 
-
-        if (countfire > 9 && vanishfire > 17) {
+        if (countfire > 9 && vanishfire > 17)
+        {
 
             glPushMatrix();
             glTranslatef(-5, 0, 0);
             fire();
             glPopMatrix();
         }
-        if (countfire > 11 && vanishfire > 17) {
+        if (countfire > 11 && vanishfire > 17)
+        {
 
             glPushMatrix();
             glTranslatef(-10, 0, 0);
@@ -21401,24 +19968,24 @@ void fire_show() {
         }
 
         glPopMatrix();
-
 
         glPushMatrix();
         glTranslatef(0, -6, 0);
-        if (countfire > 13 && vanishfire > 13) {
+        if (countfire > 13 && vanishfire > 13)
+        {
             fire();
-
         }
 
-
-        if (countfire > 14 && vanishfire > 13) {
+        if (countfire > 14 && vanishfire > 13)
+        {
 
             glPushMatrix();
             glTranslatef(-5, 0, 0);
             fire();
             glPopMatrix();
         }
-        if (countfire > 15 && vanishfire > 13) {
+        if (countfire > 15 && vanishfire > 13)
+        {
 
             glPushMatrix();
             glTranslatef(-10, 0, 0);
@@ -21427,24 +19994,24 @@ void fire_show() {
         }
 
         glPopMatrix();
-
 
         glPushMatrix();
         glTranslatef(0, -12, 0);
-        if (countfire > 16 && vanishfire > 11) {
+        if (countfire > 16 && vanishfire > 11)
+        {
             fire();
-
         }
 
-
-        if (countfire > 16 && vanishfire > 11) {
+        if (countfire > 16 && vanishfire > 11)
+        {
 
             glPushMatrix();
             glTranslatef(-5, 0, 0);
             fire();
             glPopMatrix();
         }
-        if (countfire > 16 && vanishfire > 11) {
+        if (countfire > 16 && vanishfire > 11)
+        {
 
             glPushMatrix();
             glTranslatef(-10, 0, 0);
@@ -21453,25 +20020,24 @@ void fire_show() {
         }
 
         glPopMatrix();
-
-
 
         glPushMatrix();
         glTranslatef(0, -18, 0);
-        if (countfire > 17 && vanishfire > 9) {
+        if (countfire > 17 && vanishfire > 9)
+        {
             fire();
-
         }
 
-
-        if (countfire > 17 && vanishfire > 9) {
+        if (countfire > 17 && vanishfire > 9)
+        {
 
             glPushMatrix();
             glTranslatef(-5, 0, 0);
             fire();
             glPopMatrix();
         }
-        if (countfire > 17 && vanishfire > 9) {
+        if (countfire > 17 && vanishfire > 9)
+        {
 
             glPushMatrix();
             glTranslatef(-10, 0, 0);
@@ -21480,13 +20046,13 @@ void fire_show() {
         }
 
         glPopMatrix();
-
     }
 }
 
-
-void zoom_out_to_normal_animation(int value) {
-    if (zoom_to_normal_scenario_03_value > 1) {
+void zoom_out_to_normal_animation(int value)
+{
+    if (zoom_to_normal_scenario_03_value > 1)
+    {
         zoom_to_normal_scenario_03_value -= 0.05;
     }
     glutPostRedisplay();
@@ -21509,50 +20075,48 @@ void zoom_out_to_normal_animation(int value) {
 }
  */
 
-
-void tishat() {
+void tishat()
+{
 
     // glClearColor(0.46, 0.72, 0.83, 1.0f); // Set background color to black and opaque
     glClearColor(1, 1, 1, 1.0f); // Set background color to black and opaque
     glClear(GL_COLOR_BUFFER_BIT);
 
-
-    //THIS PUSH POP IS FOR ZOOM OUT TO NORMAL TRANSITION OF THE WHOLE SCNARIO
+    // THIS PUSH POP IS FOR ZOOM OUT TO NORMAL TRANSITION OF THE WHOLE SCNARIO
 
     glPushMatrix();
     // glTranslatef(22.2801107346471, 40.0651837178067, 0);
     glTranslatef(120, 60, 0);
     glScalef(zoom_to_normal_scenario_03_value, zoom_to_normal_scenario_03_value, 1);
     glTranslatef(-120, -60, 0);
-    //glTranslatef(-22.2801107346471, -40.0651837178067, 0);
+    // glTranslatef(-22.2801107346471, -40.0651837178067, 0);
 
-    //THIS PUSHPOP IS FOR ZOOM TO FIRE AND HELICOPTER
+    // THIS PUSHPOP IS FOR ZOOM TO FIRE AND HELICOPTER
 
     glPushMatrix();
     glTranslatef(120.4870418412767, 74.2708555062664, 0);
     glScalef(zoom_fire_value, zoom_fire_value, 1);
     glTranslatef(-120.4870418412767, -74.2708555062664, 0);
 
-
     glPushMatrix();
     glTranslatef(0, -3, 0);
-    sky();  //ID - 28
+    sky(); // ID - 28
 
-    //Five birds flying 
+    // Five birds flying
     glPushMatrix();
     glScalef(0.5, 0.5, 1);
     glTranslatef(0, 90, 0);
-    bird01(); //ID - 33
-    bird02(); //ID - 34
-    bird03(); //ID - 35
-    bird04(); //ID - 36
+    bird01(); // ID - 33
+    bird02(); // ID - 34
+    bird03(); // ID - 35
+    bird04(); // ID - 36
     bird05(); // ID - 37
     glPopMatrix();
 
-    //trees
+    // trees
     trees_back_tree01(); // ID - 47
-    tree_04(); // ID - 41
-    tree_03(); // ID - 40
+    tree_04();           // ID - 41
+    tree_03();           // ID - 40
 
     building_02(); // ID - 18
     building_01(); // ID - 17
@@ -21567,28 +20131,26 @@ void tishat() {
 
     glPopMatrix();
 
-    if (countfire > 12 && vanishfire > 11) {
+    if (countfire > 12 && vanishfire > 11)
+    {
         glPushMatrix();
         glTranslatef(0, -3, 0);
         smoke_fire_all(); // ID - 58
         glPopMatrix();
     }
 
-
     fire_show(); // ID - 56
 
     if (countfire > 18 && vanishfire > 7)
-        //if (_movehelicopter == -50)
+        // if (_movehelicopter == -50)
         drawRain(); // ID - 07
-
 
     glPushMatrix();
     glTranslatef(0, -3, 0);
 
-
     building_10(); // ID - 26
 
-    //TRANSLATING THE FIRST TREE FROM LEFT TO -Y AXIS SO THAT IT DOESN'T COVER THE FIRST BUILDING SO MUCH
+    // TRANSLATING THE FIRST TREE FROM LEFT TO -Y AXIS SO THAT IT DOESN'T COVER THE FIRST BUILDING SO MUCH
     glPushMatrix();
     glTranslated(-7, 0, 0);
     tree_01(); // ID - 38
@@ -21600,45 +20162,35 @@ void tishat() {
     tree_02(); // ID - 39
     glPopMatrix();
 
-
     tree_05(); // ID - 42
     tree_06(); // ID - 43
     tree_07(); // ID - 44
     tree_08(); // ID - 45
     tree_09(); // ID - 46
 
-    //upper area of road
+    // upper area of road
     upper_road_area(); // ID - 48
-
 
     glPopMatrix();
 
-
-
-
-
-    //TRANSLATING THE TRAIN, TRAIN PLATFORM, ROAD, POND IN -7 VALUE IN Y AXIS
+    // TRANSLATING THE TRAIN, TRAIN PLATFORM, ROAD, POND IN -7 VALUE IN Y AXIS
     glPushMatrix();
     glTranslatef(0, -7, 0);
 
-
     // ApplyTexture(75, 0, 75, 10, 55, 10, 55, 0, textures[0].textureID);
 
-    train_platform();; // ID - 09
+    train_platform();
+    ;                 // ID - 09
     train_piller01(); // ID - 10
     train_piller02(); // ID - 11
     train_piller03(); // ID - 12
     train_piller04(); // ID - 13
 
-
-
-    //This push_pop matrix is for the train movement animation
+    // This push_pop matrix is for the train movement animation
     glPushMatrix();
     glTranslatef(85, 1.3, 0);
 
     glTranslatef(_movetrain, 0, 0);
-
-
 
     train01(); // ID - 14
     train02(); // ID - 15
@@ -21646,24 +20198,22 @@ void tishat() {
 
     glPopMatrix();
 
-
     road(); // ID - 06
 
-    eco_car02(); // ID - 50
-    eco_car04(); // ID - 52
-    cybertruck_01(); // ID - 49
+    eco_car02();         // ID - 50
+    eco_car04();         // ID - 52
+    cybertruck_01();     // ID - 49
     auto_motorcycle03(); // ID - 51
 
-
     left_pond_upper(); // ID - 53
-    left_pond(); // ID - 01
-    ciecle();// ID - 08
-    front_road(); // ID - 02
-    poll_first(); // ID - 04
-    poll_second(); // ID - 05
+    left_pond();       // ID - 01
+    ciecle();          // ID - 08
+    front_road();      // ID - 02
+    poll_first();      // ID - 04
+    poll_second();     // ID - 05
     side_green_area(); // ID - 03
 
-    //FLOWERS
+    // FLOWERS
     glPushMatrix();
     // glTranslatef(-130, -4.3, 0);
     // glScalef(2, 2, 1);
@@ -21672,11 +20222,7 @@ void tishat() {
     flowers_right_grass(); // ID - 54
     glPopMatrix();
 
-
-
-
     glPopMatrix();
-
 
     glPushMatrix();
 
@@ -21687,9 +20233,8 @@ void tishat() {
 
     glPopMatrix();
 
-
-
-    if (is_fly_car) {
+    if (is_fly_car)
+    {
         flying_car_01(); // ID - 29
         flying_car_02(); // ID - 30
         flying_car_03(); // ID - 31
@@ -21698,48 +20243,40 @@ void tishat() {
 
     glPopMatrix();
 
-
     glPopMatrix();
-
 
     glFlush(); // Render now
 
     glutSwapBuffers();
-
-
-
 }
 
-void initTishat() {
+void initTishat()
+{
     // glutCreateWindow("Futureistic city"); // Create a window with the given title
     glutInitWindowSize(1420, 920);
     init();
-    //glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
+    // glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
 
+    // glutDisplayFunc(tishat); // Register display callback handler for window re-paint
 
-
-    //glutDisplayFunc(tishat); // Register display callback handler for window re-paint
-
-
-    glutTimerFunc(20, change_wing, 0); // ID - 61
-    glutTimerFunc(80, fly, 0); // ID - 62
-    glutTimerFunc(20, _move_train, 0); // ID - 63
-    glutTimerFunc(150, wave_fire, 0);  // ID - 64
-    glutTimerFunc(20, zoom_fire, 0); // ID - 65
-    glutTimerFunc(1000, fire_animation, 0); // ID - 66
-    glutTimerFunc(20, rotate_fan1, 0); // ID - 67
-    glutTimerFunc(20, move_helicopter, 0); // ID - 68
-    glutTimerFunc(10, update, 0); // ID - 69
-    glutTimerFunc(20, move_flying_car, 0); // ID - 90
-    glutTimerFunc(20, move_fire_smoke, 0); // ID - 71
-    glutTimerFunc(20, move_jungle_leaf, 0); // ID - 72
-    glutTimerFunc(20, move_cars, 0); // ID - 73
+    glutTimerFunc(20, change_wing, 0);            // ID - 61
+    glutTimerFunc(80, fly, 0);                    // ID - 62
+    glutTimerFunc(20, _move_train, 0);            // ID - 63
+    glutTimerFunc(150, wave_fire, 0);             // ID - 64
+    glutTimerFunc(20, zoom_fire, 0);              // ID - 65
+    glutTimerFunc(1000, fire_animation, 0);       // ID - 66
+    glutTimerFunc(20, rotate_fan1, 0);            // ID - 67
+    glutTimerFunc(20, move_helicopter, 0);        // ID - 68
+    glutTimerFunc(10, update, 0);                 // ID - 69
+    glutTimerFunc(20, move_flying_car, 0);        // ID - 90
+    glutTimerFunc(20, move_fire_smoke, 0);        // ID - 71
+    glutTimerFunc(20, move_jungle_leaf, 0);       // ID - 72
+    glutTimerFunc(20, move_cars, 0);              // ID - 73
     glutTimerFunc(20, zoom_to_fire_animation, 0); // ID - 74
 
     glutTimerFunc(20, zoom_out_to_normal_animation, 0);
 
     glutKeyboardUpFunc(keypress_handle); // ID - 75
-
 }
 
 /* Main function: GLUT runs as a console application starting at main() */
