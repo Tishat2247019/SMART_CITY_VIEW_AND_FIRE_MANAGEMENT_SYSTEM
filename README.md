@@ -6,7 +6,7 @@
 
 
 
-This reposotary contains the source code of my computer graphics  project "FUTURISTIC CITY VIEW AND SMART FIRE MANAGEMENT SYSTEM". Which is implemented using Opengl and C++
+This reposotary contains the source code of my computer graphics  project "FUTURISTIC CITY VIEW AND SMART FIRE MANAGEMENT SYSTEM". Which is implemented using Opengl and C++.To run the project, please read the 'HOW_TO_RUN.TXT'.
 
 
 ## Group Members
