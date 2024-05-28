@@ -37,7 +37,7 @@ This reposotary contains the source code of my computer graphics  project "FUTUR
     <td>AIUB</td>
     <td>Bsc CSE</td>
     <td>22-46048-1</td>
-    <td><a href="https://www.github.com/encodeshohan">encodeshohan</a></td>
+    <td><a href="https://www.github.com/afmrafiulhassan">afmrafiulhassan</a></td>
   </tr>
  
 </table>
